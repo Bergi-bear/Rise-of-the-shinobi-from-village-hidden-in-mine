@@ -7,15 +7,19 @@ do
         --MouseHider(3, 0) -- 0 для красного игрока
         --CreateUI()
         RestoreMiniPap()
+        ReturnFPS()
     end)
 end
 function HideEverything()
-    BlzFrameSetVisible(BlzGetFrameByName("ConsoleUIBackdrop", 0), false)
+   --BlzFrameSetVisible(BlzGetFrameByName("ConsoleUIBackdrop", 0), false)
+    BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleUIBackdrop", 0), FRAMEPOINT_TOPRIGHT, 0, -0, 8)
+    --BlzFrameSetSize(BlzGetFrameByName("CommandButton_" .. 0, 0), 0, 0)-- M в позиции 0,0
     for i = 0, 11 do
-        --BlzFrameSetVisible(BlzGetFrameByName("CommandButton_"..i, 0), false) --отключить
-        BlzFrameSetSize(BlzGetFrameByName("CommandButton_" .. i, 0), 0, 0)--скрыть, но работать будут по хоткеям
+        BlzFrameSetVisible(BlzGetFrameByName("CommandButton_"..i, 0), false) --отключить
+        --BlzFrameSetSize(BlzGetFrameByName("CommandButton_" .. i, 0), 0, 0)--скрыть, но работать будут по хоткеям
     end
     BlzHideOriginFrames(true)--скрыть всё
+    BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI",0),5), 0.001) --рамка мёртвой зоны отключение
 end
 
 function ShowEverything()
@@ -186,9 +190,13 @@ end
 
 
 function RestoreMiniPap()
+    BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI",0),5), 0.001)
     map=BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP, 0)
     mapIsVisible=false
-    BlzFrameSetVisible(map, false)
+    BlzFrameSetVisible(map, mapIsVisible)
+    BlzFrameClearAllPoints(map)
+    BlzFrameSetSize(map, 0.2, 0.2)
+    BlzFrameSetAbsPoint(map,FRAMEPOINT_CENTER,0.8,0.1)
 end
 
 function CustomUIShow(show)
@@ -216,4 +224,11 @@ end
 
 function SetTooltipText(text,tips)
     BlzFrameSetText(text,tips)
+end
+
+function ReturnFPS()
+    BlzFrameSetVisible(BlzGetFrameByName("ResourceBarFrame", 0), true)
+    local fps = BlzGetFrameByName("ResourceBarFrame", 0)
+    BlzFrameClearAllPoints(fps)
+    BlzFrameSetAbsPoint(fps, FRAMEPOINT_CENTER, 0.9, 0.61)
 end

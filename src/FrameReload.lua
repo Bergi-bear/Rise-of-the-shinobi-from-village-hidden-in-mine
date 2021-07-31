@@ -86,7 +86,11 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
     local k = data.countFrame
 
     if flag == "peon" then
-        data.SpinChargesFH = MakeFrameCharged(face, 5)
+        local PeonCountFH = MakeFrameCharged(face, 5)
+        TimerStart(CreateTimer(), 0.1, true, function()
+            local _,peonCount=GetRandomPeon()
+            BlzFrameSetText(PeonCountFH,peonCount)
+        end)
     end
 
     if flag == "empath" then
@@ -97,6 +101,16 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
         TimerStart(CreateTimer(), cd, true, function()
             StartFrameCD(cd, data.EmpathCDFH)
             EmpathPeons(GetRandomPeon())
+        end)
+    end
+     if flag == "heal" then
+        data.HealCDFH = buttonIconFrame
+        local cd=30
+        HealUnit(GetRandomPeon())
+        StartFrameCD(cd, data.HealCDFH)
+        TimerStart(CreateTimer(), cd, true, function()
+            StartFrameCD(cd, data.HealCDFH)
+            HealUnit(GetRandomPeon())
         end)
     end
 
@@ -421,37 +435,3 @@ end
 
 
 --CreateUniversalFrame(0.02, 0.015, 0.03, "Пассивно связывает всех пеонов эмпатическими узами", "Эмпатия", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNSpiritLink.blp", nil, nil, "empath")
-DummyID = FourCC("e000")
-function EmpathPeons(unit)
-    local x, y = GetUnitXY(unit)
-    local dummy = CreateUnit(GetOwningPlayer(unit), DummyID, x, y, 0)
-    UnitAddAbility(dummy, FourCC("A000"))
-    UnitApplyTimedLife(dummy, FourCC('BTLF'), 2)
-    if IssueTargetOrder(dummy, "spiritlink", unit) then
-        --print(GetUnitName(unit))
-    end
-end
-perebor = CreateGroup()
-function GetRandomPeon()
-    local unit = nil
-    local e = nil
-    local k = 0
-    --print("ищем")
-    local rg = {}
-
-    GroupEnumUnitsInRect(perebor, bj_mapInitialPlayableArea, nil)
-    while true do
-        e = FirstOfGroup(perebor)
-
-        if e == nil then
-            break
-        end
-        if UnitAlive(e) and GetUnitTypeId(e) == FourCC("opeo") then
-            k = k + 1
-            rg[k] = e
-            unit = e
-        end
-        GroupRemoveUnit(perebor, e)
-    end
-    return rg[GetRandomInt(1,#rg)]
-end
