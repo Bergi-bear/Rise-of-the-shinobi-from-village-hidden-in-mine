@@ -1,0 +1,1046 @@
+﻿STRING 1
+{
+Игрок 1
+}
+
+STRING 2
+{
+Клан 1
+}
+
+STRING 3
+{
+Island
+}
+
+STRING 4
+{
+Не важно
+}
+
+STRING 5
+{
+Описание отсутствует
+}
+
+STRING 6
+{
+Неизвестно
+}
+
+STRING 7
+// Doodads: D000 (+Камни (вулкан)), Name (Name)
+{
++Камни (вулкан)
+}
+
+STRING 8
+// Doodads: D001 (+Камни (вулкан) плоский камень), Name (Name)
+{
++Камни (вулкан) плоский камень
+}
+
+STRING 11
+// Doodads: D004 (+Площадка (вулкан)), Name (Name)
+{
++Площадка (вулкан)
+}
+
+STRING 12
+// Doodads: D005 (+Колонна), Name (Name)
+{
++Колонна
+}
+
+STRING 15
+// Doodads: D007 (+Скала1 (вулкан)), Name (Name)
+{
++Скала1 (вулкан)
+}
+
+STRING 16
+// Doodads: D008 (+Скала2 (вулкан)), Name (Name)
+{
++Скала2 (вулкан)
+}
+
+STRING 17
+// Doodads: D009 (+Каменная магма), Name (Name)
+{
++Каменная магма
+}
+
+STRING 20
+// Doodads: D003 (+Куб), Name (Name)
+{
++Куб
+}
+
+STRING 21
+// Doodads: D00A (+Каменная балка (длинная)), Name (Name)
+{
++Каменная балка (длинная)
+}
+
+STRING 22
+// Doodads: D00C (+Факел-череп), Name (Name)
+{
++Факел-череп
+}
+
+STRING 23
+// Doodads: D00D (+Каменная балка (короткая)), Name (Name)
+{
++Каменная балка (короткая)
+}
+
+STRING 24
+// Doodads: D00E (+Скала3 (вулкан)), Name (Name)
+{
++Скала3 (вулкан)
+}
+
+STRING 25
+// Units: h001 (Зиккурат), Name (Name)
+{
+Зиккурат
+}
+
+STRING 26
+// Doodads: D00F (+Скала1), Name (Name)
+{
++Скала1
+}
+
+STRING 27
+// Doodads: D00G (+Обелиск), Name (Name)
+{
++Обелиск
+}
+
+STRING 28
+// Doodads: D00H (+Плавающие камни), Name (Name)
+{
++Плавающие камни
+}
+
+STRING 29
+// Doodads: D00I (+Череп-жаровня), Name (Name)
+{
++Череп-жаровня
+}
+
+STRING 31
+// Units: h000 (Тёмный Портал), Name (Name)
+{
+Тёмный Портал
+}
+
+STRING 33
+// Doodads: D013 (+Светильник), Name (Name)
+{
++Светильник
+}
+
+STRING 35
+// Abilities: A004 (Отдалить камеру), Name (Name)
+{
+Отдалить камеру
+}
+
+STRING 36
+// Abilities: A003 (Приблизить камеру), Name (Name)
+{
+Приблизить камеру
+}
+
+STRING 37
+// Abilities: A003 (Приблизить камеру), Ubertip (Tooltip - Normal - Extended)
+{
+Приближает камеру на 500.
+}
+
+STRING 38
+// Abilities: A003 (Приблизить камеру), Hotkey (Hotkey - Normal)
+{
+W
+}
+
+STRING 39
+// Abilities: A003 (Приблизить камеру), Tip (Tooltip - Normal)
+{
+Приблизить камеру (|cffffcc00W|r)
+}
+
+STRING 40
+// Abilities: A004 (Отдалить камеру), Hotkey (Hotkey - Normal)
+{
+Q
+}
+
+STRING 41
+// Abilities: A004 (Отдалить камеру), Tip (Tooltip - Normal)
+{
+Отдалить камеру (|cffffcc00Q|r)
+}
+
+STRING 42
+// Abilities: A004 (Отдалить камеру), Ubertip (Tooltip - Normal - Extended)
+{
+Отдаляет камеру на 500.
+}
+
+STRING 43
+// Abilities: A002 (Скачок), Ubertip (Tooltip - Normal - Extended)
+{
+Телепортация на любое расстояние.
+}
+
+STRING 44
+// Abilities: A002 (Скачок), Hotkey (Hotkey - Normal)
+{
+E
+}
+
+STRING 45
+// Abilities: A002 (Скачок), Tip (Tooltip - Normal)
+{
+Скачок (|cffffcc00E|r)
+}
+
+STRING 47
+// Doodads: D00K (+Груда черепов), Name (Name)
+{
++Груда черепов
+}
+
+STRING 50
+// Units: N000 (Ланд Мастер), Name (Name)
+{
+Ланд Мастер
+}
+
+STRING 51
+// Units: N000 (Ланд Мастер), Propernames (Proper Names)
+{
+Ланд Мастер
+}
+
+STRING 54
+// Units: h003 (Алтарь Силы), Name (Name)
+{
+Алтарь Силы
+}
+
+STRING 55
+// Units: h002 (Башня Магов), Name (Name)
+{
+Башня Магов
+}
+
+STRING 56
+// Doodads: D006 (+Скала1 90), Name (Name)
+{
++Скала1 90
+}
+
+STRING 57
+// Doodads: D00L (+Скала2), Name (Name)
+{
++Скала2
+}
+
+STRING 58
+// Doodads: D01U (+Скала2 90), Name (Name)
+{
++Скала2 90
+}
+
+STRING 61
+// Doodads: D00N (+Камни (серые)), Name (Name)
+{
++Камни (серые)
+}
+
+STRING 62
+// Doodads: D00O (+Пирс), Name (Name)
+{
++Пирс
+}
+
+STRING 63
+// Doodads: D00P (+Ящики1), Name (Name)
+{
++Ящики1
+}
+
+STRING 64
+// Doodads: D00B (+Плитка (вулкан)), Name (Name)
+{
++Плитка (вулкан)
+}
+
+STRING 65
+// Doodads: D00Q (+Кирпичная стена), Name (Name)
+{
++Кирпичная стена
+}
+
+STRING 66
+// Doodads: D00R (+Плитка для пирса), Name (Name)
+{
++Плитка для пирса
+}
+
+STRING 67
+// Doodads: D00S (+Короткая изгородь), Name (Name)
+{
++Короткая изгородь
+}
+
+STRING 69
+// Doodads: D00U (+Длинная изгородь), Name (Name)
+{
++Длинная изгородь
+}
+
+STRING 70
+// Doodads: D00V (+Фонарь), Name (Name)
+{
++Фонарь
+}
+
+STRING 72
+// Doodads: D00X (+Верфь), Name (Name)
+{
++Верфь
+}
+
+STRING 73
+// Doodads: D00Y (+Башня), Name (Name)
+{
++Башня
+}
+
+STRING 74
+// Doodads: D00Z (+Деревянная скамья), Name (Name)
+{
++Деревянная скамья
+}
+
+STRING 75
+// Doodads: D00J (+Светильник (вулкан)), Name (Name)
+{
++Светильник (вулкан)
+}
+
+STRING 76
+// Doodads: D010 (+Подставка для светильника), Name (Name)
+{
++Подставка для светильника
+}
+
+STRING 77
+// Doodads: D011 (+Жаровня в руинах), Name (Name)
+{
++Жаровня в руинах
+}
+
+STRING 78
+// Doodads: D012 (+Жаровня), Name (Name)
+{
++Жаровня
+}
+
+STRING 79
+// Doodads: D002 (+Разрушенная Колонна), Name (Name)
+{
++Разрушенная Колонна
+}
+
+STRING 80
+// Doodads: D014 (+Стойка для доспехов), Name (Name)
+{
++Стойка для доспехов
+}
+
+STRING 81
+// Doodads: D015 (+Корыто), Name (Name)
+{
++Корыто
+}
+
+STRING 82
+// Doodads: D00W (+Бочка1), Name (Name)
+{
++Бочка1
+}
+
+STRING 83
+// Doodads: D016 (+Ящики2), Name (Name)
+{
++Ящики2
+}
+
+STRING 84
+// Doodads: D017 (+Бочка2 (лежачая)), Name (Name)
+{
++Бочка2 (лежачая)
+}
+
+STRING 85
+// Doodads: D018 (+Камни с зеленью), Name (Name)
+{
++Камни с зеленью
+}
+
+STRING 86
+// Doodads: D019 (+Шлюпка), Name (Name)
+{
++Шлюпка
+}
+
+STRING 87
+// Doodads: D01A (+Пустые ящики), Name (Name)
+{
++Пустые ящики
+}
+
+STRING 88
+// Destructibles: B000 (+Блокиратор пути (суша)), Name (Name)
+{
++Блокиратор пути (суша)
+}
+
+STRING 89
+// Doodads: D01B (+Коновязь), Name (Name)
+{
++Коновязь
+}
+
+STRING 90
+// Doodads: D01C (+Таверна), Name (Name)
+{
++Таверна
+}
+
+STRING 91
+// Doodads: D01D (+Сарай), Name (Name)
+{
++Сарай
+}
+
+STRING 92
+// Doodads: D01E (+Куча мусора), Name (Name)
+{
++Куча мусора
+}
+
+STRING 94
+// Doodads: D01G (+Орудие пытки), Name (Name)
+{
++Орудие пытки
+}
+
+STRING 95
+// Doodads: D01H (+Мишень), Name (Name)
+{
++Мишень
+}
+
+STRING 96
+// Doodads: D00T (+Каменная стена1), Name (Name)
+{
++Каменная стена1
+}
+
+STRING 97
+// Doodads: D01I (+Каменная стена2), Name (Name)
+{
++Каменная стена2
+}
+
+STRING 98
+// Doodads: D01J (+Стол), Name (Name)
+{
++Стол
+}
+
+STRING 99
+// Doodads: D01K (+Ящики3), Name (Name)
+{
++Ящики3
+}
+
+STRING 101
+// Doodads: D01M (+Большое городское здание (красное)), Name (Name)
+{
++Большое городское здание (красное)
+}
+
+STRING 102
+// Doodads: D01N (+Ферма), Name (Name)
+{
++Ферма
+}
+
+STRING 103
+// Doodads: D01O (+Трактир), Name (Name)
+{
++Трактир
+}
+
+STRING 104
+// Doodads: D01P (+Свиноферма), Name (Name)
+{
++Свиноферма
+}
+
+STRING 105
+// Doodads: D01Q (+Здание), Name (Name)
+{
++Здание
+}
+
+STRING 106
+// Doodads: D01R (+Скала3), Name (Name)
+{
++Скала3
+}
+
+STRING 107
+// Doodads: D01S (+Статуя без щита), Name (Name)
+{
++Статуя без щита
+}
+
+STRING 108
+// Doodads: D01T (+Вьющееся растение), Name (Name)
+{
++Вьющееся растение
+}
+
+STRING 110
+// Doodads: D01V (+Водопад), Name (Name)
+{
++Водопад
+}
+
+STRING 111
+// Doodads: D01W (+Наклонное бревно), Name (Name)
+{
++Наклонное бревно
+}
+
+STRING 112
+// Doodads: D01X (Корабль2), Name (Name)
+{
+Корабль2
+}
+
+STRING 113
+// Doodads: D01Y (Корабль3), Name (Name)
+{
+Корабль3
+}
+
+STRING 114
+// Doodads: D025 (+Шатер), Name (Name)
+{
++Шатер
+}
+
+STRING 115
+// Doodads: D020 (+Лесопилка), Name (Name)
+{
++Лесопилка
+}
+
+STRING 116
+// Doodads: D021 (+Черепа на кольях), Name (Name)
+{
++Черепа на кольях
+}
+
+STRING 117
+// Doodads: D022 (+Стул), Name (Name)
+{
++Стул
+}
+
+STRING 118
+// Doodads: D023 (+Городское здание (зеленое)), Name (Name)
+{
++Городское здание (зеленое)
+}
+
+STRING 119
+// Doodads: D01L (Корабль4), Name (Name)
+{
+Корабль4
+}
+
+STRING 120
+// Doodads: D01Z (+Палатка), Name (Name)
+{
++Палатка
+}
+
+STRING 121
+// Doodads: D024 (+Рынок), Name (Name)
+{
++Рынок
+}
+
+STRING 122
+// Doodads: D026 (+Куча сокровищ), Name (Name)
+{
++Куча сокровищ
+}
+
+STRING 123
+// Doodads: D027 (+Бочка2 (со взрывчаткой)), Name (Name)
+{
++Бочка2 (со взрывчаткой)
+}
+
+STRING 124
+// Doodads: D028 (+Растение в горшке), Name (Name)
+{
++Растение в горшке
+}
+
+STRING 125
+// Doodads: D029 (+Прямая клумба), Name (Name)
+{
++Прямая клумба
+}
+
+STRING 126
+// Doodads: D02A (+Лошадь), Name (Name)
+{
++Лошадь
+}
+
+STRING 127
+// Doodads: D02B (+Мастерская), Name (Name)
+{
++Мастерская
+}
+
+STRING 128
+// Doodads: D02C (+Мини-завод), Name (Name)
+{
++Мини-завод
+}
+
+STRING 129
+// Doodads: D02D (+Сено), Name (Name)
+{
++Сено
+}
+
+STRING 130
+// Units: n001 (Пеон), Name (Name)
+{
+Пеон
+}
+
+STRING 131
+// Doodads: D02E (+Тотем-кентавр), Name (Name)
+{
++Тотем-кентавр
+}
+
+STRING 132
+// Doodads: D02F (+Мельница), Name (Name)
+{
++Мельница
+}
+
+STRING 133
+// Doodads: D02G (+Арка разрушенная), Name (Name)
+{
++Арка разрушенная
+}
+
+STRING 134
+// Doodads: D02H (+Круг нагов), Name (Name)
+{
++Круг нагов
+}
+
+STRING 135
+// Doodads: D01F (+Большое городское здание (зеленое)), Name (Name)
+{
++Большое городское здание (зеленое)
+}
+
+STRING 137
+// Doodads: D02J (+Большое городское здание (фиолетовое)), Name (Name)
+{
++Большое городское здание (фиолетовое)
+}
+
+STRING 138
+// Doodads: D02K (+Статуэтка Хранителя), Name (Name)
+{
++Статуэтка Хранителя
+}
+
+STRING 139
+// Doodads: D02L (+Статуэтка рыцаря), Name (Name)
+{
++Статуэтка рыцаря
+}
+
+STRING 140
+// Doodads: D02M (+Статуэтка Стража Азуны), Name (Name)
+{
++Статуэтка Стража Азуны
+}
+
+STRING 141
+// Doodads: D02I (+Городское здание (фиолетовое)), Name (Name)
+{
++Городское здание (фиолетовое)
+}
+
+STRING 142
+// Doodads: D02N (+Городское здание (красное)), Name (Name)
+{
++Городское здание (красное)
+}
+
+STRING 143
+// Doodads: D02O (+Стрела), Name (Name)
+{
++Стрела
+}
+
+STRING 145
+// Doodads: D00M (+Скала3 90), Name (Name)
+{
++Скала3 90
+}
+
+STRING 146
+// Doodads: D02P (+Копье), Name (Name)
+{
++Копье
+}
+
+STRING 147
+// Doodads: D02Q (+Изгородь), Name (Name)
+{
++Изгородь
+}
+
+STRING 149
+// Doodads: D02S (+Большой булыжник), Name (Name)
+{
++Большой булыжник
+}
+
+STRING 150
+// Doodads: D02T (+Амбар), Name (Name)
+{
++Амбар
+}
+
+STRING 151
+// Abilities: A005 (Прикрепить камеру), Name (Name)
+{
+Прикрепить камеру
+}
+
+STRING 152
+// Abilities: A005 (Прикрепить камеру), Tip (Tooltip - Normal)
+{
+Прикрепить камеру (|cffffcc00R|r)
+}
+
+STRING 153
+// Abilities: A005 (Прикрепить камеру), Ubertip (Tooltip - Normal - Extended)
+{
+Прикрепляет текущую камеру к Герою.
+}
+
+STRING 154
+// Abilities: A005 (Прикрепить камеру), Hotkey (Hotkey - Normal)
+{
+R
+}
+
+STRING 155
+// Abilities: A006 (Открепить камеру), Name (Name)
+{
+Открепить камеру
+}
+
+STRING 156
+// Abilities: A006 (Открепить камеру), Tip (Tooltip - Normal)
+{
+Открепить камеру (|cffffcc00R|r)
+}
+
+STRING 157
+// Abilities: A006 (Открепить камеру), Hotkey (Hotkey - Normal)
+{
+R
+}
+
+STRING 158
+// Abilities: A006 (Открепить камеру), Ubertip (Tooltip - Normal - Extended)
+{
+Отменяет закрепление текущей камеры к Герою.
+}
+
+STRING 159
+// Doodads: D02R (+Iron Gate (A)), Name (Name)
+{
++Iron Gate (A)
+}
+
+STRING 160
+// Doodads: D02U (+Куст), Name (Name)
+{
++Куст
+}
+
+STRING 161
+// Doodads: D02V (+Люк), Name (Name)
+{
++Люк
+}
+
+STRING 162
+// Doodads: D02W (+Люк2), Name (Name)
+{
++Люк2
+}
+
+STRING 163
+// Doodads: D02X (+Сокровище), Name (Name)
+{
++Сокровище
+}
+
+STRING 164
+// Doodads: D02Y (+Скала4), Name (Name)
+{
++Скала4
+}
+
+STRING 165
+// Doodads: D02Z (+Стуеньки), Name (Name)
+{
++Стуеньки
+}
+
+STRING 166
+// Doodads: D030 (+Плитка для храма), Name (Name)
+{
++Плитка для храма
+}
+
+STRING 167
+{
+Пеонетти
+}
+
+STRING 168
+{
+Ну и долго мы ещ тут будем сидеть, пора исследовать этот остров
+}
+
+STRING 169
+{
+Пеонльнарёфф
+}
+
+STRING 170
+{
+Да пришло время размять булки, пойдём ребята, осмотримся
+}
+
+STRING 171
+{
+Пеонльнарёфф
+}
+
+STRING 172
+{
+А здесь уже кто-то был, я чувствую запах пота и рыбы
+}
+
+STRING 173
+{
+Пеонетти
+}
+
+STRING 174
+{
+Это воняет от тебя
+}
+
+STRING 175
+{
+Пеонльнарёфф
+}
+
+STRING 176
+{
+Тут достаточно глобоко, я не умею плавать
+}
+
+STRING 177
+{
+Пеонетти
+}
+
+STRING 178
+{
+Ты вообще ничего не умеешь, кроме как строить башни
+}
+
+STRING 184
+{
+Пеонльнарёфф
+}
+
+STRING 185
+{
+Агрессивне лягушки, я видел таких во франции
+}
+
+STRING 186
+{
+Пеонетти
+}
+
+STRING 187
+{
+Да действительно, это воняло не от тебя
+}
+
+STRING 188
+{
+Пеонетти
+}
+
+STRING 189
+{
+Какая франция, это другая вселенная, я думаю они из Калимдора
+}
+
+STRING 190
+{
+|cff008080Доступна новая способность|r: ВЕЧНАЯ ЭМПАТИЯ теперь урон нанесённый любому пеону, будет делиться между его соратниками. Перезарядка: |cffffff0030 |rсек
+}
+
+STRING 191
+// Abilities: A000 (Пеонская связь), Name (Name)
+{
+Пеонская связь
+}
+
+STRING 192
+// Abilities: A000 (Пеонская связь), Hotkey (Hotkey - Normal)
+{
+Q
+}
+
+STRING 193
+// Units: e000 (Дамми Основной), Name (Name)
+{
+Дамми Основной
+}
+
+STRING 194
+// Units: e000 (Дамми Основной), Tip (Tooltip - Basic)
+{
+дамми
+}
+
+STRING 195
+// Units: e000 (Дамми Основной), Ubertip (Tooltip - Extended)
+{
+Это даммми юнит
+}
+
+STRING 196
+{
+Закадровый голос
+}
+
+STRING 197
+{
+Используйте правую кнопку мыши, чтобы отдать приказ движения и исследуйте территорию
+}
+
+STRING 198
+{
+Надпись на табличке
+}
+
+STRING 199
+{
+В нашей жизни бывают ситуации, когда возможности выбрать правильный путь у нас нет.
+}
+
+STRING 200
+{
+Пеонетти
+}
+
+STRING 201
+{
+Это означет, что у нас лишь 1 путь - вниз по этой тропе
+}
+
+STRING 209
+{
+Пеон погиб, попробуйте снова
+}
+
+STRING 210
+{
+Пеонпио:
+}
+
+STRING 211
+{
+Если что, теперь я буду запоминать дорогу, чтобы мы не заблудилсь
+}
+
+STRING 212
+{
+Пеонетти
+}
+
+STRING 213
+{
+Прям как после того случая
+}
+
+STRING 222
+{
+Пеонетти
+}
+
+STRING 223
+{
+Смотрите ребята, там какой-то громила, наверное это он всех сожрал
+}
+
+STRING 224
+{
+Пеонетти
+}
+
+STRING 225
+{
+Продолжая совершать преступления, обязательно тебя настигнет наказание, пришедшее из ниоткуда. Где все, признавайся?
+}
+
