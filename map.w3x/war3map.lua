@@ -1,6 +1,7 @@
 udg_MK = 0
 udg_OgreOnPlace = false
 udg_TowerRepairCount = 0
+udg_TowerIsRepair = false
 gg_rct_REG_Red_Fog = nil
 gg_rct_REG_Rain_Light = nil
 gg_rct_REG_Lights1 = nil
@@ -18,10 +19,21 @@ gg_rct________________013 = nil
 gg_rct_EndPoint = nil
 gg_rct________________015 = nil
 gg_rct________________016 = nil
-gg_trg_StartTD = nil
-gg_trg_StartTD2 = nil
-gg_trg_Aly6 = nil
+gg_rct_HealEpmty = nil
+gg_rct_HealFinder = nil
+gg_rct_FireTower = nil
+gg_rct_FireTower2 = nil
+gg_rct_FireTower3 = nil
+gg_trg_Fire = nil
+gg_trg_Fire_Copy = nil
+gg_trg_Fire_Copy_Copy = nil
+gg_trg_Empty = nil
+gg_trg_FindHeal = nil
+gg_trg_FindOrge = nil
+gg_trg_OgreRun = nil
 gg_trg_StartAllWave = nil
+gg_trg_ReadyTower = nil
+gg_trg_RepairTower = nil
 gg_trg_OnPlaceOrge = nil
 gg_trg_TolkWOrge = nil
 gg_trg_PingTowerPlace = nil
@@ -31,23 +43,19 @@ gg_trg_NewCamp = nil
 gg_trg_Brod = nil
 gg_trg_FirstAttack = nil
 gg_trg_KillMurloc = nil
-gg_trg_Table = nil
+gg_trg_ReadTable = nil
+gg_trg_Aly6 = nil
 gg_trg_DisableAttack = nil
 gg_trg_Black = nil
 gg_unit_nogm_0000 = nil
-gg_trg_ReadyTower = nil
-gg_unit_hctw_0019 = nil
 gg_unit_hatw_0020 = nil
+gg_unit_hctw_0019 = nil
 gg_unit_hgtw_0018 = nil
-gg_trg_RepairTower = nil
-gg_rct_HealEpmty = nil
-gg_rct_HealFinder = nil
-gg_trg_Empty = nil
-gg_trg_FindHeal = nil
 function InitGlobals()
     udg_MK = 0
     udg_OgreOnPlace = false
     udg_TowerRepairCount = 0
+    udg_TowerIsRepair = false
 end
 
 function CreateUnitsForPlayer0()
@@ -56,11 +64,15 @@ function CreateUnitsForPlayer0()
     local unitID
     local t
     local life
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 2097.6, -3119.6, 155.563, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 2024.4, -3186.6, 106.175, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1902.0, -3168.1, 50.304, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1858.1, -3071.2, 6.574, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 2000.9, -2974.2, 248.617, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 258.1, -3711.2, 6.570, FourCC("opeo"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.50 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 400.9, -3614.2, 248.620, FourCC("opeo"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.75 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 497.6, -3759.6, 155.563, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 424.4, -3826.6, 106.175, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 302.0, -3808.1, 50.304, FourCC("opeo"))
 end
 
 function CreateBuildingsForPlayer5()
@@ -78,6 +90,9 @@ function CreateBuildingsForPlayer5()
     gg_unit_hatw_0020 = BlzCreateUnitWithSkin(p, FourCC("hatw"), -1728.0, -1664.0, 270.000, FourCC("hatw"))
     life = GetUnitState(gg_unit_hatw_0020, UNIT_STATE_LIFE)
     SetUnitState(gg_unit_hatw_0020, UNIT_STATE_LIFE, 0.01 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("hwtw"), -1024.0, 2752.0, 270.000, FourCC("hwtw"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.01 * life)
 end
 
 function CreateUnitsForPlayer5()
@@ -120,6 +135,12 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("o000"), -2880.4, -1803.2, 61.790, FourCC("o000"))
     SetUnitColor(u, ConvertPlayerColor(4))
     u = BlzCreateUnitWithSkin(p, FourCC("ncrb"), -4391.5, 1430.8, 29.203, FourCC("ncrb"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e001"), 694.4, -3482.2, 269.628, FourCC("e001"))
+    SetUnitColor(u, ConvertPlayerColor(4))
+    u = BlzCreateUnitWithSkin(p, FourCC("e001"), -983.0, 2388.4, 260.326, FourCC("e001"))
+    SetUnitColor(u, ConvertPlayerColor(4))
+    u = BlzCreateUnitWithSkin(p, FourCC("e001"), -128.3, -3574.7, 302.779, FourCC("e001"))
+    SetUnitColor(u, ConvertPlayerColor(4))
 end
 
 function CreatePlayerBuildings()
@@ -167,6 +188,9 @@ function CreateRegions()
     gg_rct________________016 = Rect(1920.0, -5056.0, 2240.0, -4832.0)
     gg_rct_HealEpmty = Rect(640.0, -3648.0, 832.0, -3456.0)
     gg_rct_HealFinder = Rect(-224.0, -3712.0, 0.0, -3552.0)
+    gg_rct_FireTower = Rect(1408.0, -3392.0, 2048.0, -2880.0)
+    gg_rct_FireTower2 = Rect(-2016.0, -1920.0, -1376.0, -1408.0)
+    gg_rct_FireTower3 = Rect(-2848.0, 1248.0, -2208.0, 1760.0)
 end
 
 --CUSTOM_CODE
@@ -195,6 +219,305 @@ function CreateActions1234()
     end)
 
 end
+----- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+onForces = {}
+TIMER_PERIOD64=1/64
+function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
+    -- псевдо вектор использовать только для юнитов
+    local currentdistance = 0
+    if onForces[GetHandleId(hero)] == nil then
+        onForces[GetHandleId(hero)] = true
+        --print("первый раз")
+    end
+    if not IsUnitType(hero, UNIT_TYPE_STRUCTURE) and GetUnitTypeId(hero) ~= FourCC("nglm") and not IsUnitType(hero, UNIT_TYPE_FLYING) and (onForces[GetHandleId(hero)] or flag == "ignore") and GetUnitAbilityLevel(hero, FourCC("Beng")) == 0 then
+        onForces[GetHandleId(hero)] = false
+        local m = 0
+        --print("1")
+        local tempDamageGroup = CreateGroup()
+        local damageOnWall = false
+        local effDash = nil
+        local ignoreDest = false
+        if flag == "ignore" or flag == "shieldDash" then
+            local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            if data.DashDamageON or flag == "shieldDash" then
+                local effDashModel = "Hive\\Valiant Charge\\Valiant Charge Fel\\Valiant Charge Fel"
+                effDash = AddSpecialEffectTarget(effDashModel, hero, "origin")
+                ignoreDest = data.IgnoreDest -- проходимость свкозь бордюры
+            end
+        end
+
+        if true and IsUnitType(hero, UNIT_TYPE_HERO) then
+            --повышение отзывчивости
+            local x, y = GetUnitX(hero), GetUnitY(hero)
+            local newX, newY = MoveX(x, speed, angle), MoveY(y, speed, angle)
+            SetUnitPositionSmooth(hero, newX, newY)
+        end
+
+        TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+            currentdistance = currentdistance + speed
+            --print(currentdistance)
+            local x, y = GetUnitX(hero), GetUnitY(hero)
+            local newX, newY = MoveX(x, speed, angle), MoveY(y, speed, angle)
+            local makeJump = false
+            if IsUnitType(hero, UNIT_TYPE_HERO) then
+                if GetUnitData(hero).QHighJump then
+                    makeJump = true
+                end
+            end
+
+            if (flag == "ignore" and GetUnitData(hero).IframesOnDash) or makeJump then
+                -- print("попытка")
+                local is, d = PointContentDestructable(newX, newY, 120, false)
+                if is then
+                    -- print("есть какой-то декор")
+                end
+                if GetDestructableTypeId(d) == FourCC("B00A") then
+                    SetUnitX(hero, newX)
+                    SetUnitY(hero, newY)
+                    --print("пройти на сквозь")
+                else
+                    SetUnitPositionSmooth(hero, newX, newY)
+                end
+            else
+                SetUnitPositionSmooth(hero, newX, newY) -- момент толкания для любого персонажа
+            end
+
+            if GetUnitTypeId(hero) ~= HeroID and GetUnitTypeId(pushing) == HeroID then
+                local PerepadZ = GetTerrainZ(MoveXY(x, y, 120, angle)) - GetTerrainZ(x, y)
+                --print(PerepadZ)
+                if (PointContentDestructable(newX, newY, 120, false) or PerepadZ > 20) and not damageOnWall then
+                    local data = HERO[GetPlayerId(GetOwningPlayer(pushing))]
+                    local bonus = 0
+                    if not data.WallHitCount then
+                        data.WallHitCount = 0
+                    end
+                    if data.WallHitCount <= 2 then
+                        FlyTextTagShieldXY(x, y, L("Удар о стену", "Wall hit"), GetOwningPlayer(pushing))
+                        PlayerSeeNoiseInRangeTimed(0.2, x, y)
+
+                    else
+                        FlyTextTagShieldXY(x, y, L("Зажат в угол", "Trapped in corner"), GetOwningPlayer(pushing), "red")
+                        bonus = 1000
+                        PlayerSeeNoiseInRangeTimed(0.5, x, y)
+                    end
+                    data.WallHitCount = data.WallHitCount + 1
+                    TimerStart(CreateTimer(), 3, false, function()
+                        data.WallHitCount = data.WallHitCount - 1
+                        DestroyTimer(GetExpiredTimer())
+                    end)
+                    --print(data.WallHitCount)
+
+
+                    local damage = 100 + bonus
+                    if not data.WallDamage then
+                        data.WallDamage = 0
+                    end
+                    damage = damage + data.WallDamage
+                    UnitDamageTarget(pushing, hero, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+                    --print("удар о декор или стенку")
+                    damageOnWall = true
+                end
+            end
+            if flag == "lizard" then
+                UnitDamageArea(hero, 50, GetUnitX(hero), GetUnitY(hero), 120, "ForceTotem")
+            end
+            if flag == "shieldDash" then
+                GetUnitData(hero).ShieldDashReflect = true
+                if UnitDamageArea(hero, GetUnitData(hero).DamageInShieldPerDash, GetUnitX(hero), GetUnitY(hero), 120, "ForceTotem") then
+                    normal_sound("Sound\\Units\\Combat\\MetalMediumBashStone" .. GetRandomInt(1, 3), GetUnitXY(hero))
+                end
+            end
+            if flag == "RunSkeleton" then
+                UnitDamageArea(hero, 1, GetUnitX(hero), GetUnitY(hero), 120)
+            end
+            if flag == "ignore" then
+                local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+                --print("попытка нанести урон в рывке")
+
+                if data.DashDamageON then
+                    UnitDamageArea(hero, data.DashDamageON, newX, newY, 80)
+                    --print("урон рывком")
+                end
+                ----------------------------Лечим союзника в рывке
+
+                if data.HealDashAllyCDFH then
+                    if not data.HealDashAllyCurrentCD then
+                        data.HealDashAllyCurrentCD = 1
+                    end
+                    if data.HealDashAllyCurrentCD <= 0 then
+                        local ally = FindAnyAllyUnit(data, 200)
+                        if ally then
+                            --есть кого полечить
+                            --Abilities\Spells\Human\HolyBolt\HolyBoltSpecialArt.mdl
+                            local effHeal = AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", GetUnitXY(hero))
+                            BlzSetSpecialEffectYaw(effHeal, math.rad(angle))
+                            BlzSetSpecialEffectPitch(effHeal, math.rad(-90))
+                            DestroyEffect(effHeal)
+                            local talon = GlobalTalons[data.pid]["ShadowHunter"][1]
+                            local cd = talon.DS[talon.level]
+                            StartFrameCD(cd, data.HealDashAllyCDFH)
+                            data.HealDashAllyCurrentCD = cd
+                            HealUnit(ally, 100)
+                            TimerStart(CreateTimer(), cd, false, function()
+                                data.HealDashAllyCurrentCD = 0
+                                DestroyTimer(GetExpiredTimer())
+                            end)
+                        end
+                    end
+                end
+                -----------------------------
+                if data.AttackInForce then
+                    local range = 300
+                    local is, du = UnitDamageArea(hero, 0, newX, newY, 200)
+                    if is then
+                        if data.TaurenDash then
+                            range = 400
+                            --data.BaseDashDamage=data.BaseDashDamage*2
+                        end
+                        if not IsUnitInGroup(du, tempDamageGroup) then
+                            GroupAddUnit(tempDamageGroup, du)
+                            if UnitDamageArea(hero, data.BaseDashDamage, newX, newY, range, "longForce") then
+                                normal_sound("Sound\\Units\\Combat\\MetalMediumBashStone" .. GetRandomInt(1, 3), GetUnitXY(hero))
+                                --  print("нанесение урона во время рывка")
+                            end
+                        else
+                            --   print("повторное нанесение урона ни к ечму не привело")
+                        end
+                    end
+                end
+
+            end
+
+            if flag == "dust" then
+                DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", newX, newY))
+            end
+
+            if currentdistance >= distance then
+                --закончил движение
+                --or (data.OnWater and data.OnTorrent==false)
+                --data.IsDisabled=false
+                --data.OnWater=false
+                if flag == "shieldDash" then
+                    local data = GetUnitData(hero)
+                    data.ShieldDashReflect = false
+                end
+                if effDash then
+                    DestroyEffect(effDash)
+                end
+                if flag == "RunSkeleton" then
+                    BlzPauseUnitEx(hero, false)
+                    SetUnitTimeScale(hero, 1)
+                    if UnitAlive(hero) then
+                        ResetUnitAnimation(hero)
+                    end
+                end
+                if flag == "ignore" then
+                    --print("перезарядка атаки в рывке")
+                    --HERO[GetPlayerId(GetOwningPlayer(hero))].AttackInForce=false --
+                    local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+
+                    if data.IsMoving then
+                        --print("закончил рывок")
+
+                        if UnitAlive(data.UnitHero) then
+                            if data.BowReady then
+                                -- data.CurrentWeaponType ~= "bow" then
+                                --SetUnitAnimationByIndex(data.UnitHero, IndexAnimationWalk)
+                            else
+                                SetUnitAnimationByIndex(data.UnitHero, IndexAnimationWalk)
+                            end
+                        end
+                    end
+                    data.ResetSeriesTime = 0
+                    if data.IllusionDashCDFH then
+                        if not data.IllusionDashCurrentCD then
+                            data.IllusionDashCurrentCD = 1
+                        end
+                        if data.IllusionDashCurrentCD <= 0 then
+                            local talon = GlobalTalons[data.pid]["HeroBlademaster"][4]
+                            local cd = 10
+                            data.IllusionDashCurrentCD = cd
+                            StartFrameCD(cd, data.IllusionDashCDFH)
+                            local damage = talon.DS[talon.level]
+                            UnitDamageArea(hero, damage, newX, newY, 150)
+                            UnitAddForceSimple(hero, angle - 180, 25, 200, "ignore")
+                            TimerStart(CreateTimer(), cd, false, function()
+                                data.IllusionDashCurrentCD = 0
+                                DestroyTimer(GetExpiredTimer())
+                            end)
+                        end
+                    end
+
+                    data.ReleaseQ = false
+                end
+                if flag == "forceAttack" then
+                    BlzPauseUnitEx(hero, false)
+                    SetUnitTimeScale(hero, 1)
+                    UnitDamageArea(hero, 50, newX, newY, 150)
+                    DestroyEffect(AddSpecialEffect("SystemGeneric\\ThunderclapCasterClassic", newX, newY))
+                end
+                if flag == "qjump" then
+                    local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+                    if data.CurrentWeaponType == "shield" then
+                        SetUnitTimeScale(data.UnitHero, 1)
+                    end
+                    SpellSlashQ(data)
+                    --print("преземление с щитом")
+                    if data.DoubleClap then
+                        TimerStart(CreateTimer(), 0.35, false, function()
+                            SpellSlashQ(data)
+                            DestroyTimer(GetExpiredTimer())
+                        end)
+                    end
+                    data.ReleaseQ = false
+                end
+                DestroyGroup(tempDamageGroup)
+                DestroyTimer(GetExpiredTimer())
+                onForces[GetHandleId(hero)] = true
+                --print("stop cur="..currentdistance.." dist="..distance)
+            end
+        end)
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 02.08.2021 11:10
+---
+function AddQuest(compas, hero, qx, qy, questendunit)
+    local x, y = GetUnitX(hero), GetUnitY(hero)
+    local model = "AneuCaster"
+    local player = GetOwningPlayer(hero)
+    local data = HERO[GetPlayerId(player)]
+
+    if GetLocalPlayer() ~= player then
+        model = ""
+    else
+        --print("звук созданного квеста")
+        StartSound(bj_questSecretSound)
+    end
+    local QuestPointer = AddSpecialEffect(model, x, y)
+    BlzSetSpecialEffectPitch(QuestPointer, math.rad(-90))--/bj_DEGTORAD
+
+    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+        local z = GetUnitZ(hero)
+        local xc, yc = GetUnitX(hero), GetUnitY(hero)
+        local Angle = AngleBetweenXY(xc, yc, qx, qy)
+        local nx,ny=MoveXY(xc,yc,130,Angle / bj_DEGTORAD)
+        BlzSetSpecialEffectPosition(QuestPointer, nx,ny, z + 50)
+        BlzSetSpecialEffectYaw(QuestPointer, Angle)
+
+        if IsUnitInRangeXY(hero, qx, qy, 300) then
+            DestroyTimer(GetExpiredTimer())
+            DestroyEffect(QuestPointer)
+            data.Compass = nil
+        end
+    end)
+
+end
+
+--AddQuest(true,GetTriggerUnit(),GetRectCenterX(gg_rct_OgreDefPlace),GetRectCenterY(gg_rct_OgreDefPlace))
+
 function SelectedAllPeon()
     local e = nil
     GroupEnumUnitsInRect(perebor, bj_mapInitialPlayableArea, nil)
@@ -206,9 +529,59 @@ function SelectedAllPeon()
         end
         if UnitAlive(e) and GetUnitTypeId(e) == FourCC("opeo") then
             SelectUnitAddForPlayer(e,Player(0))
+            local x,y=GetUnitXY(e)
+            PanCameraToTimed(x,y,1)
         end
         GroupRemoveUnit(perebor, e)
     end
+end
+function FindUnitOfType(id,flag,x,y)
+	--flag nil - вся карта
+	--flag any - радиус
+	local unit=nil
+	local e=nil
+	local k=0
+	--print("ищем")
+	local rg={}
+	if not flag then
+		GroupEnumUnitsInRect(perebor,bj_mapInitialPlayableArea,nil)
+		while true do
+			e = FirstOfGroup(perebor)
+
+			if e == nil then break end
+			if UnitAlive(e) and GetUnitTypeId(e)==id then
+				k=k+1
+				rg[k]=e
+				unit=e
+			end
+			GroupRemoveUnit(perebor,e)
+		end
+	else
+			GroupEnumUnitsInRange(perebor,x,y,flag,nil)
+			while true do
+				e = FirstOfGroup(perebor)
+
+				if e == nil then break end
+				if UnitAlive(e) and GetUnitTypeId(e)==id then
+					k=k+1
+					rg[k]=e
+					unit=e
+				end
+				GroupRemoveUnit(perebor,e)
+			end
+	end
+
+
+	if k>1 then
+	--	print("Ошибка получено "..k.." юнитов")
+	end
+	if k>2 then
+		unit=rg[GetRandomInt(1,#rg)]
+	end
+	if unit==nil then
+	--	print("Не найдено живых юнитов данного типа")
+	end
+	return unit,k,rg
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -313,6 +686,18 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
         TimerStart(CreateTimer(), cd, true, function()
             StartFrameCD(cd, data.EmpathCDFH)
             EmpathPeons(GetRandomPeon())
+        end)
+    end
+     if flag == "heal" then
+        data.HealCDFH = buttonIconFrame
+        local cd=30
+        local _,_,peons=GetRandomPeon()
+        HealUnit(GetUnitMinHpFromTable(peons))
+        StartFrameCD(cd, data.HealCDFH)
+        TimerStart(CreateTimer(), cd, true, function()
+            StartFrameCD(cd, data.HealCDFH)
+            _,_,peons=GetRandomPeon()
+            HealUnit(GetUnitMinHpFromTable(peons))
         end)
     end
 
@@ -637,39 +1022,79 @@ end
 
 
 --CreateUniversalFrame(0.02, 0.015, 0.03, "Пассивно связывает всех пеонов эмпатическими узами", "Эмпатия", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNSpiritLink.blp", nil, nil, "empath")
-DummyID = FourCC("e000")
-function EmpathPeons(unit)
-    local x, y = GetUnitXY(unit)
-    local dummy = CreateUnit(GetOwningPlayer(unit), DummyID, x, y, 0)
-    UnitAddAbility(dummy, FourCC("A000"))
-    UnitApplyTimedLife(dummy, FourCC('BTLF'), 2)
-    if IssueTargetOrder(dummy, "spiritlink", unit) then
-        --print(GetUnitName(unit))
-    end
-end
-perebor = CreateGroup()
-function GetRandomPeon()
-    local unit = nil
-    local e = nil
-    local k = 0
-    --print("ищем")
-    local rg = {}
 
-    GroupEnumUnitsInRect(perebor, bj_mapInitialPlayableArea, nil)
-    while true do
-        e = FirstOfGroup(perebor)
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 15.02.2021 18:51
+---
+function HealUnit(hero, amount, flag, eff)
+    --1 или nil Сколько вылчено
+    --2 Сверхлечение
 
-        if e == nil then
-            break
-        end
-        if UnitAlive(e) and GetUnitTypeId(e) == FourCC("opeo") then
-            k = k + 1
-            rg[k] = e
-            unit = e
-        end
-        GroupRemoveUnit(perebor, e)
+    if not amount then
+        amount = 99999
     end
-    return rg[GetRandomInt(1,#rg)],k
+    if not eff then
+        eff = "Abilities\\Spells\\Human\\Heal\\HealTarget"
+    end
+
+    if IsUnitType(hero, UNIT_TYPE_HERO) then
+        if HERO[GetPlayerId(GetOwningPlayer(hero))] then
+            local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            amount = amount * data.HealRate
+        end
+    end
+
+    local p = GetOwningPlayer(hero)
+    local MaxHP = BlzGetUnitMaxHP(hero)
+    local CurrentHP = GetUnitState(hero, UNIT_STATE_LIFE)
+    local LoosingHP = MaxHP - CurrentHP
+    local OverHeal = amount - LoosingHP
+    local TotalHeal = amount
+    if LoosingHP <= amount then
+        TotalHeal = LoosingHP
+    end
+    DestroyEffect(AddSpecialEffectTarget(eff, hero, "overhead"))
+    SetUnitState(hero, UNIT_STATE_LIFE, CurrentHP + TotalHeal)
+
+    if IsUnitType(hero, UNIT_TYPE_HERO) then
+        if HERO[GetPlayerId(GetOwningPlayer(hero))] then
+            local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            data.ShowHealSec = 0.3
+            if not data.ShowHealAmount then
+                data.ShowHealAmount = 0
+            end
+            data.ShowHealAmount = data.ShowHealAmount + TotalHeal
+            if data.ShowHeal then
+                data.ShowHeal = false
+                TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+                    data.ShowHealSec = data.ShowHealSec - TIMER_PERIOD
+                    if data.ShowHealSec <= 0 then
+                        data.ShowHeal = true
+                        DestroyTimer(GetExpiredTimer())
+                        if TotalHeal > 1 then
+                            FlyTextTagHealXY(GetUnitX(hero), GetUnitY(hero), "+" .. R2I(data.ShowHealAmount), p)
+                            data.StatHealGained=data.StatHealGained+data.ShowHealAmount
+                        end
+                        data.ShowHealAmount = 0
+                    end
+                end)
+            end
+        end
+    else
+        if TotalHeal > 1 then
+            FlyTextTagHealXY(GetUnitX(hero), GetUnitY(hero), "+" .. R2I(TotalHeal), p)
+            local r=GetRandomInt(1,7)
+            normal_sound("Sound\\gulp0"..r,GetUnitXY(hero))
+        end
+    end
+    if not flag or flag == 1 then
+        return TotalHeal
+    end
+    if flag == 2 then
+        return OverHeal
+    end
 end
 do
     TimerStart(CreateTimer(), .1, false, function()
@@ -868,8 +1293,8 @@ function RestoreMiniPap()
     mapIsVisible=false
     BlzFrameSetVisible(map, mapIsVisible)
     BlzFrameClearAllPoints(map)
-    BlzFrameSetSize(map, 0.35, 0.35)
-    BlzFrameSetAbsPoint(map,FRAMEPOINT_CENTER,0.8,0.1)
+    BlzFrameSetSize(map, 0.2, 0.2)
+    BlzFrameSetAbsPoint(map,FRAMEPOINT_CENTER,0.7,0.1)
 end
 
 function CustomUIShow(show)
@@ -904,6 +1329,34 @@ function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
     BlzFrameClearAllPoints(fps)
     BlzFrameSetAbsPoint(fps, FRAMEPOINT_CENTER, 0.9, 0.61)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 02.08.2021 14:24
+---
+do
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        TimerStart(CreateTimer(), 1, false, function()
+            ReplaceID2ArrowMark(FourCC("e001"))
+            DestroyTimer(GetExpiredTimer())
+        end)
+    end
+end
+function ReplaceID2ArrowMark(id)
+    local tmp, k, all = FindUnitOfType(id)
+    --print("найденно "..k.." а в таблице "..#all)
+    for i = 1, #all do
+        SetUnitInvulnerable(all[i], true)
+        UnitAddAbility(all[i], FourCC("Aloc"))
+        local thisTrigger = CreateTrigger()
+        TriggerRegisterUnitInRange(thisTrigger, all[i], 200, nil)
+        TriggerAddAction(thisTrigger, function()
+            KillUnit(all[i])
+        end)
+    end
 end
 function JumpOutWater(unit, angle)
     local eff = AddSpecialEffect("SystemGeneric\\Torrent", GetUnitXY(unit))
@@ -1241,6 +1694,25 @@ end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
+--- DateTime: 02.08.2021 19:03
+---
+function normal_sound (s,x,y,volume)
+    local  snd = CreateSound(s, false, true, true, 10, 10, "CombatSoundsEAX")
+    if not volume then volume=127 end
+    SetSoundChannel(snd, 40)
+    SetSoundVolume(snd, volume)
+    SetSoundPitch(snd, 1)
+    SetSoundDistances(snd, 600, 10000)
+    SetSoundDistanceCutoff(snd, 2100)
+    SetSoundConeAngles(snd, 0.0, 0.0, 127)
+    SetSoundConeOrientation(snd, 0.0, 0.0, 0.0)
+    SetSoundPosition(snd, x, y, 50)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
 --- DateTime: 27.05.2020 23:15
 ---
 ---
@@ -1328,7 +1800,323 @@ function CreateSpeechEffect(unit,effModel,duration)
     end)
 end
 
+
+---@param text string
+---@param textSize real
+---@param x real
+---@param y real
+---@param z real
+---@param red integer
+---@param green integer
+---@param blue integer
+---@param alpha integer
+---@param xvel real
+---@param yvel real
+---@param fadepoint real
+---@param lifespan real
+---@param player player
+---@return texttag
+function FlyTextTag(text, textSize, x, y, z, red, green, blue, alpha, xvel, yvel, fadepoint, lifespan, player, flag)
+    local t = CreateTextTag()
+    SetTextTagText(t, text, textSize)
+    SetTextTagPos(t, x, y, z)
+    SetTextTagColor(t, red, green, blue, alpha)
+    SetTextTagVelocity(t, xvel, yvel)
+    SetTextTagFadepoint(t, fadepoint)
+    SetTextTagLifespan(t, lifespan)
+    SetTextTagPermanent(t, false)
+    if not flag then
+        if player ~= nil then
+            SetTextTagVisibility(t, player == GetLocalPlayer())
+        end
+    else
+        SetTextTagVisibility(t, flag)
+    end
+    return t
+end
+
+---@param target widget
+---@param text string
+---@param player player
+---@return texttag
+function FlyTextTagGoldBounty(target, text, player)
+    return FlyTextTag(text, 0.024, GetWidgetX(target) - 16, GetWidgetY(target), 0, 255, 220, 0, 255, 0, 0.03, 2, 3, player)
+end
+
+---@param target widget
+---@param text string
+---@param player player
+---@return texttag
+function FlyTextTagLumberBounty(target, text, player)
+    return FlyTextTag(text, 0.024, GetWidgetX(target) - 16, GetWidgetY(target), 0, 0, 200, 80, 255, 0, 0.03, 2, 3, player)
+end
+
+---@param target widget
+---@param text string
+---@param player player
+---@return texttag
+function FlyTextTagMiss(target, text, player)
+    return FlyTextTag(text, 0.024, GetWidgetX(target), GetWidgetY(target), 0, 255, 0, 0, 255, 0, 0.03, 1, 3, player)
+end
+
+---@param target widget
+---@param text string
+---@param player player
+---@return texttag
+function FlyTextTagCriticalStrike(target, text, player, flag)
+    return FlyTextTag(text, 0.024, GetWidgetX(target), GetWidgetY(target), 0, 255, 0, 0, 255, 0, 0.04, 2, 10, player, flag)
+end
+
+---@param target widget
+---@param text string
+---@param player player
+---@return texttag
+function FlyTextTagManaBurn(target, text, player)
+    return FlyTextTag(text, 0.024, GetWidgetX(target), GetWidgetY(target), 0, 82, 82, 255, 255, 0, 0.04, 2, 5, player)
+end
+
+---@param target widget
+---@param text string
+---@param player player
+---@return texttag
+function FlyTextTagShadowStrike(target, text, player)
+    return FlyTextTag(text, 0.024, GetWidgetX(target), GetWidgetY(target), 0, 160, 255, 0, 255, 0, 0.04, 2, 5, player)
+end
+
+function FlyTextTagHealXY(x, y, text, player)
+    return FlyTextTag(text, 0.024, x, y, 150, 88, 250, 13, 255, 0, 0.03, 1, 3, player)
+end
+
+function FlyTextTagShieldXY(x, y, text, player, flag)
+    --™
+    local xr = GetRandomReal(-0.05, 0, 05)
+    local r, g, b = 128, 128, 128
+    local see = false
+    if flag == "blue" then
+        r, g, b = 0, 128, 255
+        see = true
+    end
+    if flag == "red" then
+        r, g, b = 255, 128, 128
+        see = true
+    end
+    if flag == "SeeAll" then
+        see = true
+    end
+
+    return FlyTextTag("" .. text, 0.018, x, y, 150, r, g, b, 255, xr, 0.03, 1, 3, player, see)
+end
+
+function CreateStaticGoldTag(text, x, y)
+    --print("Не вижу текстаг")
+    local t = CreateTextTag()
+    SetTextTagText(t, text, 0.03)
+    SetTextTagPos(t, x, y, 150)
+    SetTextTagColor(t, 255, 220, 0, 255)
+    --SetTextTagVelocity(t, 0, 0.03)
+    SetTextTagFadepoint(t, 2)
+    --SetTextTagLifespan(t, 5)
+    SetTextTagPermanent(t, true)
+    if text > 0 then
+        SetTextTagVisibility(t, true)
+    else
+        SetTextTagVisibility(t, false)
+    end
+    return t
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 02.08.2021 10:06
+---
+function UnitAddBigAura(unit)
+    local prevX = GetUnitX(unit)
+    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+        local x,y = GetUnitXY(unit)
+        if x == prevX then
+            --print("Стоит на месте")
+        else
+            --print("двигается")
+
+            local e = nil
+            local k = 0
+
+            GroupEnumUnitsInRange(perebor, x,y,150, nil)
+            while true do
+                e = FirstOfGroup(perebor)
+
+                if e == nil then
+                    break
+                end
+                if UnitAlive(e) and e~=unit then
+                    k = k + 1
+                    local angle=AngleBetweenUnits(unit,e)
+                    UnitAddForceSimple(e,angle,5,150)
+                end
+                GroupRemoveUnit(perebor, e)
+            end
+        end
+        prevX = x
+    end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 31.07.2021 22:40
+---
+DummyID = FourCC("e000")
+function EmpathPeons(unit)
+    local x, y = GetUnitXY(unit)
+    local dummy = CreateUnit(GetOwningPlayer(unit), DummyID, x, y, 0)
+    UnitAddAbility(dummy, FourCC("A000"))
+    UnitApplyTimedLife(dummy, FourCC('BTLF'), 2)
+    if IssueTargetOrder(dummy, "spiritlink", unit) then
+        --print(GetUnitName(unit))
+    end
+end
+perebor = CreateGroup()
+PreviousRandomPeon=1
+function GetRandomPeon()
+    local unit = nil
+    local e = nil
+    local k = 0
+    --print("ищем")
+    local rg = {}
+
+    GroupEnumUnitsInRect(perebor, bj_mapInitialPlayableArea, nil)
+    while true do
+        e = FirstOfGroup(perebor)
+
+        if e == nil then
+            break
+        end
+        if UnitAlive(e) and GetUnitTypeId(e) == FourCC("opeo") then
+            k = k + 1
+            rg[k] = e
+            unit = e
+            if k==1 then
+
+            end
+        end
+        GroupRemoveUnit(perebor, e)
+    end
+    local rp=GetRandomInt(1,#rg)
+    if rp==PreviousRandomPeon then
+        rp=PreviousRandomPeon+1
+        if rp>=#rg then
+            rp=1
+        end
+    end
+    PreviousRandomPeon=rp
+    return rg[rp],k,rg
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 31.07.2021 22:40
+---
+function GetUnitMinHpFromTable(table)
+    local minUnit=GetRandomPeon()
+    local minHP=100
+    for i=1,#table do
+        if GetUnitStatePercent(table[i],UNIT_STATE_LIFE,UNIT_STATE_MAX_LIFE) <=minHP then
+            minHP=GetUnitStatePercent(table[i],UNIT_STATE_LIFE,UNIT_STATE_MAX_LIFE)
+            minUnit=table[i]
+        end
+    end
+    return minUnit
+end
 --CUSTOM_CODE
+function Trig_Fire_Func004C()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    if (not (udg_OgreOnPlace == true)) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Conditions()
+    if (not Trig_Fire_Func004C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_264", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_265", bj_TIMETYPE_ADD, 5.00, true)
+end
+
+function InitTrig_Fire()
+    gg_trg_Fire = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Fire, gg_rct_FireTower)
+    TriggerAddCondition(gg_trg_Fire, Condition(Trig_Fire_Conditions))
+    TriggerAddAction(gg_trg_Fire, Trig_Fire_Actions)
+end
+
+function Trig_Fire_Copy_Func004C()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    if (not (udg_OgreOnPlace == true)) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Copy_Conditions()
+    if (not Trig_Fire_Copy_Func004C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Copy_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_268", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_269", bj_TIMETYPE_ADD, 5.00, true)
+end
+
+function InitTrig_Fire_Copy()
+    gg_trg_Fire_Copy = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Fire_Copy, gg_rct_FireTower2)
+    TriggerAddCondition(gg_trg_Fire_Copy, Condition(Trig_Fire_Copy_Conditions))
+    TriggerAddAction(gg_trg_Fire_Copy, Trig_Fire_Copy_Actions)
+end
+
+function Trig_Fire_Copy_Copy_Func004C()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    if (not (udg_OgreOnPlace == true)) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Copy_Copy_Conditions()
+    if (not Trig_Fire_Copy_Copy_Func004C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Copy_Copy_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_270", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_271", bj_TIMETYPE_ADD, 5.00, true)
+end
+
+function InitTrig_Fire_Copy_Copy()
+    gg_trg_Fire_Copy_Copy = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Fire_Copy_Copy, gg_rct_FireTower3)
+    TriggerAddCondition(gg_trg_Fire_Copy_Copy, Condition(Trig_Fire_Copy_Copy_Conditions))
+    TriggerAddAction(gg_trg_Fire_Copy_Copy, Trig_Fire_Copy_Copy_Actions)
+end
+
 function Trig_Empty_Conditions()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
@@ -1336,20 +2124,12 @@ function Trig_Empty_Conditions()
     return true
 end
 
-function Trig_Empty_Func002A()
-    PauseUnitBJ(true, GetEnumUnit())
-end
-
-function Trig_Empty_Func005A()
-    PauseUnitBJ(false, GetEnumUnit())
-end
-
 function Trig_Empty_Actions()
     DisableTrigger(GetTriggeringTrigger())
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Empty_Func002A)
+    PauseUnitBJ(true, GetTriggerUnit())
         CreateSpeechEffect(GetTriggerUnit())
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_239", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_240", bj_TIMETYPE_ADD, 5.00, true)
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Empty_Func005A)
+    PauseUnitBJ(false, GetTriggerUnit())
         CreateSpeechEffect()
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_241", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_242", bj_TIMETYPE_ADD, 5.00, true)
 end
@@ -1368,21 +2148,13 @@ function Trig_FindHeal_Conditions()
     return true
 end
 
-function Trig_FindHeal_Func002A()
-    PauseUnitBJ(true, GetEnumUnit())
-end
-
-function Trig_FindHeal_Func005A()
-    PauseUnitBJ(false, GetEnumUnit())
-end
-
 function Trig_FindHeal_Actions()
     DisableTrigger(GetTriggeringTrigger())
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_FindHeal_Func002A)
+    PauseUnitBJ(true, GetTriggerUnit())
         CreateSpeechEffect(GetTriggerUnit())
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_243", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_244", bj_TIMETYPE_ADD, 5.00, true)
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_FindHeal_Func005A)
         CreateSpeechEffect()
+    PauseUnitBJ(false, GetTriggerUnit())
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_245", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_246", bj_TIMETYPE_ADD, 5.00, true)
     QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UNITACQUIRED, "TRIGSTR_247")
         CreateUniversalFrame(0.1, 0.015, 0.03, "Исцеляет самого раненного пеона каждые 30 секунд", "Зелье лечения", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNPotionGreen.blp", nil, nil, "heal")
@@ -1395,60 +2167,63 @@ function InitTrig_FindHeal()
     TriggerAddAction(gg_trg_FindHeal, Trig_FindHeal_Actions)
 end
 
-function Trig_StartTD_Conditions()
+function Trig_FindOrge_Conditions()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
     return true
 end
 
-function Trig_StartTD_Actions()
+function Trig_FindOrge_Actions()
     DisableTrigger(GetTriggeringTrigger())
         CreateSpeechEffect(GetTriggerUnit())
+        UnitAddBigAura(gg_unit_nogm_0000)
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_222", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_223", bj_TIMETYPE_ADD, 5.00, true)
 end
 
-function InitTrig_StartTD()
-    gg_trg_StartTD = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_StartTD, gg_rct________________010)
-    TriggerAddCondition(gg_trg_StartTD, Condition(Trig_StartTD_Conditions))
-    TriggerAddAction(gg_trg_StartTD, Trig_StartTD_Actions)
+function InitTrig_FindOrge()
+    gg_trg_FindOrge = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_FindOrge, gg_rct________________010)
+    TriggerAddCondition(gg_trg_FindOrge, Condition(Trig_FindOrge_Conditions))
+    TriggerAddAction(gg_trg_FindOrge, Trig_FindOrge_Actions)
 end
 
-function Trig_StartTD2_Conditions()
+function Trig_OgreRun_Conditions()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
     return true
 end
 
-function Trig_StartTD2_Func002A()
+function Trig_OgreRun_Func003A()
     SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
     PauseUnitBJ(true, GetEnumUnit())
 end
 
-function Trig_StartTD2_Func006A()
+function Trig_OgreRun_Func007A()
     SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
     PauseUnitBJ(false, GetEnumUnit())
 end
 
-function Trig_StartTD2_Actions()
+function Trig_OgreRun_Actions()
     DisableTrigger(GetTriggeringTrigger())
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_StartTD2_Func002A)
+    TriggerExecute(gg_trg_ReadyTower)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_OgreRun_Func003A)
         CreateSpeechEffect(GetTriggerUnit())
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_224", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_225", bj_TIMETYPE_ADD, 8.00, true)
     IssuePointOrderLocBJ(gg_unit_nogm_0000, "attack", GetRectCenter(gg_rct_OgreDefPlace))
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_StartTD2_Func006A)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_OgreRun_Func007A)
     EnableTrigger(gg_trg_StartAllWave)
         CreateSpeechEffect()
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_226", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_227", bj_TIMETYPE_ADD, 8.00, true)
+        AddQuest(true,GetTriggerUnit(),GetRectCenterX(gg_rct_OgreDefPlace),GetRectCenterY(gg_rct_OgreDefPlace))
 end
 
-function InitTrig_StartTD2()
-    gg_trg_StartTD2 = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_StartTD2, gg_rct________________011)
-    TriggerAddCondition(gg_trg_StartTD2, Condition(Trig_StartTD2_Conditions))
-    TriggerAddAction(gg_trg_StartTD2, Trig_StartTD2_Actions)
+function InitTrig_OgreRun()
+    gg_trg_OgreRun = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_OgreRun, gg_rct________________011)
+    TriggerAddCondition(gg_trg_OgreRun, Condition(Trig_OgreRun_Conditions))
+    TriggerAddAction(gg_trg_OgreRun, Trig_OgreRun_Actions)
 end
 
 function Trig_StartAllWave_Actions()
@@ -1469,21 +2244,44 @@ end
 
 function Trig_ReadyTower_Actions()
     UnitAddAbilityBJ(FourCC("Avul"), gg_unit_hctw_0019)
+    UnitAddAbilityBJ(FourCC("A001"), gg_unit_hctw_0019)
     UnitAddAbilityBJ(FourCC("Abun"), gg_unit_hctw_0019)
     UnitAddAbilityBJ(FourCC("Avul"), gg_unit_hatw_0020)
+    UnitAddAbilityBJ(FourCC("A001"), gg_unit_hatw_0020)
     UnitAddAbilityBJ(FourCC("Abun"), gg_unit_hatw_0020)
     UnitAddAbilityBJ(FourCC("Avul"), gg_unit_hgtw_0018)
+    UnitAddAbilityBJ(FourCC("A001"), gg_unit_hgtw_0018)
     UnitAddAbilityBJ(FourCC("Abun"), gg_unit_hgtw_0018)
 end
 
 function InitTrig_ReadyTower()
     gg_trg_ReadyTower = CreateTrigger()
-    TriggerRegisterTimerEventSingle(gg_trg_ReadyTower, 1.00)
     TriggerAddAction(gg_trg_ReadyTower, Trig_ReadyTower_Actions)
 end
 
-function Trig_RepairTower_Func004C()
+function Trig_RepairTower_Func005C()
     if (not (udg_TowerRepairCount >= 3)) then
+        return false
+    end
+    return true
+end
+
+function Trig_RepairTower_Func006C()
+    if (not (GetTriggerUnit() == gg_unit_hatw_0020)) then
+        return false
+    end
+    return true
+end
+
+function Trig_RepairTower_Func007C()
+    if (not (GetTriggerUnit() == gg_unit_hctw_0019)) then
+        return false
+    end
+    return true
+end
+
+function Trig_RepairTower_Func008C()
+    if (not (GetTriggerUnit() == gg_unit_hgtw_0018)) then
         return false
     end
     return true
@@ -1492,9 +2290,34 @@ end
 function Trig_RepairTower_Actions()
     UnitRemoveAbilityBJ(FourCC("Abun"), GetTriggerUnit())
     UnitRemoveAbilityBJ(FourCC("Avul"), GetTriggerUnit())
+    UnitRemoveAbilityBJ(FourCC("A001"), GetTriggerUnit())
     udg_TowerRepairCount = (udg_TowerRepairCount + 1)
-    if (Trig_RepairTower_Func004C()) then
+    if (Trig_RepairTower_Func005C()) then
         DisableTrigger(GetTriggeringTrigger())
+        QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_250")
+                AddQuest(true,GetRandomPeon(),GetRectCenterX(gg_rct_OgreDefPlace),GetRectCenterY(gg_rct_OgreDefPlace))
+    else
+        QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ("Отремонтированы башни " .. (I2S(udg_TowerRepairCount) .. "/3")))
+    end
+    if (Trig_RepairTower_Func006C()) then
+                CreateSpeechEffect()
+        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_252", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_253", bj_TIMETYPE_ADD, 5.00, true)
+                CreateSpeechEffect()
+        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_254", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_255", bj_TIMETYPE_ADD, 5.00, true)
+    else
+    end
+    if (Trig_RepairTower_Func007C()) then
+                CreateSpeechEffect()
+        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_256", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_257", bj_TIMETYPE_ADD, 5.00, true)
+                CreateSpeechEffect()
+        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_258", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_259", bj_TIMETYPE_ADD, 5.00, true)
+    else
+    end
+    if (Trig_RepairTower_Func008C()) then
+                CreateSpeechEffect()
+        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_260", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_261", bj_TIMETYPE_ADD, 5.00, true)
+                CreateSpeechEffect()
+        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_262", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_263", bj_TIMETYPE_ADD, 5.00, true)
     else
     end
 end
@@ -1526,7 +2349,7 @@ function InitTrig_OnPlaceOrge()
     TriggerAddAction(gg_trg_OnPlaceOrge, Trig_OnPlaceOrge_Actions)
 end
 
-function Trig_TolkWOrge_Func015C()
+function Trig_TolkWOrge_Func020C()
     if (not (udg_OgreOnPlace == true)) then
         return false
     end
@@ -1537,7 +2360,7 @@ function Trig_TolkWOrge_Func015C()
 end
 
 function Trig_TolkWOrge_Conditions()
-    if (not Trig_TolkWOrge_Func015C()) then
+    if (not Trig_TolkWOrge_Func020C()) then
         return false
     end
     return true
@@ -1562,6 +2385,11 @@ function Trig_TolkWOrge_Actions()
     QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UNITACQUIRED, "TRIGSTR_238")
         CreateUniversalFrame(0.1, 0.015, 0.03, "Бесплатно чинит любые строения и механизмы RMB", "Ремонт", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNRepair.blp", nil, nil, "repair")
     ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_TolkWOrge_Func014A)
+        AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_hctw_0019))
+        AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_hgtw_0018))
+        AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_hatw_0020))
+    SetPlayerAllianceStateBJ(Player(0), Player(5), bj_ALLIANCE_ALLIED_VISION)
+    SetPlayerAllianceStateBJ(Player(5), Player(0), bj_ALLIANCE_ALLIED_VISION)
 end
 
 function InitTrig_TolkWOrge()
@@ -1622,6 +2450,7 @@ function Trig_PeonDead_Conditions()
 end
 
 function Trig_PeonDead_Actions()
+    TriggerSleepAction(2)
     CustomDefeatBJ(Player(0), "TRIGSTR_209")
 end
 
@@ -1653,6 +2482,7 @@ function Trig_Start_Actions()
     ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Start_Func008A)
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_196", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_197", bj_TIMETYPE_ADD, 5.00, true)
         CreateUniversalFrame(0.1, 0.015, 0.03, "Выбирает всех ваших пеонов. Поражение, если хотя бы 1 умрёт", "Отряд пеонов", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNPeon.blp", nil, "1", "peon")
+    SaveGame("PeonCompany")
 end
 
 function InitTrig_Start()
@@ -1770,6 +2600,7 @@ function Trig_KillMurloc_Actions()
         QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UNITACQUIRED, "TRIGSTR_190")
                 CreateUniversalFrame(0.1, 0.015, 0.03, "Пассивно связывает всех пеонов эмпатическими узами", "Эмпатия", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNSpiritLink.blp", nil, nil, "empath")
         ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_KillMurloc_Func002Func011A)
+        SaveGame("PeonCompany")
     else
     end
 end
@@ -1781,18 +2612,19 @@ function InitTrig_KillMurloc()
     TriggerAddAction(gg_trg_KillMurloc, Trig_KillMurloc_Actions)
 end
 
-function Trig_Table_Conditions()
+function Trig_ReadTable_Conditions()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
     return true
 end
 
-function Trig_Table_Actions()
+function Trig_ReadTable_Actions()
     DisableTrigger(GetTriggeringTrigger())
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_198", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_199", bj_TIMETYPE_ADD, 5.00, true)
         CreateSpeechEffect(GetTriggerUnit())
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_200", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_201", bj_TIMETYPE_ADD, 5.00, true)
+        AddQuest(true,GetTriggerUnit(),GetUnitXY(gg_unit_nogm_0000))
         CreateUI()
         CreateSpeechEffect()
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_210", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_211", bj_TIMETYPE_ADD, 5.00, true)
@@ -1800,11 +2632,11 @@ function Trig_Table_Actions()
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_212", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_213", bj_TIMETYPE_ADD, 5.00, true)
 end
 
-function InitTrig_Table()
-    gg_trg_Table = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_Table, gg_rct________________009)
-    TriggerAddCondition(gg_trg_Table, Condition(Trig_Table_Conditions))
-    TriggerAddAction(gg_trg_Table, Trig_Table_Actions)
+function InitTrig_ReadTable()
+    gg_trg_ReadTable = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ReadTable, gg_rct________________009)
+    TriggerAddCondition(gg_trg_ReadTable, Condition(Trig_ReadTable_Conditions))
+    TriggerAddAction(gg_trg_ReadTable, Trig_ReadTable_Actions)
 end
 
 function Trig_Aly6_Actions()
@@ -1849,6 +2681,7 @@ end
 
 function Trig_Black_Actions()
     CreateFogModifierRectBJ(true, Player(0), FOG_OF_WAR_MASKED, GetPlayableMapRect())
+    UseTimeOfDayBJ(false)
 end
 
 function InitTrig_Black()
@@ -1858,10 +2691,13 @@ function InitTrig_Black()
 end
 
 function InitCustomTriggers()
+    InitTrig_Fire()
+    InitTrig_Fire_Copy()
+    InitTrig_Fire_Copy_Copy()
     InitTrig_Empty()
     InitTrig_FindHeal()
-    InitTrig_StartTD()
-    InitTrig_StartTD2()
+    InitTrig_FindOrge()
+    InitTrig_OgreRun()
     InitTrig_StartAllWave()
     InitTrig_ReadyTower()
     InitTrig_RepairTower()
@@ -1874,7 +2710,7 @@ function InitCustomTriggers()
     InitTrig_Brod()
     InitTrig_FirstAttack()
     InitTrig_KillMurloc()
-    InitTrig_Table()
+    InitTrig_ReadTable()
     InitTrig_Aly6()
     InitTrig_DisableAttack()
     InitTrig_Black()
@@ -1900,6 +2736,7 @@ end
 function main()
     SetCameraBounds(-5632.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -5632.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 5760.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 5888.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -5632.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 5888.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 5760.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -5632.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
     SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+    SetTerrainFogEx(0, 0.0, 10000.0, 0.500, 0.000, 0.000, 0.000)
     NewSoundEnvironment("Default")
     SetAmbientDaySound("SunkenRuinsDay")
     SetAmbientNightSound("SunkenRuinsNight")
@@ -1918,7 +2755,7 @@ function config()
     SetPlayers(1)
     SetTeams(1)
     SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, 1984.0, -3136.0)
+    DefineStartLocation(0, 384.0, -3776.0)
     InitCustomPlayerSlots()
     InitCustomTeams()
 end

@@ -6,6 +6,7 @@
 function HealUnit(hero, amount, flag, eff)
     --1 или nil Сколько вылчено
     --2 Сверхлечение
+
     if not amount then
         amount = 99999
     end
@@ -55,6 +56,12 @@ function HealUnit(hero, amount, flag, eff)
                     end
                 end)
             end
+        end
+    else
+        if TotalHeal > 1 then
+            FlyTextTagHealXY(GetUnitX(hero), GetUnitY(hero), "+" .. R2I(TotalHeal), p)
+            local r=GetRandomInt(1,7)
+            normal_sound("Sound\\gulp0"..r,GetUnitXY(hero))
         end
     end
     if not flag or flag == 1 then

@@ -3,3 +3,14 @@
 --- Created by Bergi.
 --- DateTime: 31.07.2021 22:40
 ---
+function GetUnitMinHpFromTable(table)
+    local minUnit=GetRandomPeon()
+    local minHP=100
+    for i=1,#table do
+        if GetUnitStatePercent(table[i],UNIT_STATE_LIFE,UNIT_STATE_MAX_LIFE) <=minHP then
+            minHP=GetUnitStatePercent(table[i],UNIT_STATE_LIFE,UNIT_STATE_MAX_LIFE)
+            minUnit=table[i]
+        end
+    end
+    return minUnit
+end

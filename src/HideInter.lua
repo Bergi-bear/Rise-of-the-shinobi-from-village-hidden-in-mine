@@ -196,7 +196,7 @@ function RestoreMiniPap()
     BlzFrameSetVisible(map, mapIsVisible)
     BlzFrameClearAllPoints(map)
     BlzFrameSetSize(map, 0.2, 0.2)
-    BlzFrameSetAbsPoint(map,FRAMEPOINT_CENTER,0.8,0.1)
+    BlzFrameSetAbsPoint(map,FRAMEPOINT_CENTER,0.7,0.1)
 end
 
 function CustomUIShow(show)

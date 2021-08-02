@@ -9,6 +9,8 @@ function SelectedAllPeon()
         end
         if UnitAlive(e) and GetUnitTypeId(e) == FourCC("opeo") then
             SelectUnitAddForPlayer(e,Player(0))
+            local x,y=GetUnitXY(e)
+            PanCameraToTimed(x,y,1)
         end
         GroupRemoveUnit(perebor, e)
     end

@@ -106,11 +106,13 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
      if flag == "heal" then
         data.HealCDFH = buttonIconFrame
         local cd=30
-        HealUnit(GetRandomPeon())
+        local _,_,peons=GetRandomPeon()
+        HealUnit(GetUnitMinHpFromTable(peons))
         StartFrameCD(cd, data.HealCDFH)
         TimerStart(CreateTimer(), cd, true, function()
             StartFrameCD(cd, data.HealCDFH)
-            HealUnit(GetRandomPeon())
+            _,_,peons=GetRandomPeon()
+            HealUnit(GetUnitMinHpFromTable(peons))
         end)
     end
 

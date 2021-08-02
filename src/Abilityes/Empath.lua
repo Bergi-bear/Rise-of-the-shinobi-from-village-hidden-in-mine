@@ -14,6 +14,7 @@ function EmpathPeons(unit)
     end
 end
 perebor = CreateGroup()
+PreviousRandomPeon=1
 function GetRandomPeon()
     local unit = nil
     local e = nil
@@ -32,8 +33,19 @@ function GetRandomPeon()
             k = k + 1
             rg[k] = e
             unit = e
+            if k==1 then
+
+            end
         end
         GroupRemoveUnit(perebor, e)
     end
-    return rg[GetRandomInt(1,#rg)],k
+    local rp=GetRandomInt(1,#rg)
+    if rp==PreviousRandomPeon then
+        rp=PreviousRandomPeon+1
+        if rp>=#rg then
+            rp=1
+        end
+    end
+    PreviousRandomPeon=rp
+    return rg[rp],k,rg
 end
