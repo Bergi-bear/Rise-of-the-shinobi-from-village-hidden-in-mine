@@ -340,6 +340,9 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
         --StartFrameCD(TotalReload,buttonIconFrame)
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        if flag == "peon" then
+            SelectedAllPeon()
+        end
         --StartAllFrameCD(GetTriggerPlayer())
         --StartFrameCD(5,buttonIconFrame)
     end)
