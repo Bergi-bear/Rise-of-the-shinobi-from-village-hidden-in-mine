@@ -1,0 +1,4 @@
+[Misc]
+AttackNotifyDelay=99999.0
+AttackNotifyRange=99999.0
+
