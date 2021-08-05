@@ -110,8 +110,8 @@ end
 function CreateUI()
     ui={}
     tt={}
-    ui[1]=CreateSimpleFrameGlue(0.02, 0.56,"ReplaceableTextures\\CommandButtons\\BTNPurge",1)
-    ui[2]=CreateSimpleFrameGlue(0.02+0.039, 0.56,"ReplaceableTextures\\CommandButtons\\BTNSpy",2)
+    ui[1]=CreateSimpleFrameGlue(0.18, 0.56,"ReplaceableTextures\\CommandButtons\\BTNPurge",1)
+    ui[2]=CreateSimpleFrameGlue(0.18+0.039, 0.56,"ReplaceableTextures\\CommandButtons\\BTNSpy",2)
     --ui[3]=CreateSimpleFrameGlue(0.02+0.039*2, 0.56,"ReplaceableTextures\\CommandButtons\\BTNCryptFiendUnBurrow",3)
     tt[1],tt[2],tt[3]=CreateToolTipBox()
 

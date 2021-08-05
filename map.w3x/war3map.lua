@@ -27,6 +27,11 @@ gg_rct_FireTower2 = nil
 gg_rct_FireTower3 = nil
 gg_rct_RescuePoint = nil
 gg_rct_StonesBlock = nil
+gg_rct_CanNotEnter = nil
+gg_rct_CanNotEnter_Copy = nil
+gg_rct_King = nil
+gg_rct_EnterTower = nil
+gg_rct_BonesPlace = nil
 gg_snd_SuccubusPissed3 = nil
 gg_snd_SuccubusPissed5 = nil
 gg_snd_SuccubusPissed6 = nil
@@ -62,11 +67,6 @@ gg_unit_hctw_0019 = nil
 gg_unit_hgtw_0018 = nil
 gg_unit_ndqs_0026 = nil
 gg_unit_hwtw_0024 = nil
-gg_rct_CanNotEnter = nil
-gg_rct_CanNotEnter_Copy = nil
-gg_rct_King = nil
-gg_rct_EnterTower = nil
-gg_rct_BonesPlace = nil
 function InitGlobals()
     udg_MK = 0
     udg_OgreOnPlace = false
@@ -96,15 +96,15 @@ function CreateUnitsForPlayer0()
     local unitID
     local t
     local life
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4221.9, 5184.8, 6.570, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1405.9, 2624.8, 6.570, FourCC("opeo"))
     life = GetUnitState(u, UNIT_STATE_LIFE)
     SetUnitState(u, UNIT_STATE_LIFE, 0.50 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4079.1, 5281.8, 248.620, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1263.1, 2721.8, 248.620, FourCC("opeo"))
     life = GetUnitState(u, UNIT_STATE_LIFE)
     SetUnitState(u, UNIT_STATE_LIFE, 0.75 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -3982.4, 5136.4, 155.563, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4055.6, 5069.4, 106.175, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4178.0, 5087.9, 50.304, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1166.4, 2576.4, 155.563, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1239.6, 2509.4, 106.175, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1362.0, 2527.9, 50.304, FourCC("opeo"))
     u = BlzCreateUnitWithSkin(p, FourCC("e002"), 2942.8, 3819.1, 357.935, FourCC("e002"))
     SetUnitColor(u, ConvertPlayerColor(4))
 end
@@ -208,7 +208,7 @@ function CreateRegions()
     gg_rct_REG_Red_Fog = Rect(2304.0, 3808.0, 4800.0, 5056.0)
     we = AddWeatherEffect(gg_rct_REG_Red_Fog, FourCC("FDrh"))
     EnableWeatherEffect(we, true)
-    gg_rct_REG_Rain_Light = Rect(-5696.0, 2688.0, -2432.0, 5984.0)
+    gg_rct_REG_Rain_Light = Rect(-5280.0, 2848.0, -2016.0, 6144.0)
     we = AddWeatherEffect(gg_rct_REG_Rain_Light, FourCC("RLlr"))
     EnableWeatherEffect(we, true)
     gg_rct_REG_Lights1 = Rect(-1856.0, 4128.0, -1536.0, 4288.0)
@@ -1262,8 +1262,8 @@ end
 function CreateUI()
     ui={}
     tt={}
-    ui[1]=CreateSimpleFrameGlue(0.02, 0.56,"ReplaceableTextures\\CommandButtons\\BTNPurge",1)
-    ui[2]=CreateSimpleFrameGlue(0.02+0.039, 0.56,"ReplaceableTextures\\CommandButtons\\BTNSpy",2)
+    ui[1]=CreateSimpleFrameGlue(0.08, 0.56,"ReplaceableTextures\\CommandButtons\\BTNPurge",1)
+    ui[2]=CreateSimpleFrameGlue(0.08+0.039, 0.56,"ReplaceableTextures\\CommandButtons\\BTNSpy",2)
     --ui[3]=CreateSimpleFrameGlue(0.02+0.039*2, 0.56,"ReplaceableTextures\\CommandButtons\\BTNCryptFiendUnBurrow",3)
     tt[1],tt[2],tt[3]=CreateToolTipBox()
 
@@ -2582,26 +2582,33 @@ do
         end)
     end
 end
-function CreateAndMoveSpeechImage(state, duration, position, texture, text, delay)
+function CreateAndMoveSpeechImage(state, duration, position, texture, text, delay, name)
     --print("изображение пеона")
+    if not name then
+        name = "<Неизвестно>"
+    end
     TimerStart(CreateTimer(), delay, false, function()
-        BlzFrameSetText(TexBoxText, text)
-
+        --BlzFrameSetText(TexBoxText, text)
+        SetTexSlow(text,TexBoxText,TIMER_PERIOD)
+        BlzFrameSetAlpha(TexBox, 254)
         local xPoz = 0
-        local yPoz = 0.45
+        local yPoz = 0.5
         local x = 0
-        local xs=0
+        local xs = 0
+        local pos = FRAMEPOINT_LEFT
         if state == "start" then
             xPoz = 0.1
         end
         if position == "right" then
             xPoz = 0.7 + TIMER_PERIOD64
             x = 1.2
+            pos = FRAMEPOINT_RIGHT
         elseif position == "left" then
             xPoz = 0.1 - TIMER_PERIOD64
             x = -0.4
+            pos = FRAMEPOINT_LEFT
         end
-        xs=x
+        xs = x
         local image = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
         BlzFrameSetAlpha(image, 0)
         local alpha = 0
@@ -2611,12 +2618,22 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
         BlzFrameSetAbsPoint(image, FRAMEPOINT_CENTER, xPoz, 1)
         local y = 1
 
+        local nameSpeaker = BlzCreateFrameByType("TEXT", "ButtonChargesText", image, "", 0)
+        BlzFrameSetSize(nameSpeaker, 0.2, 0.2)
+        BlzFrameSetText(nameSpeaker, name)
+        local tempRight = 0
+        if position == "right" then
+            tempRight = 0.1
+        end
+        BlzFrameSetPoint(nameSpeaker, pos, image, pos, 0.01 + tempRight, -0.17)
+        BlzFrameSetScale(nameSpeaker, 1.5)
+
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             alpha = alpha + 8
             if alpha >= 255 then
                 alpha = 255
             end
-            BlzFrameSetAlpha(image, alpha)
+            --BlzFrameSetAlpha(image, alpha)
             --print(alpha)
             --y = y - 0.03
 
@@ -2680,6 +2697,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
                         DestroyTimer(GetExpiredTimer())
                         if state == "end" then
                             BlzFrameSetVisible(TexBox, false)
+                            --BlzFrameSetAlpha(TexBox, 0)
                         end
                     end
                 else
@@ -2690,7 +2708,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
 
                         if state == "end" then
                             BlzFrameSetVisible(TexBox, false)
-
+                            --BlzFrameSetAlpha(TexBox, 0)
                         end
                     end
                 end
@@ -2712,7 +2730,7 @@ function CreteDialogBox()
     BlzFrameSetSize(backdrop, 1, 0.1)
     BlzFrameSetSize(text, 0.8 * 0.4, 0.1 * .7)
     BlzFrameSetPoint(backdrop, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.0, 0.0)
-    BlzFrameSetAlpha(backdrop, 100)
+    --BlzFrameSetAlpha(backdrop, 0)
     BlzFrameSetText(text, "Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?")
     BlzFrameSetPoint(text, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.12, 0)
     BlzFrameSetScale(text, 1.2)
@@ -2720,6 +2738,24 @@ function CreteDialogBox()
 
     TexBox = tooltip
     TexBoxText = text
+end
+
+function SetTexSlow(originalText, TextFrame, speed)
+    local t = {}
+    for i = 1, #originalText do
+        t[i] = originalText:sub(i, i)
+    end
+    local k = 1
+    local new = ""
+    TimerStart(CreateTimer(), speed, true, function()
+        new = new .. t[k]
+        BlzFrameSetText(TextFrame, new)
+        k = k + 1
+        if k > #originalText then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+
 end
 --CUSTOM_CODE
 function Trig_Init_Func004Func001C()
@@ -2820,7 +2856,7 @@ function Trig_DemonessEnter_Func002Func028A()
 end
 
 function Trig_DemonessEnter_Func002C()
-    if (not (udg_TowerIsRepair == false)) then
+    if (not (udg_TowerIsRepair == true)) then
         return false
     end
     return true
@@ -3383,8 +3419,8 @@ function Trig_Start_Actions()
     AdjustPlayerStateBJ(10000, Player(0), PLAYER_STATE_RESOURCE_LUMBER)
     ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Start_Func003A)
         CreateSpeechEffect()
-        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Ну и долго мы ещё тут будем сидеть, пора исследовать этот остров", 0)
-        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\thing_right", "Да пришло время размять булки, пойдём ребята, осмотримся", 5)
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Ну и долго мы ещё тут будем сидеть, пора исследовать этот остров", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\thing_right", "Да пришло время размять булки, пойдём ребята, осмотримся", 5,"Пеонльнарёфф")
     TriggerSleepAction(5.00)
         CreateSpeechEffect()
     TriggerSleepAction(5.00)
@@ -3409,9 +3445,10 @@ end
 function Trig_NewCamp_Actions()
     DisableTrigger(GetTriggeringTrigger())
         CreateSpeechEffect(GetTriggerUnit())
-    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_171", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_172", bj_TIMETYPE_ADD, 5.00, true)
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "А здесь уже кто-то был, я чувствую запах пота и рыбы", 0,"Пеонльнарёфф")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Это воняет от тебя", 5,"Пеонетти")
+    TriggerSleepAction(5.00)
         CreateSpeechEffect()
-    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_173", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_174", bj_TIMETYPE_ADD, 5.00, true)
 end
 
 function InitTrig_NewCamp()
@@ -3482,7 +3519,7 @@ function Trig_KillMurloc_Func002Func002A()
     PauseUnitBJ(true, GetEnumUnit())
 end
 
-function Trig_KillMurloc_Func002Func011A()
+function Trig_KillMurloc_Func002Func016A()
     SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
     PauseUnitBJ(false, GetEnumUnit())
 end
@@ -3500,14 +3537,16 @@ function Trig_KillMurloc_Actions()
         DisableTrigger(GetTriggeringTrigger())
         ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_KillMurloc_Func002Func002A)
                 CreateSpeechEffect()
-        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_186", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_187", bj_TIMETYPE_ADD, 5.00, true)
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Да действительно, это воняло не от тебя", 0,"Пеонетти")
+                CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\thing_right", "Агрессивне лягушки, я видел таких во франции", 5,"Пеонльнарёфф")
+                CreateAndMoveSpeechImage("end", 5, "left", "PeonEmotion\\thing_right", "Какая франция, это другая вселенная, я думаю они из Калимдора", 10,"Пеонетти")
+        TriggerSleepAction(5.00)
                 CreateSpeechEffect()
-        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_184", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_185", bj_TIMETYPE_ADD, 5.00, true)
+        TriggerSleepAction(5.00)
                 CreateSpeechEffect()
-        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_188", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_189", bj_TIMETYPE_ADD, 5.00, true)
         QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UNITACQUIRED, "TRIGSTR_190")
                 CreateUniversalFrame(0.1, 0.015, 0.03, "Пассивно связывает всех пеонов эмпатическими узами", "Эмпатия", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNSpiritLink.blp", nil, nil, "empath")
-        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_KillMurloc_Func002Func011A)
+        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_KillMurloc_Func002Func016A)
     else
     end
 end
@@ -3528,15 +3567,18 @@ end
 
 function Trig_ReadTable_Actions()
     DisableTrigger(GetTriggeringTrigger())
-    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_198", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_199", bj_TIMETYPE_ADD, 5.00, true)
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\table", "В нашей жизни бывают ситуации, когда возможности выбрать правильный путь у нас нет.", 0,"Табличка")
+        CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\thing_right", "Это означет, что у нас лишь 1 путь - вниз по этой тропе", 5,"Пеонетти")
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Если что, теперь я буду запоминать дорогу, чтобы мы не заблудилсь", 10,"Пеонпио")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Прям как после того случая", 15,"Пеонетти")
+    TriggerSleepAction(5.00)
         CreateSpeechEffect(GetTriggerUnit())
-    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_200", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_201", bj_TIMETYPE_ADD, 5.00, true)
+    TriggerSleepAction(5.00)
         AddQuest(true,GetTriggerUnit(),GetUnitXY(gg_unit_nogm_0000))
         CreateUI()
         CreateSpeechEffect()
-    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_210", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_211", bj_TIMETYPE_ADD, 5.00, true)
+    TriggerSleepAction(5.00)
         CreateSpeechEffect()
-    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_212", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_213", bj_TIMETYPE_ADD, 5.00, true)
 end
 
 function InitTrig_ReadTable()
@@ -3668,7 +3710,7 @@ function config()
     SetPlayers(1)
     SetTeams(1)
     SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, -4096.0, 5120.0)
+    DefineStartLocation(0, -1280.0, 2560.0)
     InitCustomPlayerSlots()
     InitCustomTeams()
 end

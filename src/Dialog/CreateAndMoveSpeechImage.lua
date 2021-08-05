@@ -15,26 +15,35 @@ do
         end)
     end
 end
-function CreateAndMoveSpeechImage(state, duration, position, texture, text, delay)
+function CreateAndMoveSpeechImage(state, duration, position, texture, text, delay, name)
     --print("изображение пеона")
+    if not name then
+        name = "<Неизвестно>"
+    end
     TimerStart(CreateTimer(), delay, false, function()
-        BlzFrameSetText(TexBoxText, text)
-
+        --BlzFrameSetText(TexBoxText, text)
+        SetTexSlow(text,TexBoxText,TIMER_PERIOD)
+        BlzFrameSetAlpha(TexBox, 254)
         local xPoz = 0
-        local yPoz = 0.45
+        local yPoz = 0.5
         local x = 0
-        local xs=0
+        local xs = 0
+        local pos = FRAMEPOINT_LEFT
         if state == "start" then
             xPoz = 0.1
         end
         if position == "right" then
             xPoz = 0.7 + TIMER_PERIOD64
             x = 1.2
+            pos = FRAMEPOINT_RIGHT
         elseif position == "left" then
             xPoz = 0.1 - TIMER_PERIOD64
             x = -0.4
+            pos = FRAMEPOINT_LEFT
+        else
+            print("Передан недопустимый параметр направления")
         end
-        xs=x
+        xs = x
         local image = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
         BlzFrameSetAlpha(image, 0)
         local alpha = 0
@@ -44,12 +53,22 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
         BlzFrameSetAbsPoint(image, FRAMEPOINT_CENTER, xPoz, 1)
         local y = 1
 
+        local nameSpeaker = BlzCreateFrameByType("TEXT", "ButtonChargesText", image, "", 0)
+        BlzFrameSetSize(nameSpeaker, 0.2, 0.2)
+        BlzFrameSetText(nameSpeaker, name)
+        local tempRight = 0
+        if position == "right" then
+            tempRight = 0.1
+        end
+        BlzFrameSetPoint(nameSpeaker, pos, image, pos, 0.01 + tempRight, -0.17)
+        BlzFrameSetScale(nameSpeaker, 1.5)
+
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             alpha = alpha + 8
             if alpha >= 255 then
                 alpha = 255
             end
-            BlzFrameSetAlpha(image, alpha)
+            --BlzFrameSetAlpha(image, alpha)
             --print(alpha)
             --y = y - 0.03
 
@@ -113,6 +132,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
                         DestroyTimer(GetExpiredTimer())
                         if state == "end" then
                             BlzFrameSetVisible(TexBox, false)
+                            --BlzFrameSetAlpha(TexBox, 0)
                         end
                     end
                 else
@@ -123,7 +143,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
 
                         if state == "end" then
                             BlzFrameSetVisible(TexBox, false)
-
+                            --BlzFrameSetAlpha(TexBox, 0)
                         end
                     end
                 end
@@ -145,7 +165,7 @@ function CreteDialogBox()
     BlzFrameSetSize(backdrop, 1, 0.1)
     BlzFrameSetSize(text, 0.8 * 0.4, 0.1 * .7)
     BlzFrameSetPoint(backdrop, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.0, 0.0)
-    BlzFrameSetAlpha(backdrop, 100)
+    --BlzFrameSetAlpha(backdrop, 0)
     BlzFrameSetText(text, "Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?")
     BlzFrameSetPoint(text, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.12, 0)
     BlzFrameSetScale(text, 1.2)
@@ -153,4 +173,22 @@ function CreteDialogBox()
 
     TexBox = tooltip
     TexBoxText = text
+end
+
+function SetTexSlow(originalText, TextFrame, speed)
+    local t = {}
+    for i = 1, #originalText do
+        t[i] = originalText:sub(i, i)
+    end
+    local k = 1
+    local new = ""
+    TimerStart(CreateTimer(), speed, true, function()
+        new = new .. t[k]
+        BlzFrameSetText(TextFrame, new)
+        k = k + 1
+        if k > #originalText then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+
 end
