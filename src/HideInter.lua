@@ -8,8 +8,49 @@ do
         --CreateUI()
         RestoreMiniPap()
         ReturnFPS()
+        --ReturnF10()
+        MenuFrame()
     end)
 end
+
+
+function MenuFrame()
+    BlzFrameSetVisible(BlzGetFrameByName("UpperButtonBarFrame",0),true)
+    for i=0,3 do
+        --local i=0
+        local f10=BlzGetOriginFrame(ORIGIN_FRAME_SYSTEM_BUTTON, i)
+        if i==0 then
+            BlzFrameSetParent(f10, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+            BlzFrameSetVisible(f10, true)
+            BlzFrameClearAllPoints(f10)
+            BlzFrameSetAbsPoint(f10, FRAMEPOINT_CENTER, 0.65+(0.08*2) ,0.59)
+        elseif i==1 then
+            BlzFrameSetVisible(f10, false)
+        elseif i==2 then
+            BlzFrameSetParent(f10, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+            BlzFrameSetVisible(f10, true)
+            BlzFrameClearAllPoints(f10)
+            BlzFrameSetAbsPoint(f10, FRAMEPOINT_CENTER, 0.65+(0.08*1) ,0.59)
+        elseif i==3 then
+            BlzFrameSetParent(f10, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+            BlzFrameSetVisible(f10, true)
+            BlzFrameClearAllPoints(f10)
+            BlzFrameSetAbsPoint(f10, FRAMEPOINT_CENTER, 0.65+(0.08*i) ,0.59)
+        end
+    end
+end
+
+function ReturnF10()
+    	--Вернуть F10
+	local f10=BlzGetOriginFrame(ORIGIN_FRAME_SYSTEM_BUTTON, 0)--не не работает
+	BlzFrameSetVisible(f10, true)
+	BlzFrameClearAllPoints(f10)
+	BlzFrameSetAbsPoint(f10, FRAMEPOINT_CENTER, 0.65 ,0.58)
+	BlzFrameClearAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_SYSTEM_BUTTON, 1)) --отрыв других кнопок меню
+	BlzFrameClearAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_SYSTEM_BUTTON, 2)) --
+end
+
+
 function HideEverything()
    --BlzFrameSetVisible(BlzGetFrameByName("ConsoleUIBackdrop", 0), false)
     BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleUIBackdrop", 0), FRAMEPOINT_TOPRIGHT, 0, -0, 8)

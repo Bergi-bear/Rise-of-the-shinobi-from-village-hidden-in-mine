@@ -22,7 +22,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
     end
     TimerStart(CreateTimer(), delay, false, function()
         --BlzFrameSetText(TexBoxText, text)
-        SetTexSlow(text,TexBoxText,TIMER_PERIOD)
+        SetTexSlow(text,TexBoxText,TIMER_PERIOD/2)
         BlzFrameSetAlpha(TexBox, 254)
         local xPoz = 0
         local yPoz = 0.5

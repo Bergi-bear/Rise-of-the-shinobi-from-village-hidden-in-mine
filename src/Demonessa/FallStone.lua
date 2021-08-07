@@ -3,7 +3,7 @@
 --- Created by Bergi.
 --- DateTime: 02.08.2021 22:45
 ---
-PeonAnderStone = 0
+PeonAnderStone = -1
 
 function MarkAndFall(x, y, effModel, hero)
     local mark = AddSpecialEffect("Alarm", x, y)
@@ -27,7 +27,7 @@ function MarkAndFall(x, y, effModel, hero)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 local _, damaged = UnitDamageArea(hero, 70, x, y, 100) --при падении камня
                 if IsUnitInRangeXY(damaged, x, y, 80) and UnitAlive(damaged) then
-
+                    PeonAnderStone=PeonAnderStone+1
                     RemoveUnit(damaged)
                     if PeonAnderStone == 0 then
                         TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "Пеонетти", GetRectCenter(GetPlayableMapRect()), nil, "О нет, нашел собрата придавило, думаю он выкарабкается", bj_TIMETYPE_ADD, 4.00, true)
@@ -39,7 +39,7 @@ function MarkAndFall(x, y, effModel, hero)
                         TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "Пеонетти", GetRectCenter(GetPlayableMapRect()), nil, "Я растерял всех своих друзей", bj_TIMETYPE_ADD, 4.00, true)
                         CreateSpeechEffect(GetRandomPeon())
                     end
-                    PeonAnderStone=PeonAnderStone+1
+
                 end
 
                 TimerStart(CreateTimer(), 5, false, function()

@@ -10,17 +10,20 @@ function TP2Point(x, y,delay)
     end
     for i = 1, #table do
         local xp, yp = GetUnitXY(table[i])
-        DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", xp, yp ))
-        ShowUnit(table[i],false)
-        TimerStart(CreateTimer(), 1, false, function()
-            PanCameraToTimed(x,y,1)
-            TimerStart(CreateTimer(), delay, false, function()
-                SetUnitPosition(table[i], x, y)
-                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", GetUnitXY(table[i])))
-                ShowUnit(table[i],true)
-                PauseUnit(table[i],false)
-                SelectUnitAdd(table[i])
+        local unit=table[i]
+        if not IsUnitInRangeXY(unit,x,y,300) then
+            DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", xp, yp ))
+            ShowUnit(table[i],false)
+            TimerStart(CreateTimer(), 0, false, function()
+                PanCameraToTimed(x,y,1)
+                TimerStart(CreateTimer(), delay, false, function()
+                    SetUnitPosition(table[i], x, y)
+                    DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", GetUnitXY(table[i])))
+                    ShowUnit(table[i],true)
+                    PauseUnit(table[i],false)
+                    SelectUnitAdd(table[i])
+                end)
             end)
-        end)
+        end
     end
 end

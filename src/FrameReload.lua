@@ -354,6 +354,11 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
         BlzFrameSetVisible(tooltip, true) --GetLocalPlayer() == GetTriggerPlayer()
     end)
     local TrigMOUSE_LEAVE = CreateTrigger()
+    --первичное отключение после создания
+    TimerStart(CreateTimer(), 15,false, function()
+               BlzFrameSetVisible(tooltip, false)
+    end)
+
     BlzTriggerRegisterFrameEvent(TrigMOUSE_LEAVE, face, FRAMEEVENT_MOUSE_LEAVE)
     TriggerAddAction(TrigMOUSE_LEAVE, function()
         --mouseOnFrame=false
