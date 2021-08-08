@@ -6,8 +6,9 @@
 PeonAnderStone = -1
 
 function MarkAndFall(x, y, effModel, hero)
-    local mark = AddSpecialEffect("Alarm", x, y)
-    BlzSetSpecialEffectScale(mark, 1)
+    --local mark = AddSpecialEffect("Alarm", x, y)
+    --BlzSetSpecialEffectScale(mark, 1)
+    local mark=CreateCircleImage(x, y)
     TimerStart(CreateTimer(), 2, false, function()
         local FallenEff = AddSpecialEffect(effModel, x, y)
         BlzSetSpecialEffectZ(FallenEff, 2000)
@@ -18,8 +19,10 @@ function MarkAndFall(x, y, effModel, hero)
 
             if z <= GetTerrainZ(x, y) then
                 PlayerSeeNoiseInRangeTimed(1, x, y)
-                DestroyEffect(mark)
-                BlzSetSpecialEffectPosition(mark, 5000, 5000, 0)
+                --DestroyEffect(mark)
+                --BlzSetSpecialEffectPosition(mark, 5000, 5000, 0)
+                SetImagePosition(mark,5000,5000,0)
+                DestroyImage(mark)
                 DestroyTimer(GetExpiredTimer())
                 DestroyEffect(FallenEff)
                 local nd = CreateDestructable(FourCC('LTrc'), x, y, 0, GetRandomInt(1, 1), GetRandomInt(1, 5))
@@ -64,4 +67,15 @@ function PlayerSeeNoiseInRangeTimed(duration, x, y)
         end
     end
 
+end
+
+
+function CreateCircleImage(x, y)
+    -- "SystemGeneric\\Pavement.blp"
+    local img = CreateImage("SystemGeneric\\circle.dds", 256, 256, 0, x, y, 0, 256 / 2, 256 / 2, 0, 4)
+    --SetImageColor(img, 0, 255, 0, 128)
+    SetImageRender(img, true)
+    SetImageRenderAlways(img, true)
+    ShowImage(img, true)
+    return img
 end
