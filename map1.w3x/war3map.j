@@ -48,7 +48,7 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set u=BlzCreateUnitWithSkin(p, 'odes', - 2193.7, - 592.4, - 2.571, 'odes')
+    set u=BlzCreateUnitWithSkin(p, 'odes', - 2193.7, - 592.4, 357.429, 'odes')
 endfunction
 
 //===========================================================================

@@ -3,6 +3,7 @@
 --- Created by Bergi.
 --- DateTime: 04.08.2021 16:36
 ---
+ActiveDialog=false
 do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()

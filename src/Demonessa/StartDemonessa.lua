@@ -29,3 +29,24 @@ function StartDemonessa(boss)
         end
     end)
 end
+
+function StartForSheep(boss,sheep)
+        TimerStart(CreateTimer(), 1, true, function()
+
+        local x,y=GetUnitXY(sheep)
+        local effmodel = "Doodads\\LordaeronSummer\\Terrain\\LoardaeronRockChunks\\LoardaeronRockChunks3"
+        local angle=GetUnitFacing(sheep)
+        local dist=GetRandomInt(0,500)
+        x,y=MoveXY(x,y,dist,angle)
+        local r=GetRandomInt(1,2)
+        if r==1 then
+            MarkAndFall(x,y,effmodel,boss)
+        elseif r==2 then
+            angle=GetRandomInt(0,360)
+            x,y=MoveXY(x,y,dist,angle)
+            local m=CreateUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE),FourCC("nmrl"),x,y,angle)
+            local face=AngleBetweenUnits(m,sheep)
+            JumpOutWater(m,face)
+        end
+    end)
+end
