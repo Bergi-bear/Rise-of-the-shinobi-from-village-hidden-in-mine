@@ -127,15 +127,15 @@ function CreateUnitsForPlayer0()
     local unitID
     local t
     local life
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -125.9, -2943.2, 6.570, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4221.9, 5184.8, 6.570, FourCC("opeo"))
     life = GetUnitState(u, UNIT_STATE_LIFE)
     SetUnitState(u, UNIT_STATE_LIFE, 0.50 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 16.9, -2846.2, 248.620, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4079.1, 5281.8, 248.620, FourCC("opeo"))
     life = GetUnitState(u, UNIT_STATE_LIFE)
     SetUnitState(u, UNIT_STATE_LIFE, 0.75 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 113.6, -2991.6, 155.563, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 40.4, -3058.6, 106.175, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -82.0, -3040.1, 50.304, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -3982.4, 5136.4, 155.563, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4055.6, 5069.4, 106.175, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4178.0, 5087.9, 50.304, FourCC("opeo"))
 end
 
 function CreateBuildingsForPlayer1()
@@ -3565,24 +3565,24 @@ function InitTrig_TolkWOrgeAfterRepair()
     TriggerAddAction(gg_trg_TolkWOrgeAfterRepair, Trig_TolkWOrgeAfterRepair_Actions)
 end
 
-function Trig_Victory_Func019C()
+function Trig_Victory_Func020C()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
-    if (not (udg_VictorySheep == false)) then
+    if (not (udg_VictorySheep == true)) then
         return false
     end
     return true
 end
 
 function Trig_Victory_Conditions()
-    if (not Trig_Victory_Func019C()) then
+    if (not Trig_Victory_Func020C()) then
         return false
     end
     return true
 end
 
-function Trig_Victory_Func011A()
+function Trig_Victory_Func012A()
     PlaySoundAtPointBJ(gg_snd_Loading, 100, GetUnitLoc(GetEnumUnit()), 0)
     ShowUnitHide(GetEnumUnit())
     udg_SavedPeons = (udg_SavedPeons + 1)
@@ -3599,8 +3599,9 @@ function Trig_Victory_Actions()
         CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Ура спасение, она что совсем сдурела?", 0,"Пеонетти")
         CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\DemonAngry", "Я только начала пеонята", 5,"Демонесса")
     TriggerSleepAction(5.00)
+        UnitAddBigAura(gg_unit_odes_0027)
         StartForSheep(gg_unit_ndqs_0026,gg_unit_odes_0027)
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Victory_Func011A)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Victory_Func012A)
     IssuePointOrderLocBJ(gg_unit_odes_0027, "move", GetRectCenter(gg_rct_Region_030))
     SetCameraTargetControllerNoZForPlayer(Player(0), gg_unit_odes_0027, 0, 0, false)
     SetCameraFieldForPlayer(Player(0), CAMERA_FIELD_TARGET_DISTANCE, 4000.00, 10.00)
@@ -3621,7 +3622,7 @@ function Trig_Sound_Func005C()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
-    if (not (udg_VictorySheep == false)) then
+    if (not (udg_VictorySheep == true)) then
         return false
     end
     return true
@@ -4037,7 +4038,7 @@ function config()
     SetPlayers(1)
     SetTeams(1)
     SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, 0.0, -3008.0)
+    DefineStartLocation(0, -4096.0, 5120.0)
     InitCustomPlayerSlots()
     InitCustomTeams()
 end

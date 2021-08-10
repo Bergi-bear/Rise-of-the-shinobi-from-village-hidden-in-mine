@@ -98,7 +98,7 @@ function CreateSimpleFrameGlue(posX, PosY, texture, flag)
     BlzTriggerRegisterFrameEvent(TrigMOUSE_ENTER, SelfFrame, FRAMEEVENT_MOUSE_ENTER)
 
     TriggerAddAction(TrigMOUSE_ENTER, function()
-        print("показать подсказку "..flag)
+        --print("показать подсказку "..flag)
         mouseOnFrame=true
         BlzFrameSetVisible(tt[1],true)
         if flag==1 then
@@ -128,7 +128,7 @@ function init()
 	_G['tornado'] = {}
 	_G['tornado'].add = function(unit)
 		_G['tornado'][#_G['tornado']+1] = {unit, 0 }
-        print("создан торнато")
+        --print("создан торнато")
 	end
 	_G['tornado'].move = function()
 		local torn = _G['tornado']
@@ -153,9 +153,9 @@ function InitGlobals()
 	t = CreateTrigger()
 	TriggerRegisterPlayerEvent(t, Player(0), EVENT_PLAYER_MOUSE_MOVE)
 	TriggerAddAction(t, function() _G['toPos']={BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()} end)
-	_G['movedUnit'] = CreateUnit(Player(0), FourCC('odes'), 0,0,0)
+	_G['movedUnit'] = CreateUnit(Player(0), FourCC('odes'), -28939,0,0)
 	UnitRemoveAbility(_G['movedUnit'], FourCC('Ainv'))
-	_G['camDummy'] = CreateUnit(Player(0), FourCC('owyv'), 0,0,0)
+	_G['camDummy'] = CreateUnit(Player(0), FourCC('owyv'), -28939,0,0)
 	UnitAddAbility(_G['movedUnit'],FourCC('Apxf'))
 	t = CreateTimer()
 	TimerStart(t, 0.01, true, function() mainMouse(); autoMove(_G['movedUnit'],2.5); autoMove(_G['camDummy'],1.8); frameMove(); _G['tornado'].move() end)
@@ -184,10 +184,11 @@ function frameMove()
 		else
 			X = X+0.5
 			BlzFrameSetAbsPoint(frame[1], FRAMEPOINT_CENTER, X, Y)
+			local YOffset=GetUnitY(u)+GetRandomInt(-500,300)
 			if(id:sub(1,1) == "L") then
-				CreateDestructableZ(FourCC(id), GetUnitX(u)+1200, GetUnitY(u)+GetRandomInt(-300,300),  5, 0, .95, GetRandomInt(1, 5))
+				CreateDestructableZ(FourCC(id), GetUnitX(u)+1200, YOffset,  5, 0, .95, GetRandomInt(1, 5))
 			else
-				local un = CreateUnit(Player(5), FourCC(id), GetUnitX(u)+1200, GetUnitY(u)+GetRandomInt(-300,300),270)
+				local un = CreateUnit(Player(5), FourCC(id), YOffset,270)
 				if( id == 'ntor') then
 					_G['tornado'].add(un) -- добавляем торнадо в пул торнад для движения
 				end

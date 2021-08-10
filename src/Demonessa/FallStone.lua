@@ -29,7 +29,7 @@ function MarkAndFall(x, y, effModel, hero)
                 SetDestructableInvulnerable(nd, true)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 local _, damaged = UnitDamageArea(hero, 70, x, y, 100) --при падении камня
-                if IsUnitInRangeXY(damaged, x, y, 80) and UnitAlive(damaged) then
+                if IsUnitInRangeXY(damaged, x, y, 80) and UnitAlive(damaged) and GetOwningPlayer(damaged)==Player(0) then
                     PeonAnderStone=PeonAnderStone+1
                     RemoveUnit(damaged)
                     if PeonAnderStone == 0 then
