@@ -1,2 +1,2 @@
-powershell -command -(New-Object Net.WebClient).DownloadFile('https://github.com/Bergi-bear/roguelike/raw/master/PeonRogue.w3x', 'PeonRogue.w3x')
-move /Y PeonRogue.w3x "%userprofile%/documents/Warcraft III/maps"
+powershell -command -(New-Object Net.WebClient).DownloadFile('https://github.com/Bergi-bear/Rise-of-the-shinobi-from-village-hidden-in-mine/raw/main/PeonCampaignMap01.w3x', 'PeonCampaignMap01.w3x')
+move /Y PeonCampaignMap01.w3x "%userprofile%/documents/Warcraft III/maps"
