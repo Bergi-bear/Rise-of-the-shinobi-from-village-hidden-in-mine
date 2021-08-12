@@ -1,0 +1,2 @@
+powershell -command -(New-Object Net.WebClient).DownloadFile('https://github.com/Bergi-bear/roguelike/raw/master/PeonRogue.w3x', 'PeonRogue.w3x')
+move /Y PeonRogue.w3x "%userprofile%/documents/Warcraft III/maps"

@@ -24,7 +24,7 @@ function look(a1, a2, b1, b2)
     local deg = math.deg(acos)
     return deg
 end
-function CreateSimpleFrameGlue(posX, PosY, texture, flag)
+function CreateSimpleFrameGlueNew(posX, PosY, texture, flag)
     local NextPoint = 0.039
     if not texture then
         texture = "ReplaceableTextures\\CommandButtons\\BTNSelectHeroOn"
