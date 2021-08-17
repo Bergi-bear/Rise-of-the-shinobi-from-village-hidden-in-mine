@@ -22,21 +22,7 @@ function look(a1, a2, b1, b2)
     local deg = math.deg(acos)
     return deg
 end
-function CreateSimpleFrameGlueNew(posX, PosY, texture, flag)
-    local NextPoint = 0.039
-    if not texture then
-        texture = "ReplaceableTextures\\CommandButtons\\BTNSelectHeroOn"
-    end
-    local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
-    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
-    BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
-    BlzFrameSetTexture(buttonIconFrame, texture, 0, true)
-    BlzFrameSetSize(SelfFrame, NextPoint, NextPoint)
-    BlzFrameSetAbsPoint(SelfFrame, FRAMEPOINT_CENTER, posX, PosY)
 
-    --_G[SelfFrame] = buttonIconFrame
-    return SelfFrame
-end
 
 function Init2Map() --вызывается из гуи
     local xs, ys = GetPlayerStartLocationX(Player(0)), GetPlayerStartLocationY(Player(0))

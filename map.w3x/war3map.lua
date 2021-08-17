@@ -2685,7 +2685,6 @@ end
 ---
 
 function CreateAndMoveCamera(dummy, speed, xs, ys, flag)
-
     local X, Y = xs, ys
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         local unitPos = { GetUnitX(dummy), GetUnitY(dummy) }
