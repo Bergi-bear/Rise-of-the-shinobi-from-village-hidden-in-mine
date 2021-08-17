@@ -4,15 +4,16 @@
 --- DateTime: 10.08.2021 19:34
 ---
 function CreateAndMoveFrame(texture)
-    local x,y=0.5,0.55
-    local frame = CreateSimpleFrameGlue(x, y, texture, 1)
+    local x, y = 0.5, 0.58
+    local frame = CreateSimpleFrameGlueNew(x, y, texture, 1)
 
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-        x=x-0.002
-        BlzFrameSetAbsPoint(frame,FRAMEPOINT_CENTER,x,y)
-        if x<=0.1 then
+        x = x - 0.002
+        BlzFrameSetAbsPoint(frame, FRAMEPOINT_CENTER, x, y)
+        if x <= 0.1 then
             DestroyTimer(GetExpiredTimer())
-            BlzFrameSetVisible(frame,false)
+            BlzFrameSetVisible(frame, false)
+            ActionPerDestroy(texture)
         end
     end)
 end
@@ -24,7 +25,48 @@ function StartCombiner()
         "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp",
     }
     TimerStart(CreateTimer(), 1, true, function()
-        local r=GetRandomInt(2,#textureTable)
+        local r = GetRandomInt(1, #textureTable)
         CreateAndMoveFrame(textureTable[r])
+    end)
+end
+
+function ActionPerDestroy(texture)
+    if texture == "ReplaceableTextures\\CommandButtons\\BTNGolemStormBolt.blp" then
+        --print("камень")
+        CreateStone()
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNParasite.blp" then
+        --print("мурлок")
+        CreateEnemy(FourCC("nmtw"))
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp" then
+        --print("циклон")
+        CreateTornado()
+    else
+        print('переданная текстура не найдена в базе', texture)
+    end
+end
+
+function CreateStone()
+    local xOffset = GetUnitX(GCameraDummy) + 1200
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-500, 400)
+    CreateDestructableZ(FourCC("LTrc"), xOffset, yOffset, -50, 0, .95, GetRandomInt(1, 5))
+end
+
+function CreateEnemy(id)
+    local xOffset = GetUnitX(GCameraDummy) + 1200
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-500, 400)
+    local unit = CreateUnit(Player(5), id, xOffset, yOffset, 270)
+    IssuePointOrder(unit, "attack", Gxs, Gys)
+end
+
+function CreateTornado()
+    local xOffset = GetUnitX(GCameraDummy) + 1200
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-500, 400)
+    local unit = CreateUnit(Player(5), FourCC("ntor"), xOffset, yOffset, 270)
+    UnitApplyTimedLife(unit, FourCC('BTLF'), 20)
+    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+        SetUnitPositionSmooth(unit, GetUnitX(unit) - 3, GetUnitY(unit))
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+        end
     end)
 end
