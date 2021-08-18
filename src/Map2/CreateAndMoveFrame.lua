@@ -38,8 +38,9 @@ function StartCombiner()
         "ReplaceableTextures\\CommandButtons\\BTNGolemStormBolt.blp",
         "ReplaceableTextures\\CommandButtons\\BTNParasite.blp",
         "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp",
+        "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp",
     }
-    TimerStart(CreateTimer(), 1, true, function()
+    TimerStart(CreateTimer(), 2, true, function()
         local r = GetRandomInt(1, #textureTable)
         CreateAndMoveFrame(textureTable[r])
     end)
@@ -62,20 +63,20 @@ end
 
 function CreateStone()
     local xOffset = GetUnitX(GCameraDummy) + 1200
-    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-500, 400)
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 400)
     CreateDestructableZ(FourCC("LTrc"), xOffset, yOffset, -50, 0, .95, GetRandomInt(1, 5))
 end
 
 function CreateEnemy(id)
     local xOffset = GetUnitX(GCameraDummy) + 1200
-    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-500, 400)
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 400)
     local unit = CreateUnit(Player(5), id, xOffset, yOffset, 270)
     IssuePointOrder(unit, "attack", Gxs, Gys)
 end
 
 function CreateTornado()
     local xOffset = GetUnitX(GCameraDummy) + 1200
-    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-500, 400)
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 400)
     local unit = CreateUnit(Player(5), FourCC("ntor"), xOffset, yOffset, 270)
     UnitApplyTimedLife(unit, FourCC('BTLF'), 20)
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
@@ -85,3 +86,4 @@ function CreateTornado()
         end
     end)
 end
+

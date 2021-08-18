@@ -10,9 +10,21 @@ do
         ReturnFPS()
         --ReturnF10()
         MenuFrame()
+        HideToolTips()
     end)
 end
 
+
+function HideToolTips()
+    BlzFrameClearAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_UBERTOOLTIP,0))
+    BlzFrameClearAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_TOOLTIP,0))
+    BlzFrameSetVisible(BlzGetOriginFrame(ORIGIN_FRAME_TOOLTIP,0), false)
+    BlzFrameSetVisible(BlzGetOriginFrame(ORIGIN_FRAME_UBERTOOLTIP,0), false)
+    BlzFrameSetAbsPoint(BlzGetOriginFrame(ORIGIN_FRAME_UBERTOOLTIP,0),FRAMEPOINT_CENTER,0.75,0.55)
+    BlzFrameSetAbsPoint(BlzGetOriginFrame(ORIGIN_FRAME_TOOLTIP,0),FRAMEPOINT_CENTER,0.75,0.55)
+    BlzFrameSetAlpha(BlzGetOriginFrame(ORIGIN_FRAME_TOOLTIP,0),0)
+    BlzFrameSetAlpha(BlzGetOriginFrame(ORIGIN_FRAME_UBERTOOLTIP,0),0)
+end
 
 function MenuFrame()
     BlzFrameSetVisible(BlzGetFrameByName("UpperButtonBarFrame",0),true)
