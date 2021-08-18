@@ -38,9 +38,12 @@ function StartCombiner()
         "ReplaceableTextures\\CommandButtons\\BTNGolemStormBolt.blp",
         "ReplaceableTextures\\CommandButtons\\BTNParasite.blp",
         "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp",
-        "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp",
+        "ReplaceableTextures\\CommandButtons\\BTNInnerFire.blp",
+        "ReplaceableTextures\\CommandButtons\\BTNCryptFiendBurrow.blp",
+        "ReplaceableTextures\\CommandButtons\\BTNTornado.blp",
+        "ReplaceableTextures\\CommandButtons\\BTNRepair.blp"
     }
-    TimerStart(CreateTimer(), 2, true, function()
+    TimerStart(CreateTimer(), 1.5, true, function()
         local r = GetRandomInt(1, #textureTable)
         CreateAndMoveFrame(textureTable[r])
     end)
@@ -55,7 +58,16 @@ function ActionPerDestroy(texture)
         CreateEnemy(FourCC("nmtw"))
     elseif texture == "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp" then
         --print("циклон")
-        CreateTornado()
+        CreateTornado("ntor")
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNInnerFire.blp" then
+        MarkPillar(GetUnitX(GPlayer), GetUnitY(GPlayer), GPlayer)
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNCryptFiendBurrow.blp" then
+        local effmodel = "Doodads\\LordaeronSummer\\Terrain\\LoardaeronRockChunks\\LoardaeronRockChunks3"
+        MarkAndFall(GetUnitX(GPlayer) + 500, GetUnitY(GPlayer), effmodel, GPlayer)
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNTornado.blp" then
+        CreateTornado("n001")
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNRepair.blp" then
+        CreateRepairPack()
     else
         print('переданная текстура не найдена в базе', texture)
     end
@@ -74,15 +86,38 @@ function CreateEnemy(id)
     IssuePointOrder(unit, "attack", Gxs, Gys)
 end
 
-function CreateTornado()
+function CreateTornado(id)
     local xOffset = GetUnitX(GCameraDummy) + 1200
     local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 400)
-    local unit = CreateUnit(Player(5), FourCC("ntor"), xOffset, yOffset, 270)
+    local unit = CreateUnit(Player(5), FourCC(id), xOffset, yOffset, 270)
     UnitApplyTimedLife(unit, FourCC('BTLF'), 20)
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         SetUnitPositionSmooth(unit, GetUnitX(unit) - 3, GetUnitY(unit))
         if not UnitAlive(unit) then
             DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
+function CreateRepairPack()
+    local xOffset = GetUnitX(GCameraDummy) + 1200
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 400)
+    local unit = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC("n000"), xOffset, yOffset, 270)
+    UnitAddAbility(unit, FourCC("Aloc"))
+    local eff = AddSpecialEffect("ActionRepair", xOffset, yOffset)
+    BlzSetSpecialEffectZ(eff, 20)
+    local thisTrigger = CreateTrigger()
+    TriggerRegisterUnitInRange(thisTrigger, unit, 100, nil)
+    TriggerAddAction(thisTrigger, function()
+        if GetUnitTypeId(GetTriggerUnit())==FourCC("odes") then
+            KillUnit(unit)
+            ShowUnit(unit,false)
+            DestroyEffect(eff)
+            BlzSetSpecialEffectZ(eff,-300)
+            DestroyTrigger(thisTrigger)
+            HealUnit(GetTriggerUnit(),50)
+            local x,y=GetUnitXY(GetTriggerUnit())
+            normal_sound("Abilities\\Spells\\Other\\LoadUnload\\Loading",x,y)
         end
     end)
 end

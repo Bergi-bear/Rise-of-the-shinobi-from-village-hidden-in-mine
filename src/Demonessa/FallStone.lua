@@ -25,9 +25,16 @@ function MarkAndFall(x, y, effModel, hero)
                 DestroyImage(mark)
                 DestroyTimer(GetExpiredTimer())
                 DestroyEffect(FallenEff)
-                local nd = CreateDestructable(FourCC('LTrc'), x, y, 0, GetRandomInt(1, 1), GetRandomInt(1, 5))
+                BlzSetSpecialEffectPosition(FallenEff,5000,5000,0)
+                local nd = CreateDestructableZ(FourCC('LTrc'), x, y, -100,GetRandomReal(0,360), GetRandomInt(1, 1), GetRandomInt(1, 5))
                 SetDestructableInvulnerable(nd, true)
-                DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
+
+                if z<=100 then
+                    --print(z,"падения камня")
+                    DestroyEffect(AddSpecialEffect("SystemGeneric\\Torrent", x, y))
+                else
+                     DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
+                end
                 local _, damaged = UnitDamageArea(hero, 70, x, y, 100) --при падении камня
                 if IsUnitInRangeXY(damaged, x, y, 80) and UnitAlive(damaged) and GetOwningPlayer(damaged)==Player(0) then
                     PeonAnderStone=PeonAnderStone+1
@@ -74,7 +81,8 @@ function CreateCircleImage(x, y)
     -- "SystemGeneric\\Pavement.blp"
     local img = CreateImage("SystemGeneric\\circle.dds", 256, 256, 0, x, y, 0, 256 / 2, 256 / 2, 0, 4)
     --SetImageColor(img, 0, 255, 0, 128)
-    SetImageRender(img, true)
+    --SetImageRender(img, true)
+    --SetImageAboveWater(img,true,true)
     SetImageRenderAlways(img, true)
     ShowImage(img, true)
     return img

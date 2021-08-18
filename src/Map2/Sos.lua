@@ -28,13 +28,14 @@ function Init2Map() --вызывается из гуи
     local xs, ys = GetPlayerStartLocationX(Player(0)), GetPlayerStartLocationY(Player(0))
     Gxs, Gys = xs, ys
     MaxX=Gxs
-    print(xs)
+    --print(xs)
     StartCombiner()
     local dummy = CreateUnit(Player(0), FourCC('owyv'), xs, ys, 0)
     GCameraDummy = dummy
     CreateAndMoveCamera(dummy, 1.8, xs, ys, true)
 
     local heroSheep = CreateUnit(Player(0), FourCC('odes'), xs, ys, 0)
+    GPlayer=heroSheep
     CreateAndMoveCamera(heroSheep, 2.5, xs, ys)
     UnitAddAbility(heroSheep, FourCC('Apxf'))
 
