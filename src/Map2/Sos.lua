@@ -25,26 +25,244 @@ end
 
 
 function Init2Map() --вызывается из гуи
+    createClass = function()
+        local creator = {}
+        creator.__private = {
+            object_class = {},
+        }
+        
+        creator.__oncall = function(class_creator)		
+            -- Get the class definition so we can make needed variables private, static, etc.
+            local this = class_creator()
+            -- Initialize class from class definition
+            __init = function()
+                -- Init Public Static
+                local class = {}
+                if (type(this.__public_static) == "table") then
+                    class = this.__public_static
+                end
+                
+                -- Init Object
+                local thisClass = this
+                local __constructor = function(...)
+                    local object = {}
+                    local this = class_creator()
+    
+                    -- Init Public
+                    if (type(this.__public) == "table") then
+                        object = this.__public
+                    end
+    
+                    -- Init static values of the class
+                    this.__public_static = thisClass.__public_static
+                    this.__private_static = thisClass.__private_static
+    
+                    -- Call Constructor
+                    if (type(this.__construct) == "function") then
+                        this.__construct(...)
+                    end
+                    
+                    -- Returning constructed object
+                    return object
+                end
+                return {class = class, constructor = __constructor}
+            end
+    
+            -- Creating class (returning constructor)
+            local class_data = __init()
+            local class = class_data.class
+            local constructor = class_data.constructor
+    
+            -- Set class metatable (with setting constructor)
+            local class_metatable = {
+                __newindex = function(t, key, value)
+                    if type(t[key])=="nil" or type(t[key])=="function" then
+                        error("Attempt to redefine class")
+                    end
+                    rawset(t, key, value)
+                end,
+                __metatable = false,
+                __call = function(t, ...)
+                    if type(t) == nil then
+                        error("Class object create failed!")
+                    end
+                    local obj = constructor(...)
+                    creator.__private.object_class[obj] = t
+                    local object_metatable = {
+                        __newindex = function(t, key, value)
+                            class = creator.__private.object_class[t]
+                            if type(class[key])~="nil" and type(class[key])~="function" then
+                                rawset(class, key, value)
+                                return
+                            end
+                            if type(t[key])~="nil" and type(t[key])~="function" then
+                                rawset(t, key, value)
+                                return
+                            end
+                            error("Attempt to redefine object")
+                        end,
+                        __index = t,
+                        __metatable = false,
+                    }
+                    setmetatable(obj, object_metatable)
+                    return obj
+                end,
+            }
+    
+            -- Setting class metatable to the class itself
+            setmetatable(class, class_metatable)
+    
+            -- Returning resulting class
+            return class
+        end
+        
+        return creator.__oncall
+    end
+    createClass = createClass()
+
+    RiverToPlayer_Proto = function()
+        local this = {}
+
+        this.__public = {
+            CamSpeed = 1,
+            MoveSpeed = 1,
+            TriggerSheepOutCam = function(callback) this.__private.sheepOutCamTrigger = callback end,
+            GetDummy = function() return this.__private.dummy end,
+            GetSheep = function() return this.__private.sheep end,
+
+
+        }
+        this.__private = {
+            sheepOutCamTrigger = function() end,
+            sheep = nil,
+            dummy = nil,
+            playerId = nil,
+            player = nil,
+            startPos = nil,
+            currSheepPos = {x=nil,y=nil},
+            currDummyPos = {x=nil,y=nil},
+            speed = nil,
+            endPos = {x=300000,y=0},
+            createSheep = function()
+                this.__private.sheep = CreateUnit(this.__private.player, FourCC('odes'), this.__private.startPos.x, this.__private.startPos.y, 0)
+            end,
+            createDummy = function()
+                this.__private.dummy = CreateUnit(this.__private.player, FourCC('owyv'), this.__private.startPos.x, this.__private.startPos.y, 0)
+            end,
+            moveSheep = function()
+                TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                    local u = this.__private.sheep
+                    this.__private.currSheepPos = {x=GetUnitX(u), y=GetUnitY(u)}
+                    unitPos = this.__private.currSheepPos
+                    endPos = this.__private.endPos
+                    next = vectorCut({unitPos.x, unitPos.y}, {endPos.x, endPos.y}, this.__public.MoveSpeed / vectorLen({unitPos.x, unitPos.y}, {endPos.x, endPos.y}))
+                    SetUnitPositionSmooth(this.__private.sheep, next[1], next[2])
+                    if this.__private.currDummyPos.x - next[1] > 1000 then
+                        this.__private.sheepOutCamTrigger()
+                    end
+                end)
+            end,
+            moveCam = function()
+                SetCameraTargetControllerNoZForPlayer(this.__private.player, this.__private.dummy, 10, 10, true)
+                TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                    local u = this.__private.dummy
+                    this.__private.currDummyPos = {x=GetUnitX(u), y=GetUnitY(u)}
+                    unitPos = this.__private.currDummyPos
+                    endPos = this.__private.endPos
+                    next = vectorCut({unitPos.x, unitPos.y}, {endPos.x, endPos.y}, this.__public.CamSpeed / vectorLen({unitPos.x, unitPos.y}, {endPos.x, endPos.y}))
+                    this.__private.speed = next[1] - unitPos.x
+                    SetUnitPositionSmooth(this.__private.dummy, next[1], next[2])
+                end)
+            end,
+            moveSheepToMouse = function()
+                maxSpeed = 30
+                minSpeed = 5
+
+                MouseX, MouseY = 0,0
+                startPos = this.__private.startPos
+                PrevX, PrevY = startPos.x, startPos.y
+                local ThisTrigger = CreateTrigger()
+                TriggerRegisterPlayerEvent(ThisTrigger, Player(0), EVENT_PLAYER_MOUSE_MOVE)
+                TriggerAddAction(ThisTrigger, function()
+                    MouseX, MouseY = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
+                end)
+                TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                    local X, Y = MouseX, MouseY
+                    if X~=0.0 then
+                        local u = this.__private.sheep
+                        this.__private.currSheepPos = {x=GetUnitX(u), y=GetUnitY(u) }
+                        unitPos = this.__private.currSheepPos
+                        local speed0 = math.max(
+                                                math.min(vectorLen({unitPos.x, unitPos.y}, { X, Y }) / 75, 
+                                                    maxSpeed), 
+                                                minSpeed)
+                        local speed = speed0 / vectorLen({unitPos.x, unitPos.y}, { X, Y })
+                        local endX, endY = table.unpack(vectorCut({unitPos.x, unitPos.y}, { X, Y }, speed))
+                        local angle = -180 + AngleBetweenXY(X, Y, unitPos.x, unitPos.y) / bj_DEGTORAD
+                        if X == PrevX then
+                            X = X + this.__private.speed
+                            MouseX = MouseX +  this.__private.speed
+                        end
+                        SetUnitFacing(u, angle)
+                        SetUnitPositionSmooth(u, endX, endY)
+                        PrevX, PrevY = X,Y
+                    else
+                        local u = this.__private.sheep
+                        this.__private.currSheepPos = {x=GetUnitX(u), y=GetUnitY(u) }
+                        unitPos = this.__private.currSheepPos
+                        local speed0 = math.max(
+                                                math.min(vectorLen({unitPos.x, unitPos.y}, { PrevX, PrevY }) / 75, 
+                                                    maxSpeed), 
+                                                minSpeed)
+                        local speed = speed0 / vectorLen({unitPos.x, unitPos.y}, { PrevX, PrevY })
+                        local endX, endY = table.unpack(vectorCut({unitPos.x, unitPos.y}, { PrevX, PrevY }, speed))
+                        local angle = -180 + AngleBetweenXY(PrevX, PrevY, unitPos.x, unitPos.y) / bj_DEGTORAD
+                        
+                            
+                        SetUnitFacing(u, angle)
+                        SetUnitPositionSmooth(u, endX, endY)
+                        PrevX = PrevX + this.__private.speed
+                    end
+                end)
+            end
+        }
+
+        this.__construct = function(playerId,xs,ys)
+            this.__private.startPos = {x=xs, y=ys}
+            this.__private.playerId = playerId
+            this.__private.player = Player(playerId)
+            this.__private.createSheep()
+            this.__private.createDummy()
+            this.__private.moveCam()
+            this.__private.moveSheep()
+            this.__private.moveSheepToMouse()
+
+        end
+        return this
+    end
+    RiverToPlayer = createClass(RiverToPlayer_Proto)
+    River = {}
     local xs, ys = GetPlayerStartLocationX(Player(0)), GetPlayerStartLocationY(Player(0))
     Gxs, Gys = xs, ys
-    MaxX=Gxs
-    --print(xs)
+    River[1] = RiverToPlayer(0,xs,ys)
+    --MaxX=Gxs
+    ----print(xs)
     StartCombiner()
-    local dummy = CreateUnit(Player(0), FourCC('owyv'), xs, ys, 0)
-    GCameraDummy = dummy
-    CreateAndMoveCamera(dummy, 1.8, xs, ys, true)
-
-    local heroSheep = CreateUnit(Player(0), FourCC('odes'), xs, ys, 0)
-    GPlayer=heroSheep
-    CreateAndMoveCamera(heroSheep, 2.5, xs, ys)
-    UnitAddAbility(heroSheep, FourCC('Apxf'))
-
-    Move2Mouse(heroSheep)
-    MouseX, MouseY = xs, ys
-
-    local ThisTrigger = CreateTrigger()
-    TriggerRegisterPlayerEvent(ThisTrigger, Player(0), EVENT_PLAYER_MOUSE_MOVE)
-    TriggerAddAction(ThisTrigger, function()
-        MouseX, MouseY = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
-    end)
+    --local dummy = CreateUnit(Player(0), FourCC('owyv'), xs, ys, 0)
+    GCameraDummy = River[1].GetDummy()
+    --CreateAndMoveCamera(dummy, 1.8, xs, ys, true)
+--
+    --local heroSheep = CreateUnit(Player(0), FourCC('odes'), xs, ys, 0)
+    GPlayer= River[1].GetSheep()
+    --CreateAndMoveCamera(heroSheep, 2.5, xs, ys)
+    --UnitAddAbility(heroSheep, FourCC('Apxf'))
+--
+    --Move2Mouse(heroSheep)
+    --MouseX, MouseY = xs, ys
+--
+    --local ThisTrigger = CreateTrigger()
+    --TriggerRegisterPlayerEvent(ThisTrigger, Player(0), EVENT_PLAYER_MOUSE_MOVE)
+    --TriggerAddAction(ThisTrigger, function()
+    --    MouseX, MouseY = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
+    --end)
 end
