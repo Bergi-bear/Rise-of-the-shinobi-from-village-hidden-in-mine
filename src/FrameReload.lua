@@ -429,6 +429,7 @@ function StartAllFrameCD(player)
     end
 end
 
+NextPoint = 0.03
 function MakeFrameCharged(fh, ch)
     if not NextPoint then
         NextPoint = 0.03

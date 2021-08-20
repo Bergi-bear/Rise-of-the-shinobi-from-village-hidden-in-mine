@@ -64,15 +64,18 @@ function CreateFirePillar(xs, ys, boss)
     --end
 end
 
-function MarkPillar(xs, ys, boss)
+function MarkPillar(xs, ys, boss,delay)
     --local eff=AddSpecialEffect("Alarm",xs,ys)
     --BlzSetSpecialEffectZ(eff,GetTerrainZ(xs,ys))
     --BlzSetSpecialEffectMatrixScale(eff,4,14,0.5)
     --BlzSetSpecialEffectColor(eff,255,0,0)
+    if not delay then
+        delay=3
+    end
     local mark = CreateCircleImage(xs, ys)
     SetImageColor(mark,255,0,0,255)
     --BlzSetSpecialEffectAlpha(eff,100)
-    TimerStart(CreateTimer(), 3, false, function()
+    TimerStart(CreateTimer(), delay, false, function()
         --CreateFirePillar(xs,ys,boss)
         local fire = AddSpecialEffect("Abilities\\Spells\\Human\\FlameStrike\\FlameStrike1.mdl", xs, ys)
         UnitDamageArea(boss, 200, xs, ys, 100)

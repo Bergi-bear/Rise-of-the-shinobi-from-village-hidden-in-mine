@@ -19,16 +19,31 @@ function CreateSimpleFrameGlueNew(posX, PosY, texture, flag)
 end
 
 function CreateAndMoveFrame(texture)
-    local x, y = 0.5, 0.58
+    if not texture then
+        return
+    end
+    local x, y = 0.5, 0.58 - 0.01
     local frame = CreateSimpleFrameGlueNew(x, y, texture, 1)
+    local charge = 1
+    if CompletedGame > 10 and CompletedGame < 20 then
+        charge = 2
+        MakeFrameCharged(frame, charge)
+    elseif CompletedGame > 20 and CompletedGame < 30 then
+        charge = 3
+        MakeFrameCharged(frame, charge)
+    elseif CompletedGame == 30 then
+        BossFight=true
+    else
+
+    end
 
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         x = x - 0.002
         BlzFrameSetAbsPoint(frame, FRAMEPOINT_CENTER, x, y)
-        if x <= 0.1 then
+        if x <= 0.12 then
             DestroyTimer(GetExpiredTimer())
             BlzFrameSetVisible(frame, false)
-            ActionPerDestroy(texture)
+            ActionPerDestroy(texture, charge)
         end
     end)
 end
@@ -43,10 +58,48 @@ function StartCombiner()
         "ReplaceableTextures\\CommandButtons\\BTNTornado.blp",
         "ReplaceableTextures\\CommandButtons\\BTNRepair.blp"
     }
+    CreateCombinerUI()
     TimerStart(CreateTimer(), 1.5, true, function()
         local r = GetRandomInt(1, #textureTable)
         CreateAndMoveFrame(textureTable[r])
     end)
+
+end
+
+function CreateCombinerUI()
+    local x, y = 0.318, 0.6
+    local border = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
+    BlzFrameSetParent(border, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(border, "CombainBorder", 0, true)
+    BlzFrameSetSize(border, 0.4, 0.1)
+    BlzFrameSetAbsPoint(border, FRAMEPOINT_TOP, x, y)
+
+    for i = 1, 50 do
+        -- print(i)
+        CreateAndMoveChain(0.515 - i * (0.008) + 0.01, 0.58, nil, border)
+    end
+
+    TimerStart(CreateTimer(), 0.13, true, function()
+        CreateAndMoveChain(0.515, 0.58, nil, border)
+        --print(GetUnitMoveSpeed(GPlayer),"speed")
+    end)
+end
+
+function CreateAndMoveChain(x, y, speed, border)
+    local chain = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', border, '', 0)
+    BlzFrameSetTexture(chain, "CombainChain", 0, true)
+    BlzFrameSetSize(chain, 0.05, 0.05)
+    BlzFrameSetAbsPoint(chain, FRAMEPOINT_TOP, x, y)
+
+    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+        x = x - 0.002
+        BlzFrameSetAbsPoint(chain, FRAMEPOINT_TOP, x, y)
+        if x <= 0.12 then
+            DestroyTimer(GetExpiredTimer())
+            BlzFrameSetVisible(chain, false)
+        end
+    end)
+
 end
 
 function ActionPerDestroy(texture)
@@ -60,10 +113,14 @@ function ActionPerDestroy(texture)
         --print("циклон")
         CreateTornado("ntor")
     elseif texture == "ReplaceableTextures\\CommandButtons\\BTNInnerFire.blp" then
-        MarkPillar(GetUnitX(GPlayer), GetUnitY(GPlayer), GPlayer)
+        local delay = 0.7
+        CreateEffectMarkDelay(delay, "EFFECT_Pack_1\\[Orbital Attack and laser's]\\Attack 3\\model (107).mdl", GetUnitX(GPlayer), GetUnitY(GPlayer))
+        MarkPillar(GetUnitX(GPlayer), GetUnitY(GPlayer), Boss, delay)
     elseif texture == "ReplaceableTextures\\CommandButtons\\BTNCryptFiendBurrow.blp" then
         local effmodel = "Doodads\\LordaeronSummer\\Terrain\\LoardaeronRockChunks\\LoardaeronRockChunks3"
-        MarkAndFall(GetUnitX(GPlayer) + 500, GetUnitY(GPlayer), effmodel, GPlayer)
+        local effMark = CreateEffectMarkDelay(3, "EFFECT_Pack_1\\[Energy]\\Energy 3\\model (310).mdl", GetUnitX(GPlayer) + 200, GetUnitY(GPlayer))
+        BlzSetSpecialEffectMatrixScale(effMark, 1, 1, 5)
+        MarkAndFall(GetUnitX(GPlayer) + 200, GetUnitY(GPlayer), effmodel, Boss)
     elseif texture == "ReplaceableTextures\\CommandButtons\\BTNTornado.blp" then
         CreateTornado("n001")
     elseif texture == "ReplaceableTextures\\CommandButtons\\BTNRepair.blp" then
@@ -75,20 +132,20 @@ end
 
 function CreateStone()
     local xOffset = GetUnitX(GCameraDummy) + 1200
-    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 400)
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 200)
     CreateDestructableZ(FourCC("LTrc"), xOffset, yOffset, -50, 0, .95, GetRandomInt(1, 5))
 end
 
 function CreateEnemy(id)
     local xOffset = GetUnitX(GCameraDummy) + 1200
-    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 400)
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 200)
     local unit = CreateUnit(Player(5), id, xOffset, yOffset, 270)
     IssuePointOrder(unit, "attack", Gxs, Gys)
 end
 
 function CreateTornado(id)
     local xOffset = GetUnitX(GCameraDummy) + 1200
-    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 400)
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 200)
     local unit = CreateUnit(Player(5), FourCC(id), xOffset, yOffset, 270)
     UnitApplyTimedLife(unit, FourCC('BTLF'), 20)
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
@@ -101,7 +158,7 @@ end
 
 function CreateRepairPack()
     local xOffset = GetUnitX(GCameraDummy) + 1200
-    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 400)
+    local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 200)
     local unit = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC("n000"), xOffset, yOffset, 270)
     UnitAddAbility(unit, FourCC("Aloc"))
     local eff = AddSpecialEffect("ActionRepair", xOffset, yOffset)
@@ -109,15 +166,15 @@ function CreateRepairPack()
     local thisTrigger = CreateTrigger()
     TriggerRegisterUnitInRange(thisTrigger, unit, 100, nil)
     TriggerAddAction(thisTrigger, function()
-        if GetUnitTypeId(GetTriggerUnit())==FourCC("odes") then
+        if GetUnitTypeId(GetTriggerUnit()) == FourCC("odes") then
             KillUnit(unit)
-            ShowUnit(unit,false)
+            ShowUnit(unit, false)
             DestroyEffect(eff)
-            BlzSetSpecialEffectZ(eff,-300)
+            BlzSetSpecialEffectZ(eff, -300)
             DestroyTrigger(thisTrigger)
-            HealUnit(GetTriggerUnit(),50)
-            local x,y=GetUnitXY(GetTriggerUnit())
-            normal_sound("Abilities\\Spells\\Other\\LoadUnload\\Loading",x,y)
+            HealUnit(GetTriggerUnit(), 50)
+            local x, y = GetUnitXY(GetTriggerUnit())
+            normal_sound("Abilities\\Spells\\Other\\LoadUnload\\Loading", x, y)
         end
     end)
 end
