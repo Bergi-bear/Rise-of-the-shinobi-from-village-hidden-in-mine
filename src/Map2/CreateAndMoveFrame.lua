@@ -32,7 +32,7 @@ function CreateAndMoveFrame(texture)
         charge = 3
         MakeFrameCharged(frame, charge)
     elseif CompletedGame == 30 then
-        BossFight=true
+        BossFight = true
     else
 
     end
@@ -55,8 +55,11 @@ function StartCombiner()
         "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp",
         "ReplaceableTextures\\CommandButtons\\BTNInnerFire.blp",
         "ReplaceableTextures\\CommandButtons\\BTNCryptFiendBurrow.blp",
-        "ReplaceableTextures\\CommandButtons\\BTNTornado.blp",
-        "ReplaceableTextures\\CommandButtons\\BTNRepair.blp"
+        "ReplaceableTextures\\CommandButtons\\BTNTornado",
+        "ReplaceableTextures\\CommandButtons\\BTNRepair",
+        "ReplaceableTextures\\CommandButtons\\BTNDivineIntervention",
+        "ReplaceableTextures\\CommandButtons\\BTNEvasion",
+        "ReplaceableTextures\\CommandButtons\\BTNDemolish",
     }
     CreateCombinerUI()
     TimerStart(CreateTimer(), 1.5, true, function()
@@ -102,29 +105,69 @@ function CreateAndMoveChain(x, y, speed, border)
 
 end
 
-function ActionPerDestroy(texture)
+function ActionPerDestroy(texture, charge)
+    if not charge then
+        charge = 1
+    end
     if texture == "ReplaceableTextures\\CommandButtons\\BTNGolemStormBolt.blp" then
         --print("камень")
-        CreateStone()
+        for _ = 1, charge do
+            CreateStone()
+        end
     elseif texture == "ReplaceableTextures\\CommandButtons\\BTNParasite.blp" then
         --print("мурлок")
-        CreateEnemy(FourCC("nmtw"))
+        for _ = 1, charge do
+            CreateEnemy(FourCC("nmtw"))
+        end
     elseif texture == "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp" then
         --print("циклон")
-        CreateTornado("ntor")
+        for _ = 1, charge do
+            CreateTornado("ntor")
+        end
     elseif texture == "ReplaceableTextures\\CommandButtons\\BTNInnerFire.blp" then
         local delay = 0.7
+        --charge=3
         CreateEffectMarkDelay(delay, "EFFECT_Pack_1\\[Orbital Attack and laser's]\\Attack 3\\model (107).mdl", GetUnitX(GPlayer), GetUnitY(GPlayer))
         MarkPillar(GetUnitX(GPlayer), GetUnitY(GPlayer), Boss, delay)
+        if charge > 1 then
+            TimerStart(CreateTimer(), 0.5, true, function()
+                CreateEffectMarkDelay(delay, "EFFECT_Pack_1\\[Orbital Attack and laser's]\\Attack 3\\model (107).mdl", GetUnitX(GPlayer), GetUnitY(GPlayer))
+                MarkPillar(GetUnitX(GPlayer), GetUnitY(GPlayer), Boss, delay)
+                charge = charge - 1
+                if charge <= 0 then
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
+        end
     elseif texture == "ReplaceableTextures\\CommandButtons\\BTNCryptFiendBurrow.blp" then
+
         local effmodel = "Doodads\\LordaeronSummer\\Terrain\\LoardaeronRockChunks\\LoardaeronRockChunks3"
         local effMark = CreateEffectMarkDelay(3, "EFFECT_Pack_1\\[Energy]\\Energy 3\\model (310).mdl", GetUnitX(GPlayer) + 200, GetUnitY(GPlayer))
         BlzSetSpecialEffectMatrixScale(effMark, 1, 1, 5)
         MarkAndFall(GetUnitX(GPlayer) + 200, GetUnitY(GPlayer), effmodel, Boss)
-    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNTornado.blp" then
-        CreateTornado("n001")
-    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNRepair.blp" then
-        CreateRepairPack()
+        if charge > 1 then
+            TimerStart(CreateTimer(), 0.5, true, function()
+                effMark = CreateEffectMarkDelay(3, "EFFECT_Pack_1\\[Energy]\\Energy 3\\model (310).mdl", GetUnitX(GPlayer) + 200, GetUnitY(GPlayer))
+                BlzSetSpecialEffectMatrixScale(effMark, 1, 1, 5)
+                MarkAndFall(GetUnitX(GPlayer) + 200, GetUnitY(GPlayer), effmodel, Boss)
+                charge = charge - 1
+                if charge <= 0 then
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
+        end
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNTornado" then
+        for _ = 1, charge do
+            CreateTornado("n001")
+        end
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNRepair" then
+        CreateAmmo(texture)
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNDivineIntervention" then
+        CreateAmmo(texture)
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNEvasion" then
+        CreateAmmo(texture)
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNDemolish" then
+        CreateAmmo(texture)
     else
         print('переданная текстура не найдена в базе', texture)
     end
@@ -156,13 +199,13 @@ function CreateTornado(id)
     end)
 end
 
-function CreateRepairPack()
+function CreateAmmo(texture)
     local xOffset = GetUnitX(GCameraDummy) + 1200
     local yOffset = GetUnitY(GCameraDummy) + GetRandomInt(-800, 200)
     local unit = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC("n000"), xOffset, yOffset, 270)
     UnitAddAbility(unit, FourCC("Aloc"))
-    local eff = AddSpecialEffect("ActionRepair", xOffset, yOffset)
-    BlzSetSpecialEffectZ(eff, 20)
+    local eff = AddSpecialEffect(GetEffectFromTexture(texture), xOffset - 20, yOffset)
+    BlzSetSpecialEffectZ(eff, -10)
     local thisTrigger = CreateTrigger()
     TriggerRegisterUnitInRange(thisTrigger, unit, 100, nil)
     TriggerAddAction(thisTrigger, function()
@@ -172,10 +215,29 @@ function CreateRepairPack()
             DestroyEffect(eff)
             BlzSetSpecialEffectZ(eff, -300)
             DestroyTrigger(thisTrigger)
-            HealUnit(GetTriggerUnit(), 50)
+            ActionAmmo(GetTriggerUnit(), texture)
             local x, y = GetUnitXY(GetTriggerUnit())
             normal_sound("Abilities\\Spells\\Other\\LoadUnload\\Loading", x, y)
         end
     end)
 end
 
+function GetEffectFromTexture(texture)
+    local s = string.gsub(texture, "ReplaceableTextures\\CommandButtons\\BTN", "Action")
+    --print(s)
+    return s
+end
+
+function ActionAmmo(unit, texture)
+    if texture == "ReplaceableTextures\\CommandButtons\\BTNRepair" then
+        HealUnit(unit, 50)
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNDivineIntervention" then
+        --print("Неуязвимость")
+        UnitAddAbility(unit, FourCC("AInv"))
+        UnitAddItemById(unit, FourCC("I000"))
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNEvasion" then
+        UnitAddBigAura(unit, 5)
+    elseif texture == "ReplaceableTextures\\CommandButtons\\BTNDemolish" then
+        UnitDestroyAura(unit, 5)
+    end
+end

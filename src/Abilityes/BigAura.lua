@@ -3,10 +3,21 @@
 --- Created by Bergi.
 --- DateTime: 02.08.2021 10:06
 ---
-function UnitAddBigAura(unit)
+function UnitAddBigAura(unit, duration)
     local prevX = GetUnitX(unit)
+    local offAura = false
+    if duration then
+        TimerStart(CreateTimer(), duration, false, function()
+            offAura=true
+        end)
+    end
+
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-        local x,y = GetUnitXY(unit)
+        local x, y = GetUnitXY(unit)
+        if offAura then
+            DestroyTimer(GetExpiredTimer())
+            --print("дейсвие отталкивания закончилось")
+        end
         if x == prevX then
             --print("Стоит на месте")
         else
@@ -15,17 +26,17 @@ function UnitAddBigAura(unit)
             local e = nil
             local k = 0
 
-            GroupEnumUnitsInRange(perebor, x,y,150, nil)
+            GroupEnumUnitsInRange(perebor, x, y, 150, nil)
             while true do
                 e = FirstOfGroup(perebor)
 
                 if e == nil then
                     break
                 end
-                if UnitAlive(e) and e~=unit then
+                if UnitAlive(e) and e ~= unit then
                     k = k + 1
-                    local angle=AngleBetweenUnits(unit,e)
-                    UnitAddForceSimple(e,angle,5,150)
+                    local angle = AngleBetweenUnits(unit, e)
+                    UnitAddForceSimple(e, angle, 5, 150)
                 end
                 GroupRemoveUnit(perebor, e)
             end

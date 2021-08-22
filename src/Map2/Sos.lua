@@ -155,6 +155,7 @@ function Init2Map()
             end,
             createDummy = function()
                 this.__private.dummy = CreateUnit(this.__private.player, FourCC('owyv'), this.__private.startPos.x, this.__private.startPos.y, 0)
+                UnitAddAbility(this.__private.dummy,FourCC("Abun"))
             end,
             moveSheep = function()
                 TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()

@@ -19,6 +19,7 @@ function InitDeathEvent()
                 --print("Воскрешаем")
                 GPlayer=CreateUnit(Player(0),FourCC("odes"),x-2000,y-200,0)
                 RebaseAbility(GPlayer)
+                UnitDestroyAura(GPlayer,2)
                 --GPlayer = River[1].GetSheep()
             end
         end
