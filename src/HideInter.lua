@@ -280,8 +280,8 @@ function SetTooltipText(text,tips)
 end
 
 function ReturnFPS()
-    BlzFrameSetVisible(BlzGetFrameByName("ResourceBarFrame", 0), true)
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
+    BlzFrameSetVisible(fps, true)
     BlzFrameClearAllPoints(fps)
     BlzFrameSetAbsPoint(fps, FRAMEPOINT_CENTER, 0.95, 0.62)
 end

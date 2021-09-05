@@ -7,6 +7,12 @@
 AllAbilityFrames = {
     -- ReadyToReload={}
 }
+AllAbilityFramesForHide = {
+
+}
+AllAbilityFramesForHide2 = {
+
+}
 AbilityIconPath = {
     "ReplaceableTextures\\CommandButtons\\BTNGatherGold", --кирка
     "ReplaceableTextures\\CommandButtons\\BTNStormBolt", -- молоток
@@ -74,6 +80,8 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
         passiveTexture = GetPassiveIco(activeTexture)
     end
     local visionPlayer = Player(0)
+
+
 
     local face = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
     local buttonIconFrame = BlzCreateSimpleFrame("MyBar", face, 0) -- фрейм перезарядки
@@ -270,7 +278,7 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
     BlzFrameSetVisible(face, GetLocalPlayer() == visionPlayer)
     BlzFrameSetVisible(buttonIconFrame, GetLocalPlayer() == visionPlayer)
     --- tooltip
-    local tooltip, backdrop, text = CreateToolTipBoxSize(x + k * size, y + size * 2, size * 5, size * 3, toolTipTex, toolTipHeader)
+    local tooltip, backdrop, text = CreateToolTipBoxSize(x + k * size, y + size * 2, size * 5, size * 3, toolTipTex, toolTipHeader,face)
     --data.FrameToDestroy[k] = { face, buttonIconFrame, cdtext, cdICO, hotkey, tooltip, backdrop, text }
     ---------------------------------------------------
     ----------------ДИНАМИЧЕСКИЕ ОПИСАНИЯ--------------
@@ -373,12 +381,15 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
     else
 
     end
+    --print(k+1,"добавлен в общий список")
+    AllAbilityFramesForHide[k+1]=buttonIconFrame
+    AllAbilityFramesForHide2[k+1]=face
     return text, buttonIconFrame, face
 end
 
-function CreateToolTipBoxSize(x, y, sizeX, sizeY, toolTipTex, toolTipHeader)
+function CreateToolTipBoxSize(x, y, sizeX, sizeY, toolTipTex, toolTipHeader,parentFrame)
     --print("создан бокс ",toolTipTex)
-    local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
+    local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", parentFrame, "StandardFrameTemplate", 0)
     local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
     --BlzFrameSetParent(tooltip, BlzGetFrameByName("ConsoleUIBackdrop", 0))
@@ -444,5 +455,17 @@ function MakeFrameCharged(fh, ch)
     return text
 end
 
+function ShowAllAbilitiesFrame(state)
+    --true скрыты
+    --print(#AllAbilityFramesForHide,"размер")
+    for i=0,#AllAbilityFramesForHide do
+        BlzFrameSetVisible(AllAbilityFramesForHide[i], state)
+        --print(i,"скрыт")
+    end
 
+      for i=0,#AllAbilityFramesForHide2 do
+        BlzFrameSetVisible(AllAbilityFramesForHide2[i], state)
+        --print(i,"скрыт")
+    end
+end
 --CreateUniversalFrame(0.02, 0.015, 0.03, "Пассивно связывает всех пеонов эмпатическими узами", "Эмпатия", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNSpiritLink.blp", nil, nil, "empath")

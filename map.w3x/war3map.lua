@@ -1,5 +1,283 @@
+udg_MK = 0
+udg_OgreOnPlace = false
+udg_TowerRepairCount = 0
+udg_TowerIsRepair = false
+udg_GR = 0
+udg_TMPColorText = ""
+udg_VictorySheep = false
+udg_SavedPeons = 0
+udg_sound = ""
+gg_rct_REG_Red_Fog = nil
+gg_rct_REG_Rain_Light = nil
+gg_rct_REG_Lights1 = nil
+gg_rct_REG_Lights2 = nil
+gg_rct_NewCamp = nil
+gg_rct_Brod = nil
+gg_rct_FirstAttack = nil
+gg_rct________________007 = nil
+gg_rct________________007_____________________u = nil
+gg_rct________________009 = nil
+gg_rct________________010 = nil
+gg_rct________________011 = nil
+gg_rct_OgreDefPlace = nil
+gg_rct________________013 = nil
+gg_rct_EndPoint = nil
+gg_rct________________015 = nil
+gg_rct________________016 = nil
+gg_rct_HealEpmty = nil
+gg_rct_HealFinder = nil
+gg_rct_FireTower = nil
+gg_rct_FireTower2 = nil
+gg_rct_FireTower3 = nil
+gg_rct_RescuePoint = nil
+gg_rct_StonesBlock = nil
+gg_rct_CanNotEnter = nil
+gg_rct_CanNotEnter_Copy = nil
+gg_rct_King = nil
+gg_rct_EnterTower = nil
+gg_rct_BonesPlace = nil
+gg_rct_BridgeBlock = nil
+gg_rct_Region_030 = nil
+gg_snd_SuccubusPissed3 = nil
+gg_snd_SuccubusPissed5 = nil
+gg_snd_SuccubusPissed6 = nil
+gg_snd_Loading = nil
+gg_trg_Start = nil
+gg_trg_NewCamp = nil
+gg_trg_Brod = nil
+gg_trg_ReadTable = nil
+gg_trg_FirstAttack = nil
+gg_trg_InitBridge = nil
+gg_trg_ClearLift = nil
+gg_trg_RestoreBridge = nil
+gg_trg_KillMurloc = nil
 gg_trg_Init = nil
+gg_trg_DemonessEnter = nil
+gg_trg_Fire = nil
+gg_trg_Fire_Copy = nil
+gg_trg_Fire_Copy_Copy = nil
+gg_trg_Empty = nil
+gg_trg_FindHeal = nil
+gg_trg_FindOrge = nil
+gg_trg_OgreRun = nil
+gg_trg_StartAllWave = nil
+gg_trg_ReadyTower = nil
+gg_trg_RepairTower = nil
+gg_trg_ShowHP = nil
+gg_trg_OnPlaceOrge = nil
+gg_trg_TolkWOrge = nil
+gg_trg_PingTowerPlace = nil
+gg_trg_TolkWOrgeAfterRepair = nil
+gg_trg_Victory = nil
+gg_trg_Sound = nil
+gg_trg_ZCamera = nil
+gg_trg_PeonDead = nil
+gg_trg_Aly6 = nil
+gg_trg_DisableAttack = nil
+gg_trg_Black = nil
+gg_unit_nogm_0000 = nil
+gg_unit_hatw_0020 = nil
+gg_unit_hctw_0019 = nil
+gg_unit_hgtw_0018 = nil
+gg_unit_ndqs_0026 = nil
+gg_unit_hwtw_0024 = nil
+gg_unit_odes_0027 = nil
+gg_dest_B002_2498 = nil
+gg_dest_B002_4547 = nil
 function InitGlobals()
+    udg_MK = 0
+    udg_OgreOnPlace = false
+    udg_TowerRepairCount = 0
+    udg_TowerIsRepair = false
+    udg_GR = 0
+    udg_TMPColorText = ""
+    udg_VictorySheep = false
+    udg_SavedPeons = 0
+    udg_sound = ""
+end
+
+function InitSounds()
+    gg_snd_SuccubusPissed3 = CreateSound("Units/Demon/Demoness/SuccubusPissed3.flac", false, true, true, 0, 0, "DefaultEAXON")
+    SetSoundParamsFromLabel(gg_snd_SuccubusPissed3, "DemonessPissed")
+    SetSoundDuration(gg_snd_SuccubusPissed3, 3230)
+    SetSoundVolume(gg_snd_SuccubusPissed3, 127)
+    gg_snd_SuccubusPissed5 = CreateSound("Units/Demon/Demoness/SuccubusPissed5.flac", false, true, true, 0, 0, "DefaultEAXON")
+    SetSoundParamsFromLabel(gg_snd_SuccubusPissed5, "DemonessPissed")
+    SetSoundDuration(gg_snd_SuccubusPissed5, 4894)
+    SetSoundVolume(gg_snd_SuccubusPissed5, 127)
+    gg_snd_SuccubusPissed6 = CreateSound("Units/Demon/Demoness/SuccubusPissed6.flac", false, true, true, 0, 0, "DefaultEAXON")
+    SetSoundParamsFromLabel(gg_snd_SuccubusPissed6, "DemonessPissed")
+    SetSoundDuration(gg_snd_SuccubusPissed6, 2665)
+    SetSoundVolume(gg_snd_SuccubusPissed6, 127)
+    gg_snd_Loading = CreateSound("Abilities/Spells/Other/LoadUnload/Loading.flac", false, true, true, 0, 0, "DefaultEAXON")
+    SetSoundParamsFromLabel(gg_snd_Loading, "LoadUnload")
+    SetSoundDuration(gg_snd_Loading, 740)
+    SetSoundVolume(gg_snd_Loading, 127)
+end
+
+function CreateAllDestructables()
+    local d
+    local t
+    local life
+    gg_dest_B002_4547 = BlzCreateDestructableZWithSkin(FourCC("B002"), -2426.0, 3572.9, 267.8, 316.517, 1.300, 0, FourCC("B002"))
+    gg_dest_B002_2498 = BlzCreateDestructableZWithSkin(FourCC("B002"), -1812.7, 2936.4, 291.9, 316.517, 1.300, 0, FourCC("B002"))
+end
+
+function CreateUnitsForPlayer0()
+    local p = Player(0)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4221.9, 5184.8, 6.570, FourCC("opeo"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.50 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4079.1, 5281.8, 248.620, FourCC("opeo"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.75 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -3982.4, 5136.4, 155.563, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4055.6, 5069.4, 106.175, FourCC("opeo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -4178.0, 5087.9, 50.304, FourCC("opeo"))
+end
+
+function CreateBuildingsForPlayer1()
+    local p = Player(1)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 2560.0, 4288.0, 270.000, FourCC("h001"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("h003"), 4544.0, 4288.0, 170.000, FourCC("h003"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), 3919.5, 4907.7, 305.000, FourCC("h002"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 3200.0, 3840.0, 270.000, FourCC("h000"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+end
+
+function CreateUnitsForPlayer1()
+    local p = Player(1)
+    local u
+    local unitID
+    local t
+    local life
+    gg_unit_ndqs_0026 = BlzCreateUnitWithSkin(p, FourCC("ndqs"), 2497.5, 2760.4, 252.871, FourCC("ndqs"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e002"), 2942.8, 3819.1, 357.935, FourCC("e002"))
+    SetUnitColor(u, ConvertPlayerColor(4))
+end
+
+function CreateBuildingsForPlayer5()
+    local p = Player(5)
+    local u
+    local unitID
+    local t
+    local life
+    gg_unit_hgtw_0018 = BlzCreateUnitWithSkin(p, FourCC("hgtw"), 1728.0, -3136.0, 270.000, FourCC("hgtw"))
+    life = GetUnitState(gg_unit_hgtw_0018, UNIT_STATE_LIFE)
+    SetUnitState(gg_unit_hgtw_0018, UNIT_STATE_LIFE, 0.01 * life)
+    gg_unit_hctw_0019 = BlzCreateUnitWithSkin(p, FourCC("hctw"), -2496.0, 1536.0, 270.000, FourCC("hctw"))
+    life = GetUnitState(gg_unit_hctw_0019, UNIT_STATE_LIFE)
+    SetUnitState(gg_unit_hctw_0019, UNIT_STATE_LIFE, 0.01 * life)
+    gg_unit_hatw_0020 = BlzCreateUnitWithSkin(p, FourCC("hatw"), -1728.0, -1664.0, 270.000, FourCC("hatw"))
+    life = GetUnitState(gg_unit_hatw_0020, UNIT_STATE_LIFE)
+    SetUnitState(gg_unit_hatw_0020, UNIT_STATE_LIFE, 0.01 * life)
+    gg_unit_hwtw_0024 = BlzCreateUnitWithSkin(p, FourCC("hwtw"), -1024.0, 2752.0, 270.000, FourCC("hwtw"))
+    life = GetUnitState(gg_unit_hwtw_0024, UNIT_STATE_LIFE)
+    SetUnitState(gg_unit_hwtw_0024, UNIT_STATE_LIFE, 0.01 * life)
+end
+
+function CreateUnitsForPlayer5()
+    local p = Player(5)
+    local u
+    local unitID
+    local t
+    local life
+    gg_unit_nogm_0000 = BlzCreateUnitWithSkin(p, FourCC("nogm"), -1214.4, -542.0, 334.937, FourCC("nogm"))
+end
+
+function CreateNeutralPassive()
+    local p = Player(PLAYER_NEUTRAL_PASSIVE)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), -3895.2, 1659.2, 230.490, FourCC("nvl2"))
+    u = BlzCreateUnitWithSkin(p, FourCC("ncrb"), -4347.5, 3968.6, 252.012, FourCC("ncrb"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nhmc"), -3849.6, 2722.5, 47.759, FourCC("nhmc"))
+    u = BlzCreateUnitWithSkin(p, FourCC("ncrb"), -1978.1, -2310.9, 351.397, FourCC("ncrb"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nhmc"), 5219.0, -3601.9, 292.729, FourCC("nhmc"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hrdh"), 388.5, -2021.5, 45.670, FourCC("hrdh"))
+    u = BlzCreateUnitWithSkin(p, FourCC("o000"), -2880.4, -1803.2, 61.790, FourCC("o000"))
+    SetUnitColor(u, ConvertPlayerColor(4))
+    u = BlzCreateUnitWithSkin(p, FourCC("ncrb"), -4391.5, 1430.8, 29.203, FourCC("ncrb"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e001"), 694.4, -3482.2, 269.628, FourCC("e001"))
+    SetUnitColor(u, ConvertPlayerColor(4))
+    u = BlzCreateUnitWithSkin(p, FourCC("e001"), -983.0, 2388.4, 260.326, FourCC("e001"))
+    SetUnitColor(u, ConvertPlayerColor(4))
+    u = BlzCreateUnitWithSkin(p, FourCC("e001"), -128.3, -3574.7, 302.779, FourCC("e001"))
+    SetUnitColor(u, ConvertPlayerColor(4))
+    gg_unit_odes_0027 = BlzCreateUnitWithSkin(p, FourCC("odes"), -558.1, -4535.6, 215.940, FourCC("odes"))
+end
+
+function CreatePlayerBuildings()
+    CreateBuildingsForPlayer1()
+    CreateBuildingsForPlayer5()
+end
+
+function CreatePlayerUnits()
+    CreateUnitsForPlayer0()
+    CreateUnitsForPlayer1()
+    CreateUnitsForPlayer5()
+end
+
+function CreateAllUnits()
+    CreatePlayerBuildings()
+    CreateNeutralPassive()
+    CreatePlayerUnits()
+end
+
+function CreateRegions()
+    local we
+    gg_rct_REG_Red_Fog = Rect(2304.0, 3808.0, 4800.0, 5056.0)
+    we = AddWeatherEffect(gg_rct_REG_Red_Fog, FourCC("FDrh"))
+    EnableWeatherEffect(we, true)
+    gg_rct_REG_Rain_Light = Rect(-5280.0, 2848.0, -2016.0, 6144.0)
+    we = AddWeatherEffect(gg_rct_REG_Rain_Light, FourCC("RLlr"))
+    EnableWeatherEffect(we, true)
+    gg_rct_REG_Lights1 = Rect(-1856.0, 4128.0, -1536.0, 4288.0)
+    we = AddWeatherEffect(gg_rct_REG_Lights1, FourCC("LRaa"))
+    EnableWeatherEffect(we, true)
+    gg_rct_REG_Lights2 = Rect(3360.0, -1056.0, 3584.0, -896.0)
+    we = AddWeatherEffect(gg_rct_REG_Lights2, FourCC("LRaa"))
+    EnableWeatherEffect(we, true)
+    gg_rct_NewCamp = Rect(-3520.0, 3616.0, -3008.0, 4128.0)
+    gg_rct_Brod = Rect(-4416.0, 2496.0, -3680.0, 2784.0)
+    gg_rct_FirstAttack = Rect(-2112.0, 2912.0, -1760.0, 3296.0)
+    gg_rct________________007 = Rect(-2720.0, 3104.0, -2560.0, 3232.0)
+    gg_rct________________007_____________________u = Rect(-2368.0, 2688.0, -2208.0, 2816.0)
+    gg_rct________________009 = Rect(-1056.0, 2304.0, -896.0, 2464.0)
+    gg_rct________________010 = Rect(-1440.0, -960.0, -640.0, -128.0)
+    gg_rct________________011 = Rect(-1344.0, -640.0, -1088.0, -384.0)
+    gg_rct_OgreDefPlace = Rect(352.0, -1440.0, 608.0, -1184.0)
+    gg_rct________________013 = Rect(-5632.0, 896.0, -5344.0, 1312.0)
+    gg_rct_EndPoint = Rect(2368.0, 2560.0, 2848.0, 3136.0)
+    gg_rct________________015 = Rect(-4928.0, -5024.0, -4608.0, -4768.0)
+    gg_rct________________016 = Rect(1920.0, -5056.0, 2240.0, -4832.0)
+    gg_rct_HealEpmty = Rect(640.0, -3648.0, 832.0, -3456.0)
+    gg_rct_HealFinder = Rect(-224.0, -3712.0, 0.0, -3552.0)
+    gg_rct_FireTower = Rect(1408.0, -3392.0, 2048.0, -2880.0)
+    gg_rct_FireTower2 = Rect(-2016.0, -1920.0, -1376.0, -1408.0)
+    gg_rct_FireTower3 = Rect(-2848.0, 1248.0, -2208.0, 1760.0)
+    gg_rct_RescuePoint = Rect(-832.0, -4288.0, -576.0, -4064.0)
+    gg_rct_StonesBlock = Rect(-1248.0, -4288.0, 960.0, -480.0)
+    gg_rct_CanNotEnter = Rect(-2720.0, 608.0, -2592.0, 736.0)
+    gg_rct_CanNotEnter_Copy = Rect(-3040.0, 352.0, -2912.0, 480.0)
+    gg_rct_King = Rect(-2240.0, -192.0, -1984.0, 32.0)
+    gg_rct_EnterTower = Rect(-1824.0, -3616.0, -1600.0, -3456.0)
+    gg_rct_BonesPlace = Rect(3584.0, -2944.0, 3840.0, -2752.0)
+    gg_rct_BridgeBlock = Rect(-3200.0, 2272.0, -1152.0, 4160.0)
+    gg_rct_Region_030 = Rect(4928.0, -5440.0, 5248.0, -5088.0)
 end
 
 --CUSTOM_CODE
@@ -401,6 +679,12 @@ end
 AllAbilityFrames = {
     -- ReadyToReload={}
 }
+AllAbilityFramesForHide = {
+
+}
+AllAbilityFramesForHide2 = {
+
+}
 AbilityIconPath = {
     "ReplaceableTextures\\CommandButtons\\BTNGatherGold", --кирка
     "ReplaceableTextures\\CommandButtons\\BTNStormBolt", -- молоток
@@ -468,6 +752,8 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
         passiveTexture = GetPassiveIco(activeTexture)
     end
     local visionPlayer = Player(0)
+
+
 
     local face = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
     local buttonIconFrame = BlzCreateSimpleFrame("MyBar", face, 0) -- фрейм перезарядки
@@ -664,7 +950,7 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
     BlzFrameSetVisible(face, GetLocalPlayer() == visionPlayer)
     BlzFrameSetVisible(buttonIconFrame, GetLocalPlayer() == visionPlayer)
     --- tooltip
-    local tooltip, backdrop, text = CreateToolTipBoxSize(x + k * size, y + size * 2, size * 5, size * 3, toolTipTex, toolTipHeader)
+    local tooltip, backdrop, text = CreateToolTipBoxSize(x + k * size, y + size * 2, size * 5, size * 3, toolTipTex, toolTipHeader,face)
     --data.FrameToDestroy[k] = { face, buttonIconFrame, cdtext, cdICO, hotkey, tooltip, backdrop, text }
     ---------------------------------------------------
     ----------------ДИНАМИЧЕСКИЕ ОПИСАНИЯ--------------
@@ -767,12 +1053,15 @@ function CreateUniversalFrame(x, y, size, toolTipTex, toolTipHeader, data, activ
     else
 
     end
+    --print(k+1,"добавлен в общий список")
+    AllAbilityFramesForHide[k+1]=buttonIconFrame
+    AllAbilityFramesForHide2[k+1]=face
     return text, buttonIconFrame, face
 end
 
-function CreateToolTipBoxSize(x, y, sizeX, sizeY, toolTipTex, toolTipHeader)
+function CreateToolTipBoxSize(x, y, sizeX, sizeY, toolTipTex, toolTipHeader,parentFrame)
     --print("создан бокс ",toolTipTex)
-    local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
+    local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", parentFrame, "StandardFrameTemplate", 0)
     local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
     --BlzFrameSetParent(tooltip, BlzGetFrameByName("ConsoleUIBackdrop", 0))
@@ -838,7 +1127,19 @@ function MakeFrameCharged(fh, ch)
     return text
 end
 
+function ShowAllAbilitiesFrame(state)
+    --true скрыты
+    --print(#AllAbilityFramesForHide,"размер")
+    for i=0,#AllAbilityFramesForHide do
+        BlzFrameSetVisible(AllAbilityFramesForHide[i], state)
+        --print(i,"скрыт")
+    end
 
+      for i=0,#AllAbilityFramesForHide2 do
+        BlzFrameSetVisible(AllAbilityFramesForHide2[i], state)
+        --print(i,"скрыт")
+    end
+end
 --CreateUniversalFrame(0.02, 0.015, 0.03, "Пассивно связывает всех пеонов эмпатическими узами", "Эмпатия", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNSpiritLink.blp", nil, nil, "empath")
 
 ---
@@ -1196,8 +1497,8 @@ function SetTooltipText(text,tips)
 end
 
 function ReturnFPS()
-    BlzFrameSetVisible(BlzGetFrameByName("ResourceBarFrame", 0), true)
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
+    BlzFrameSetVisible(fps, true)
     BlzFrameClearAllPoints(fps)
     BlzFrameSetAbsPoint(fps, FRAMEPOINT_CENTER, 0.95, 0.62)
 end
@@ -1228,6 +1529,51 @@ function ReplaceID2ArrowMark(id)
             KillUnit(all[i])
         end)
     end
+end
+function CreateJojoReference(delay, isVictory)
+    --настройки
+    local toBeContinued = "ToBeContinued" --путь к картинке ToBeContinued
+    local endingSound = "endingSound" -- путь к мелодии
+    --delay время задержки перед начало выезжания таблички
+    -- isVictory  нужно ли объявить победу
+
+    PlayThematicMusic(endingSound)
+
+    TimerStart(CreateTimer(), delay-0.5, false, function()
+        CreateEnding(gg_unit_opeo_0000)
+    end)
+    TimerStart(CreateTimer(), delay, false, function()
+        CreateContinuedAndMove(toBeContinued, 1, 0.1,isVictory)
+    end)
+end
+
+function CreateContinuedAndMove(toBeContinued, x, y,isVictory)
+    local tobe = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
+    BlzFrameSetParent(tobe, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(tobe, toBeContinued, 0, true)
+    BlzFrameSetSize(tobe, 0.4, 0.1)
+    BlzFrameSetAbsPoint(tobe, FRAMEPOINT_TOP, x, y)
+    --print("запушен референс")
+
+    TimerStart(CreateTimer(), 1/64, true, function()
+        x = x - 0.02
+        if x <= 0.07 then
+            --print("остановка")
+            DestroyTimer(GetExpiredTimer())
+            CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 99, "ReplaceableTextures\\CameraMasks\\White_mask.blp", 20.00, 20.00, 20.00, 20.00)
+            if isVictory then
+                CustomVictoryBJ(Player(0), true, false)
+            end
+            PauseGame(true)
+        else
+            BlzFrameSetAbsPoint(tobe, FRAMEPOINT_TOP, x, y)
+        end
+    end)
+end
+
+function CreateEnding(unit)
+    local x,y=GetUnitX(unit),GetUnitY(unit)
+    AddSpecialEffect("Units\\Demon\\Infernal\\InfernalBirth.mdl",x,y)
 end
 function JumpOutWater(unit, angle)
     local eff = AddSpecialEffect("SystemGeneric\\Torrent", GetUnitXY(unit))
@@ -1794,6 +2140,69 @@ function CreateStaticGoldTag(text, x, y)
         SetTextTagVisibility(t, false)
     end
     return t
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 24.08.2021 10:49
+---
+toastyTable = {
+    [1] = { "toasty", "toasty" },
+    [2] = { "hatehorse", "hatehorse" },
+    [3] = { "spypeon", "Units\\Orc\\Peon\\PeonWarcry1" },
+    [4] = { "mush", "nya" }
+}
+function CreateToasty()
+    local r = GetRandomInt(1, #toastyTable)
+    local texture, sound = GetDataFromTable(toastyTable, r)
+    CreateAndMoveToastyFrame(texture, sound)
+end
+function CreateAndMoveToastyFrame(texture, sound)
+    local x, y = 1, 0.1
+    local toasty = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
+    BlzFrameSetParent(toasty, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(toasty, texture, 0, true)
+    BlzFrameSetSize(toasty, 0.1, 0.1)
+    BlzFrameSetAbsPoint(toasty, FRAMEPOINT_TOP, x, y)
+    PlaySound(sound)
+    --print("запушен референс")
+
+    TimerStart(CreateTimer(), 1 / 32, true, function()
+        x = x - 0.02
+        if x <= 0.88 then
+            --print("остановка")
+            DestroyTimer(GetExpiredTimer())
+            local showDuration = 0.5
+            TimerStart(CreateTimer(), showDuration, false, function()
+                Left2Right(toasty, x, y)
+                --print("реверс")
+            end)
+        else
+            BlzFrameSetAbsPoint(toasty, FRAMEPOINT_TOP, x, y)
+        end
+    end)
+end
+
+function Left2Right(frame, x, y)
+    TimerStart(CreateTimer(), 1 / 32, true, function()
+        x = x + 0.02
+        if x >= 1 then
+            --print("остановка")
+            DestroyTimer(GetExpiredTimer())
+            --print("Уничтожить фрейм")
+        else
+            BlzFrameSetAbsPoint(frame, FRAMEPOINT_TOP, x, y)
+        end
+    end)
+end
+
+function GetDataFromTable(table, index)
+    if not table[index] then
+        print("элемент в таблице не существует")
+    else
+        return table[index][1],table[index][2]
+        --table.unpack(table[index])
+    end
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -2450,7 +2859,7 @@ end
 --- Created by Bergi.
 --- DateTime: 04.08.2021 16:36
 ---
-ActiveDialog=false
+ActiveDialog = false
 do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
@@ -2463,22 +2872,30 @@ do
         end)
     end
 end
-function CreateAndMoveSpeechImage(state, duration, position, texture, text, delay, name)
+
+yDialog = 0.15
+function CreateAndMoveSpeechImage(state, duration, position, texture, text, delay, name, sound)
     --print("изображение пеона")
     if not name then
         name = "<Неизвестно>"
     end
+    sound = udg_sound
     TimerStart(CreateTimer(), delay, false, function()
         --BlzFrameSetText(TexBoxText, text)
-        SetTexSlow(text,TexBoxText,TIMER_PERIOD/2)
+
+        --print(sound, "звук из глобалки")
+        normal_sound(sound, GetUnitXY(GetRandomPeon()))
+
+        SetTexSlow(text, TexBoxText, TIMER_PERIOD / 2)
         BlzFrameSetAlpha(TexBox, 254)
         local xPoz = 0
-        local yPoz = 0.5
+        local yPoz = yDialog
         local x = 0
         local xs = 0
         local pos = FRAMEPOINT_LEFT
         if state == "start" then
             xPoz = 0.1
+            ShowAllAbilitiesFrame(false)
         end
         if position == "right" then
             xPoz = 0.7 + TIMER_PERIOD64
@@ -2570,6 +2987,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
                 end]]
                 if state == "end" then
                     BlzFrameSetAlpha(TexBox, alpha)
+                    ShowAllAbilitiesFrame(true)
                 end
                 if position == "left" then
                     x = x - TIMER_PERIOD64
@@ -2580,6 +2998,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
                         DestroyTimer(GetExpiredTimer())
                         if state == "end" then
                             BlzFrameSetVisible(TexBox, false)
+
                             --BlzFrameSetAlpha(TexBox, 0)
                         end
                     end
@@ -2603,12 +3022,11 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
 end
 
 function CreteDialogBox()
-
     --print("создан бокс ",toolTipTex)
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
     local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
-    BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_CENTER, 0.0, 0.45)
+    BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_CENTER, 0.0, yDialog - 0.05)
     BlzFrameSetSize(tooltip, 1, 0.1)
     BlzFrameSetSize(backdrop, 1, 0.1)
     BlzFrameSetSize(text, 0.8 * 0.4, 0.1 * .7)
@@ -2787,7 +3205,7 @@ function StartCombiner()
         "ReplaceableTextures\\CommandButtons\\BTNCyclone.blp",
         "ReplaceableTextures\\CommandButtons\\BTNInnerFire.blp",
         "ReplaceableTextures\\CommandButtons\\BTNCryptFiendBurrow.blp",
-        "ReplaceableTextures\\CommandButtons\\BTNTornado.blp",
+        "ReplaceableTextures\\CommandButtons\\BTNTornado",
         "ReplaceableTextures\\CommandButtons\\BTNRepair",
         "ReplaceableTextures\\CommandButtons\\BTNDivineIntervention",
         "ReplaceableTextures\\CommandButtons\\BTNEvasion",
@@ -3290,6 +3708,7 @@ function Init2Map()
     MAP = 2
     CreateInterFaceMap2()
     InitDeathEvent()
+    --CreateJojoReference()
     --
     --Move2Mouse(heroSheep)
     --MouseX, MouseY = xs, ys
@@ -3301,25 +3720,1134 @@ function Init2Map()
     --end)
 end
 --CUSTOM_CODE
+function Trig_Start_Func003A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(true, GetEnumUnit())
+end
+
+function Trig_Start_Func014A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(false, GetEnumUnit())
+end
+
+function Trig_Start_Actions()
+    AdjustPlayerStateBJ(10000, Player(0), PLAYER_STATE_RESOURCE_GOLD)
+    AdjustPlayerStateBJ(10000, Player(0), PLAYER_STATE_RESOURCE_LUMBER)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Start_Func003A)
+        CreateSpeechEffect()
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonlnaref_01"
+        CreateAndMoveSpeechImage("start", 6, "left", "PeonEmotion\\normal_left", "Ну и долго мы ещё тут будем сидеть, пора исследовать этот остров", 0,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_01"
+        CreateAndMoveSpeechImage("end", 6, "right", "PeonEmotion\\thing_right", "Да пришло время размять булки, пойдём ребята, осмотримся", 6,"Пеонетти")
+    TriggerSleepAction(6.00)
+        CreateSpeechEffect()
+    TriggerSleepAction(6.00)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Start_Func014A)
+    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_196", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_197", bj_TIMETYPE_ADD, 5.00, true)
+        CreateUniversalFrame(0.1, 0.015, 0.03, "Выбирает всех ваших пеонов. Поражение, если хотя бы 1 умрёт", "Отряд пеонов", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNPeon.blp", nil, "1", "peon")
+end
+
+function InitTrig_Start()
+    gg_trg_Start = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_Start, 1.00)
+    TriggerAddAction(gg_trg_Start, Trig_Start_Actions)
+end
+
+function Trig_NewCamp_Conditions()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_NewCamp_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonlnaref_02"
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "А здесь уже кто-то был, я чувствую запах пота и рыбы", 0,"Пеонльнарёфф")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_02"
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Это воняет от тебя", 5,"Пеонетти")
+    TriggerSleepAction(5.00)
+        CreateSpeechEffect()
+end
+
+function InitTrig_NewCamp()
+    gg_trg_NewCamp = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_NewCamp, gg_rct_NewCamp)
+    TriggerAddCondition(gg_trg_NewCamp, Condition(Trig_NewCamp_Conditions))
+    TriggerAddAction(gg_trg_NewCamp, Trig_NewCamp_Actions)
+end
+
+function Trig_Brod_Conditions()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_Brod_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\foo", "Тут достаточно глобоко, я не умею плавать", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\thing_right", "Ты вообще ничего не умеешь, кроме как строить башни", 5,"Пеонльнарёфф")
+    TriggerSleepAction(5.00)
+        CreateSpeechEffect()
+end
+
+function InitTrig_Brod()
+    gg_trg_Brod = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Brod, gg_rct_Brod)
+    TriggerAddCondition(gg_trg_Brod, Condition(Trig_Brod_Conditions))
+    TriggerAddAction(gg_trg_Brod, Trig_Brod_Actions)
+end
+
+function Trig_ReadTable_Conditions()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_ReadTable_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\table", "В нашей жизни бывают ситуации, когда возможности выбрать правильный путь у нас нет.", 0,"Табличка")
+        CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\thing_right", "Это означет, что у нас лишь 1 путь - вниз по этой тропе", 5,"Пеонетти")
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Если что, теперь я буду запоминать дорогу, чтобы мы не заблудилсь", 10,"Пеонпио")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Прям как после того случая", 15,"Пеонетти")
+    TriggerSleepAction(5.00)
+        CreateSpeechEffect(GetTriggerUnit())
+    TriggerSleepAction(5.00)
+        AddQuest(true,GetTriggerUnit(),GetUnitXY(gg_unit_nogm_0000))
+        CreateUI()
+        CreateSpeechEffect()
+    TriggerSleepAction(5.00)
+        CreateSpeechEffect()
+end
+
+function InitTrig_ReadTable()
+    gg_trg_ReadTable = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ReadTable, gg_rct________________009)
+    TriggerAddCondition(gg_trg_ReadTable, Condition(Trig_ReadTable_Conditions))
+    TriggerAddAction(gg_trg_ReadTable, Trig_ReadTable_Actions)
+end
+
+function Trig_FirstAttack_Conditions()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_FirstAttack_Func009A()
+        CreateSpeechEffect(GetEnumUnit(),"random",3)
+end
+
+function Trig_FirstAttack_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+    EnableTrigger(gg_trg_KillMurloc)
+        TP2Point(GetUnitX(GetTriggerUnit()),GetUnitY(GetTriggerUnit()),0)
+    TriggerExecute(gg_trg_RestoreBridge)
+    CreateNUnitsAtLoc(1, FourCC("nmrl"), Player(PLAYER_NEUTRAL_AGGRESSIVE), GetRectCenter(gg_rct________________007), bj_UNIT_FACING)
+        JumpOutWater(bj_lastCreatedUnit,45)
+    CreateNUnitsAtLoc(1, FourCC("nmrl"), Player(PLAYER_NEUTRAL_AGGRESSIVE), GetRectCenter(gg_rct________________007_____________________u), bj_UNIT_FACING)
+        JumpOutWater(bj_lastCreatedUnit,90)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_FirstAttack_Func009A)
+end
+
+function InitTrig_FirstAttack()
+    gg_trg_FirstAttack = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_FirstAttack, gg_rct_FirstAttack)
+    TriggerAddCondition(gg_trg_FirstAttack, Condition(Trig_FirstAttack_Conditions))
+    TriggerAddAction(gg_trg_FirstAttack, Trig_FirstAttack_Actions)
+end
+
+function Trig_InitBridge_Func003Func001C()
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B003"))) then
+        return false
+    end
+    return true
+end
+
+function Trig_InitBridge_Func003A()
+    if (Trig_InitBridge_Func003Func001C()) then
+        KillDestructable(GetEnumDestructable())
+    else
+    end
+end
+
+function Trig_InitBridge_Actions()
+    KillDestructable(gg_dest_B002_2498)
+    KillDestructable(gg_dest_B002_4547)
+    EnumDestructablesInRectAll(gg_rct_BridgeBlock, Trig_InitBridge_Func003A)
+end
+
+function InitTrig_InitBridge()
+    gg_trg_InitBridge = CreateTrigger()
+    TriggerAddAction(gg_trg_InitBridge, Trig_InitBridge_Actions)
+end
+
+function Trig_RestoreBridge_Func003Func001C()
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B003"))) then
+        return false
+    end
+    return true
+end
+
+function Trig_RestoreBridge_Func003A()
+    if (Trig_RestoreBridge_Func003Func001C()) then
+        DestructableRestoreLife(GetEnumDestructable(), GetDestructableMaxLife(GetEnumDestructable()), true)
+    else
+    end
+end
+
+function Trig_RestoreBridge_Actions()
+    DestructableRestoreLife(gg_dest_B002_2498, GetDestructableMaxLife(gg_dest_B002_2498), true)
+    DestructableRestoreLife(gg_dest_B002_4547, GetDestructableMaxLife(gg_dest_B002_4547), true)
+    EnumDestructablesInRectAll(gg_rct_BridgeBlock, Trig_RestoreBridge_Func003A)
+end
+
+function InitTrig_RestoreBridge()
+    gg_trg_RestoreBridge = CreateTrigger()
+    TriggerAddAction(gg_trg_RestoreBridge, Trig_RestoreBridge_Actions)
+end
+
+function Trig_KillMurloc_Conditions()
+    if (not (GetUnitTypeId(GetTriggerUnit()) == FourCC("nmrl"))) then
+        return false
+    end
+    return true
+end
+
+function Trig_KillMurloc_Func002Func003A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(true, GetEnumUnit())
+end
+
+function Trig_KillMurloc_Func002Func019A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(false, GetEnumUnit())
+end
+
+function Trig_KillMurloc_Func002C()
+    if (not (udg_MK == 2)) then
+        return false
+    end
+    return true
+end
+
+function Trig_KillMurloc_Actions()
+    udg_MK = (udg_MK + 1)
+    if (Trig_KillMurloc_Func002C()) then
+        TriggerExecute(gg_trg_InitBridge)
+        DisableTrigger(GetTriggeringTrigger())
+        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_KillMurloc_Func002Func003A)
+                CreateSpeechEffect()
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Да действительно, это воняло не от тебя", 0,"Пеонетти")
+                CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\thing_right", "Агрессивне лягушки, я видел таких во франции", 5,"Пеонльнарёфф")
+                CreateAndMoveSpeechImage("end", 5, "left", "PeonEmotion\\angry", "Какая франция, это другая вселенная, я думаю они из Калимдора", 10,"Пеонетти")
+        TriggerSleepAction(5.00)
+                CreateSpeechEffect()
+        TriggerSleepAction(5.00)
+                CreateSpeechEffect()
+        TriggerSleepAction(5.00)
+        QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UNITACQUIRED, "TRIGSTR_190")
+        udg_TMPColorText = "Пассивно связывает всех пеонов эмпатическими узами. Перезарядка: |cffffff0030|r сек. "
+                CreateUniversalFrame(0.1, 0.015, 0.03, udg_TMPColorText, "Эмпатия", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNSpiritLink.blp", nil, nil, "empath")
+        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_KillMurloc_Func002Func019A)
+    else
+    end
+end
+
+function InitTrig_KillMurloc()
+    gg_trg_KillMurloc = CreateTrigger()
+    DisableTrigger(gg_trg_KillMurloc)
+    TriggerRegisterAnyUnitEventBJ(gg_trg_KillMurloc, EVENT_PLAYER_UNIT_DEATH)
+    TriggerAddCondition(gg_trg_KillMurloc, Condition(Trig_KillMurloc_Conditions))
+    TriggerAddAction(gg_trg_KillMurloc, Trig_KillMurloc_Actions)
+end
+
+function Trig_Init_Func004Func001C()
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B001"))) then
+        return false
+    end
+    return true
+end
+
+function Trig_Init_Func004A()
+    if (Trig_Init_Func004Func001C()) then
+        KillDestructable(GetEnumDestructable())
+    else
+    end
+end
+
 function Trig_Init_Actions()
-        Init2Map()
+    UnitAddAbilityBJ(FourCC("Avul"), gg_unit_ndqs_0026)
+    UnitAddAbilityBJ(FourCC("Abun"), gg_unit_ndqs_0026)
+    UnitAddAbilityBJ(FourCC("A007"), gg_unit_ndqs_0026)
+    EnumDestructablesInRectAll(gg_rct_StonesBlock, Trig_Init_Func004A)
 end
 
 function InitTrig_Init()
     gg_trg_Init = CreateTrigger()
-    TriggerRegisterTimerEventSingle(gg_trg_Init, 0.10)
     TriggerAddAction(gg_trg_Init, Trig_Init_Actions)
 end
 
+function Trig_DemonessEnter_Conditions()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_DemonessEnter_Func002Func003C()
+    if (not (udg_GR == 1)) then
+        return false
+    end
+    return true
+end
+
+function Trig_DemonessEnter_Func002Func004C()
+    if (not (udg_GR == 2)) then
+        return false
+    end
+    return true
+end
+
+function Trig_DemonessEnter_Func002Func005C()
+    if (not (udg_GR == 3)) then
+        return false
+    end
+    return true
+end
+
+function Trig_DemonessEnter_Func002Func006C()
+    if (not (udg_GR == 4)) then
+        return false
+    end
+    return true
+end
+
+function Trig_DemonessEnter_Func002Func008A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(false, GetEnumUnit())
+end
+
+function Trig_DemonessEnter_Func002Func009A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(false, GetEnumUnit())
+end
+
+function Trig_DemonessEnter_Func002Func027A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(true, GetEnumUnit())
+    SetUnitFacingToFaceUnitTimed(GetEnumUnit(), gg_unit_ndqs_0026, 0.00)
+end
+
+function Trig_DemonessEnter_Func002Func031A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(false, GetEnumUnit())
+    IssuePointOrderLocBJ(GetEnumUnit(), "move", GetRectCenter(gg_rct_RescuePoint))
+end
+
+function Trig_DemonessEnter_Func002Func033Func001C()
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B001"))) then
+        return false
+    end
+    return true
+end
+
+function Trig_DemonessEnter_Func002Func033A()
+    if (Trig_DemonessEnter_Func002Func033Func001C()) then
+        CreateDestructableLoc(FourCC("LTrc"), GetDestructableLoc(GetEnumDestructable()), GetRandomDirectionDeg(), 1, GetRandomInt(1, 5))
+    else
+    end
+end
+
+function Trig_DemonessEnter_Func002C()
+    if (not (udg_TowerIsRepair == true)) then
+        return false
+    end
+    return true
+end
+
+function Trig_DemonessEnter_Actions()
+    PlaySoundOnUnitBJ(gg_snd_SuccubusPissed3, 100, gg_unit_ndqs_0026)
+    if (Trig_DemonessEnter_Func002C()) then
+        DisableTrigger(GetTriggeringTrigger())
+        DisableTrigger(gg_trg_StartAllWave)
+        KillUnit(gg_unit_nogm_0000)
+        udg_VictorySheep = true
+        SetUnitOwner(gg_unit_odes_0027, Player(5), true)
+                TP2Point(2309,2404,0)
+                SelectedAllPeon()
+                AddQuest(true,GetTriggerUnit(),GetUnitXY(gg_unit_odes_0027))
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\DemonLeft", "Где моя еда!!!???", 0,"Демонесса")
+                CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\foo", "Какая еда, мы не доставка пиццы", 5,"Пеонпио")
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\DemonAngry", "Тогда сегодня на ужин у меня будет, черепаший суп!", 10,"Демонесса")
+                CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\foo", "Что то-то я не вижу тут черепах", 15,"Пеонльнарёфф")
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\DemonBobs", "(Звуки демонической магии)", 20,"Демонесса")
+                CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "О нет, она превратила Пеонльнарёфа в черепаху, бежим отсюда!", 25,"Пеонетти")
+                CreateSpeechEffect(GetTriggerUnit())
+        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_DemonessEnter_Func002Func027A)
+        TriggerSleepAction(25.00)
+        IssueTargetOrderBJ(gg_unit_ndqs_0026, "hex", GetTriggerUnit())
+                CreateSpeechEffect()
+        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_DemonessEnter_Func002Func031A)
+                StartDemonessa(gg_unit_ndqs_0026)
+        EnumDestructablesInRectAll(gg_rct_StonesBlock, Trig_DemonessEnter_Func002Func033A)
+    else
+        DisableTrigger(GetTriggeringTrigger())
+        udg_GR = GetRandomInt(1, 4)
+        if (Trig_DemonessEnter_Func002Func003C()) then
+                        CreateSpeechEffect(gg_unit_ndqs_0026,"smileys_quest")
+            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_290", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_291", bj_TIMETYPE_ADD, 2.00, false)
+        else
+        end
+        if (Trig_DemonessEnter_Func002Func004C()) then
+                        CreateSpeechEffect(gg_unit_ndqs_0026,"smileys_quest")
+            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_292", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_293", bj_TIMETYPE_ADD, 2.00, false)
+        else
+        end
+        if (Trig_DemonessEnter_Func002Func005C()) then
+                        CreateSpeechEffect(gg_unit_ndqs_0026,"smileys_quest")
+            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_294", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_295", bj_TIMETYPE_ADD, 2.00, false)
+        else
+        end
+        if (Trig_DemonessEnter_Func002Func006C()) then
+                        CreateSpeechEffect(gg_unit_ndqs_0026,"smileys_quest")
+            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_296", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_297", bj_TIMETYPE_ADD, 2.00, false)
+        else
+        end
+                TP2Point(530,-1320)
+        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_DemonessEnter_Func002Func008A)
+        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_DemonessEnter_Func002Func009A)
+        TriggerSleepAction(2)
+        EnableTrigger(GetTriggeringTrigger())
+    end
+end
+
+function InitTrig_DemonessEnter()
+    gg_trg_DemonessEnter = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_DemonessEnter, gg_rct_EndPoint)
+    TriggerAddCondition(gg_trg_DemonessEnter, Condition(Trig_DemonessEnter_Conditions))
+    TriggerAddAction(gg_trg_DemonessEnter, Trig_DemonessEnter_Actions)
+end
+
+function Trig_Fire_Func006C()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    if (not (udg_OgreOnPlace == true)) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Conditions()
+    if (not Trig_Fire_Func006C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Эта башня горит, несите воду!", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 5, "left", "PeonEmotion\\angry", "Улыбаемся и машем кирками", 5,"Пеонетти")
+end
+
+function InitTrig_Fire()
+    gg_trg_Fire = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Fire, gg_rct_FireTower)
+    TriggerAddCondition(gg_trg_Fire, Condition(Trig_Fire_Conditions))
+    TriggerAddAction(gg_trg_Fire, Trig_Fire_Actions)
+end
+
+function Trig_Fire_Copy_Func006C()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    if (not (udg_OgreOnPlace == true)) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Copy_Conditions()
+    if (not Trig_Fire_Copy_Func006C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Copy_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Башня почти обуглена, как я смогу починить её одной лишь киркой?", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Улыбаемся и машем", 5,"Пеонльнарёфф")
+end
+
+function InitTrig_Fire_Copy()
+    gg_trg_Fire_Copy = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Fire_Copy, gg_rct_FireTower2)
+    TriggerAddCondition(gg_trg_Fire_Copy, Condition(Trig_Fire_Copy_Conditions))
+    TriggerAddAction(gg_trg_Fire_Copy, Trig_Fire_Copy_Actions)
+end
+
+function Trig_Fire_Copy_Copy_Func006C()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    if (not (udg_OgreOnPlace == true)) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Copy_Copy_Conditions()
+    if (not Trig_Fire_Copy_Copy_Func006C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_Fire_Copy_Copy_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Этот камень горит, махайте кирками быстрее", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Улыбаемся и машем", 5,"Пеонльнарёфф")
+end
+
+function InitTrig_Fire_Copy_Copy()
+    gg_trg_Fire_Copy_Copy = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Fire_Copy_Copy, gg_rct_FireTower3)
+    TriggerAddCondition(gg_trg_Fire_Copy_Copy, Condition(Trig_Fire_Copy_Copy_Conditions))
+    TriggerAddAction(gg_trg_Fire_Copy_Copy, Trig_Fire_Copy_Copy_Actions)
+end
+
+function Trig_Empty_Conditions()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_Empty_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+    PauseUnitBJ(true, GetTriggerUnit())
+        CreateSpeechEffect(GetTriggerUnit())
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Посмотрите какая интересная труба, однако в ней пусто", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\ready", "Ты вечно думаешь о каких-то отверстиях, иди в другой посмотри!", 5,"Пеонльнарёфф")
+    TriggerSleepAction(5.00)
+    PauseUnitBJ(false, GetTriggerUnit())
+        CreateSpeechEffect()
+end
+
+function InitTrig_Empty()
+    gg_trg_Empty = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Empty, gg_rct_HealEpmty)
+    TriggerAddCondition(gg_trg_Empty, Condition(Trig_Empty_Conditions))
+    TriggerAddAction(gg_trg_Empty, Trig_Empty_Actions)
+end
+
+function Trig_FindHeal_Conditions()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_FindHeal_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+    PauseUnitBJ(true, GetTriggerUnit())
+        CreateSpeechEffect(GetTriggerUnit())
+    udg_TMPColorText = "Что там, пызырёк с неизвестной зелёной жидкостью, что может пойти не так если мы это попробуем?"
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", udg_TMPColorText, 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Ребята, а это классна штука, похожа на колу", 5,"Пеонпио")
+    TriggerSleepAction(5.00)
+        CreateSpeechEffect()
+    PauseUnitBJ(false, GetTriggerUnit())
+    TriggerSleepAction(5.00)
+    QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UNITACQUIRED, "TRIGSTR_247")
+        CreateUniversalFrame(0.1, 0.015, 0.03, "Исцеляет самого раненного пеона каждые 30 секунд", "Зелье лечения", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNPotionGreen.blp", nil, nil, "heal")
+end
+
+function InitTrig_FindHeal()
+    gg_trg_FindHeal = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_FindHeal, gg_rct_HealFinder)
+    TriggerAddCondition(gg_trg_FindHeal, Condition(Trig_FindHeal_Conditions))
+    TriggerAddAction(gg_trg_FindHeal, Trig_FindHeal_Actions)
+end
+
+function Trig_FindOrge_Conditions()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_FindOrge_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+        UnitAddBigAura(gg_unit_nogm_0000)
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Смотрите ребята, там какой-то громила, наверное это он всех сожрал", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 2, "right", "PeonEmotion\\ready", "Я его не боюсь!", 5,"Пеонльнарёфф")
+    TriggerSleepAction(8.00)
+    EnableTrigger(gg_trg_OgreRun)
+end
+
+function InitTrig_FindOrge()
+    gg_trg_FindOrge = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_FindOrge, gg_rct________________010)
+    TriggerAddCondition(gg_trg_FindOrge, Condition(Trig_FindOrge_Conditions))
+    TriggerAddAction(gg_trg_FindOrge, Trig_FindOrge_Actions)
+end
+
+function Trig_OgreRun_Conditions()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_OgreRun_Func003A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(true, GetEnumUnit())
+end
+
+function Trig_OgreRun_Func011A()
+    SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
+    PauseUnitBJ(false, GetEnumUnit())
+end
+
+function Trig_OgreRun_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+    TriggerExecute(gg_trg_ReadyTower)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_OgreRun_Func003A)
+        CreateSpeechEffect(GetTriggerUnit())
+    udg_TMPColorText = "Продолжая совершать преступления, обязательно тебя настигнет наказание, пришедшее из ниоткуда. Где все, признавайся?"
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\angry",udg_TMPColorText, 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\ready", "Ребята, он уходит, бежим за ним!!!!", 5,"Пеонльнарёфф")
+    TriggerSleepAction(5.00)
+    IssuePointOrderLocBJ(gg_unit_nogm_0000, "attack", GetRectCenter(gg_rct_OgreDefPlace))
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_OgreRun_Func011A)
+    EnableTrigger(gg_trg_StartAllWave)
+        CreateSpeechEffect()
+        AddQuest(true,GetTriggerUnit(),GetRectCenterX(gg_rct_OgreDefPlace),GetRectCenterY(gg_rct_OgreDefPlace))
+    TriggerSleepAction(3.00)
+    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_318", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_319", bj_TIMETYPE_ADD, 5.00, true)
+end
+
+function InitTrig_OgreRun()
+    gg_trg_OgreRun = CreateTrigger()
+    DisableTrigger(gg_trg_OgreRun)
+    TriggerRegisterEnterRectSimple(gg_trg_OgreRun, gg_rct________________011)
+    TriggerAddCondition(gg_trg_OgreRun, Condition(Trig_OgreRun_Conditions))
+    TriggerAddAction(gg_trg_OgreRun, Trig_OgreRun_Actions)
+end
+
+function Trig_StartAllWave_Actions()
+    CreateNUnitsAtLoc(1, FourCC("nmrl"), Player(4), GetRectCenter(gg_rct________________013), bj_UNIT_FACING)
+    IssuePointOrderLocBJ(GetLastCreatedUnit(), "attack", GetRectCenter(gg_rct_EndPoint))
+    CreateNUnitsAtLoc(1, FourCC("nmrl"), Player(4), GetRectCenter(gg_rct________________015), bj_UNIT_FACING)
+    IssuePointOrderLocBJ(GetLastCreatedUnit(), "attack", GetRectCenter(gg_rct_EndPoint))
+    CreateNUnitsAtLoc(1, FourCC("nmrl"), Player(4), GetRectCenter(gg_rct________________016), bj_UNIT_FACING)
+    IssuePointOrderLocBJ(GetLastCreatedUnit(), "attack", GetRectCenter(gg_rct_EndPoint))
+end
+
+function InitTrig_StartAllWave()
+    gg_trg_StartAllWave = CreateTrigger()
+    DisableTrigger(gg_trg_StartAllWave)
+    TriggerRegisterTimerEventPeriodic(gg_trg_StartAllWave, 30.00)
+    TriggerAddAction(gg_trg_StartAllWave, Trig_StartAllWave_Actions)
+end
+
+function Trig_ReadyTower_Actions()
+    UnitAddAbilityBJ(FourCC("Avul"), gg_unit_hctw_0019)
+    UnitAddAbilityBJ(FourCC("A001"), gg_unit_hctw_0019)
+    UnitAddAbilityBJ(FourCC("Abun"), gg_unit_hctw_0019)
+    UnitAddAbilityBJ(FourCC("Avul"), gg_unit_hatw_0020)
+    UnitAddAbilityBJ(FourCC("A001"), gg_unit_hatw_0020)
+    UnitAddAbilityBJ(FourCC("Abun"), gg_unit_hatw_0020)
+    UnitAddAbilityBJ(FourCC("Avul"), gg_unit_hgtw_0018)
+    UnitAddAbilityBJ(FourCC("A001"), gg_unit_hgtw_0018)
+    UnitAddAbilityBJ(FourCC("Abun"), gg_unit_hgtw_0018)
+    UnitAddAbilityBJ(FourCC("A001"), gg_unit_hwtw_0024)
+end
+
+function InitTrig_ReadyTower()
+    gg_trg_ReadyTower = CreateTrigger()
+    TriggerAddAction(gg_trg_ReadyTower, Trig_ReadyTower_Actions)
+end
+
+function Trig_RepairTower_Func004C()
+    if (not (GetTriggerUnit() ~= gg_unit_hwtw_0024)) then
+        return false
+    end
+    return true
+end
+
+function Trig_RepairTower_Func005C()
+    if (not (udg_TowerRepairCount >= 3)) then
+        return false
+    end
+    return true
+end
+
+function Trig_RepairTower_Func006C()
+    if (not (GetTriggerUnit() == gg_unit_hatw_0020)) then
+        return false
+    end
+    return true
+end
+
+function Trig_RepairTower_Func007C()
+    if (not (GetTriggerUnit() == gg_unit_hctw_0019)) then
+        return false
+    end
+    return true
+end
+
+function Trig_RepairTower_Func008C()
+    if (not (GetTriggerUnit() == gg_unit_hgtw_0018)) then
+        return false
+    end
+    return true
+end
+
+function Trig_RepairTower_Func009C()
+    if (not (GetTriggerUnit() == gg_unit_hwtw_0024)) then
+        return false
+    end
+    return true
+end
+
+function Trig_RepairTower_Actions()
+    UnitRemoveAbilityBJ(FourCC("Abun"), GetTriggerUnit())
+    UnitRemoveAbilityBJ(FourCC("Avul"), GetTriggerUnit())
+    UnitRemoveAbilityBJ(FourCC("A001"), GetTriggerUnit())
+    if (Trig_RepairTower_Func004C()) then
+        udg_TowerRepairCount = (udg_TowerRepairCount + 1)
+    else
+    end
+    if (Trig_RepairTower_Func005C()) then
+        QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_250")
+                AddQuest(true,GetRandomPeon(),GetRectCenterX(gg_rct_OgreDefPlace),GetRectCenterY(gg_rct_OgreDefPlace))
+        udg_TowerIsRepair = true
+    else
+        QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ("|cff008000Задание обновилось:|r Отремонтированы башни " .. (I2S(udg_TowerRepairCount) .. "/3")))
+    end
+    if (Trig_RepairTower_Func006C()) then
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Интересно, а кто управляет этими башнями?", 0,"Пеонетти")
+                CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Возможно это всё магия союзного стенда", 5,"Пеонльнарёфф")
+                CreateSpeechEffect()
+        TriggerSleepAction(5.00)
+                CreateSpeechEffect()
+    else
+    end
+    if (Trig_RepairTower_Func007C()) then
+                CreateSpeechEffect()
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Вот эта башня странная, она не умеет стрелять вплотную", 0,"Пеонетти")
+                CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Тот, кто её проектировал, об этом явно не думал", 5,"Пеонльнарёфф")
+        TriggerSleepAction(5.00)
+                CreateSpeechEffect()
+        TriggerSleepAction(10.00)
+        SetUnitInvulnerable(GetTriggerUnit(), true)
+    else
+    end
+    if (Trig_RepairTower_Func008C()) then
+                CreateSpeechEffect()
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Ну и кто заряжает в неё эти стрелы?", 0,"Пеонетти")
+                CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Скорее всего кто, очень маленький... прям как твой на холоде", 5,"Пеонльнарёфф")
+        TriggerSleepAction(5.00)
+                CreateSpeechEffect()
+    else
+    end
+    if (Trig_RepairTower_Func009C()) then
+                CreateSpeechEffect()
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Кто нибудь знает, зачем мы это починили?", 0,"Пеонетти")
+                CreateAndMoveSpeechImage("end", 2, "right", "PeonEmotion\\angry", "Бесполезная башня", 5,"Пеонпио")
+        TriggerSleepAction(5.00)
+                CreateSpeechEffect()
+    else
+    end
+end
+
+function InitTrig_RepairTower()
+    gg_trg_RepairTower = CreateTrigger()
+    TriggerRegisterUnitLifeEvent(gg_trg_RepairTower, gg_unit_hctw_0019, GREATER_THAN_OR_EQUAL, 499.00)
+    TriggerRegisterUnitLifeEvent(gg_trg_RepairTower, gg_unit_hgtw_0018, GREATER_THAN_OR_EQUAL, 499.00)
+    TriggerRegisterUnitLifeEvent(gg_trg_RepairTower, gg_unit_hatw_0020, GREATER_THAN_OR_EQUAL, 499.00)
+    TriggerRegisterUnitLifeEvent(gg_trg_RepairTower, gg_unit_hwtw_0024, GREATER_THAN_OR_EQUAL, 499.00)
+    TriggerAddAction(gg_trg_RepairTower, Trig_RepairTower_Actions)
+end
+
+function Trig_ShowHP_Actions()
+    UnitRemoveAbilityBJ(FourCC("Avul"), GetTriggerUnit())
+end
+
+function InitTrig_ShowHP()
+    gg_trg_ShowHP = CreateTrigger()
+    TriggerRegisterUnitLifeEvent(gg_trg_ShowHP, gg_unit_hctw_0019, GREATER_THAN_OR_EQUAL, 10.00)
+    TriggerRegisterUnitLifeEvent(gg_trg_ShowHP, gg_unit_hgtw_0018, GREATER_THAN_OR_EQUAL, 10.00)
+    TriggerRegisterUnitLifeEvent(gg_trg_ShowHP, gg_unit_hatw_0020, GREATER_THAN_OR_EQUAL, 10.00)
+    TriggerRegisterUnitLifeEvent(gg_trg_ShowHP, gg_unit_hwtw_0024, GREATER_THAN_OR_EQUAL, 10.00)
+    TriggerAddAction(gg_trg_ShowHP, Trig_ShowHP_Actions)
+end
+
+function Trig_OnPlaceOrge_Conditions()
+    if (not (GetTriggerUnit() == gg_unit_nogm_0000)) then
+        return false
+    end
+    return true
+end
+
+function Trig_OnPlaceOrge_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+    udg_OgreOnPlace = true
+end
+
+function InitTrig_OnPlaceOrge()
+    gg_trg_OnPlaceOrge = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_OnPlaceOrge, gg_rct_OgreDefPlace)
+    TriggerAddCondition(gg_trg_OnPlaceOrge, Condition(Trig_OnPlaceOrge_Conditions))
+    TriggerAddAction(gg_trg_OnPlaceOrge, Trig_OnPlaceOrge_Actions)
+end
+
+function Trig_TolkWOrge_Func024C()
+    if (not (udg_OgreOnPlace == true)) then
+        return false
+    end
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_TolkWOrge_Conditions()
+    if (not Trig_TolkWOrge_Func024C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_TolkWOrge_Func018A()
+    UnitAddAbilityBJ(FourCC("Ahrp"), GetEnumUnit())
+end
+
+function Trig_TolkWOrge_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Ну и что тут происходит? Ты наш враг? я почему-то не могу тебя атаковать?", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\OgreNormal", "Моя плохо поимать ваш язык, люди ушли, люди платить мне шашлыком, я убивать мурлок!", 5,"Огр")
+        CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\OgreWay", "Башни сломались, бедный огр тяжело, у вас есть кирка, ремонтируй башня!", 10,"Огр")
+        CreateAndMoveSpeechImage("end", 5, "left", "PeonEmotion\\angry", "Так ребята, тряхнём стариной, сделаем, то что у нас получается лучше всего: СТРОИТЬ БАШНИ!", 15,"Пеонетти")
+    TriggerSleepAction(5.00)
+        CreateSpeechEffect(gg_unit_nogm_0000)
+    TriggerSleepAction(5.00)
+        CreateSpeechEffect(gg_unit_nogm_0000)
+    TriggerSleepAction(5.00)
+    EnableTrigger(gg_trg_PingTowerPlace)
+        BlzFrameSetVisible(map, true)
+        CreateSpeechEffect()
+    TriggerSleepAction(7.00)
+    QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UNITACQUIRED, "TRIGSTR_238")
+        CreateUniversalFrame(0.1, 0.015, 0.03, "Бесплатно чинит любые строения и механизмы RMB", "Ремонт", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNRepair.blp", nil, nil, "repair")
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_TolkWOrge_Func018A)
+        AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_hctw_0019))
+        AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_hgtw_0018))
+        AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_hatw_0020))
+    SetPlayerAllianceStateBJ(Player(0), Player(5), bj_ALLIANCE_ALLIED_VISION)
+    SetPlayerAllianceStateBJ(Player(5), Player(0), bj_ALLIANCE_ALLIED_VISION)
+end
+
+function InitTrig_TolkWOrge()
+    gg_trg_TolkWOrge = CreateTrigger()
+    TriggerRegisterUnitInRangeSimple(gg_trg_TolkWOrge, 256, gg_unit_nogm_0000)
+    TriggerAddCondition(gg_trg_TolkWOrge, Condition(Trig_TolkWOrge_Conditions))
+    TriggerAddAction(gg_trg_TolkWOrge, Trig_TolkWOrge_Actions)
+end
+
+function Trig_PingTowerPlace_Func001C()
+    if (not (GetUnitLifePercent(gg_unit_hatw_0020) <= 90.00)) then
+        return false
+    end
+    return true
+end
+
+function Trig_PingTowerPlace_Func002C()
+    if (not (GetUnitLifePercent(gg_unit_hctw_0019) <= 90.00)) then
+        return false
+    end
+    return true
+end
+
+function Trig_PingTowerPlace_Func003C()
+    if (not (GetUnitLifePercent(gg_unit_hgtw_0018) <= 90.00)) then
+        return false
+    end
+    return true
+end
+
+function Trig_PingTowerPlace_Actions()
+    if (Trig_PingTowerPlace_Func001C()) then
+        PingMinimapLocForForce(GetPlayersAll(), GetUnitLoc(gg_unit_hatw_0020), 1)
+    else
+    end
+    if (Trig_PingTowerPlace_Func002C()) then
+        PingMinimapLocForForce(GetPlayersAll(), GetUnitLoc(gg_unit_hctw_0019), 1)
+    else
+    end
+    if (Trig_PingTowerPlace_Func003C()) then
+        PingMinimapLocForForce(GetPlayersAll(), GetUnitLoc(gg_unit_hgtw_0018), 1)
+    else
+    end
+end
+
+function InitTrig_PingTowerPlace()
+    gg_trg_PingTowerPlace = CreateTrigger()
+    DisableTrigger(gg_trg_PingTowerPlace)
+    TriggerRegisterTimerEventPeriodic(gg_trg_PingTowerPlace, 15.00)
+    TriggerAddAction(gg_trg_PingTowerPlace, Trig_PingTowerPlace_Actions)
+end
+
+function Trig_TolkWOrgeAfterRepair_Func012C()
+    if (not (udg_TowerIsRepair == true)) then
+        return false
+    end
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
+end
+
+function Trig_TolkWOrgeAfterRepair_Conditions()
+    if (not Trig_TolkWOrgeAfterRepair_Func012C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_TolkWOrgeAfterRepair_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+        CreateSpeechEffect(GetTriggerUnit())
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Дело сделано, теперь башни на страже города, а куда бегут эти твари?", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\OgreTalk", "Моя не знать, зелёные идти на вершину горы, что узнать", 5,"Пеонльнарёфф")
+    TriggerSleepAction(5.00)
+        CreateSpeechEffect(gg_unit_nogm_0000)
+        AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_ndqs_0026))
+    SetUnitAnimation(gg_unit_nogm_0000, "sleep")
+    TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_324", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_325", bj_TIMETYPE_ADD, 5.00, true)
+end
+
+function InitTrig_TolkWOrgeAfterRepair()
+    gg_trg_TolkWOrgeAfterRepair = CreateTrigger()
+    TriggerRegisterUnitInRangeSimple(gg_trg_TolkWOrgeAfterRepair, 256, gg_unit_nogm_0000)
+    TriggerAddCondition(gg_trg_TolkWOrgeAfterRepair, Condition(Trig_TolkWOrgeAfterRepair_Conditions))
+    TriggerAddAction(gg_trg_TolkWOrgeAfterRepair, Trig_TolkWOrgeAfterRepair_Actions)
+end
+
+function Trig_Victory_Func020C()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    if (not (udg_VictorySheep == true)) then
+        return false
+    end
+    return true
+end
+
+function Trig_Victory_Conditions()
+    if (not Trig_Victory_Func020C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_Victory_Func012A()
+    PlaySoundAtPointBJ(gg_snd_Loading, 100, GetUnitLoc(GetEnumUnit()), 0)
+    ShowUnitHide(GetEnumUnit())
+    udg_SavedPeons = (udg_SavedPeons + 1)
+    QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ("|cff008000Задание обновилось:|r Спасено пеонов " .. (I2S(udg_SavedPeons) .. "/5")))
+end
+
+function Trig_Victory_Actions()
+    DisableTrigger(GetTriggeringTrigger())
+    SetUnitOwner(gg_unit_odes_0027, Player(5), true)
+    SetPlayerAllianceStateBJ(Player(0), Player(5), bj_ALLIANCE_ALLIED_VISION)
+    SetPlayerAllianceStateBJ(Player(5), Player(0), bj_ALLIANCE_ALLIED_VISION)
+        CreateSpeechEffect(GetTriggerUnit())
+        UnitAddBigAura(gg_unit_odes_0027)
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Ура спасение, она что совсем сдурела?", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\DemonAngry", "Я только начала пеонята", 5,"Демонесса")
+    TriggerSleepAction(5.00)
+        UnitAddBigAura(gg_unit_odes_0027)
+        StartForSheep(gg_unit_ndqs_0026,gg_unit_odes_0027)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Victory_Func012A)
+    IssuePointOrderLocBJ(gg_unit_odes_0027, "move", GetRectCenter(gg_rct_Region_030))
+    SetCameraTargetControllerNoZForPlayer(Player(0), gg_unit_odes_0027, 0, 0, false)
+    SetCameraFieldForPlayer(Player(0), CAMERA_FIELD_TARGET_DISTANCE, 4000.00, 10.00)
+    TriggerSleepAction(10.00)
+    CustomVictoryBJ(Player(0), true, false)
+    TriggerSleepAction(1.00)
+    SaveAndChangeLevelBJ("SaveFile.w3z", "Maps\\Map1.w3x", false)
+end
+
+function InitTrig_Victory()
+    gg_trg_Victory = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Victory, gg_rct_RescuePoint)
+    TriggerAddCondition(gg_trg_Victory, Condition(Trig_Victory_Conditions))
+    TriggerAddAction(gg_trg_Victory, Trig_Victory_Actions)
+end
+
+function Trig_Sound_Func005C()
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    if (not (udg_VictorySheep == true)) then
+        return false
+    end
+    return true
+end
+
+function Trig_Sound_Conditions()
+    if (not Trig_Sound_Func005C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_Sound_Actions()
+    PlaySoundAtPointBJ(gg_snd_Loading, 100, GetUnitLoc(GetTriggerUnit()), 0)
+    ShowUnitHide(GetTriggerUnit())
+    udg_SavedPeons = (udg_SavedPeons + 1)
+    QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ("|cff008000Задание обновилось:|r Спасено пеонов " .. (I2S(udg_SavedPeons) .. "/5")))
+end
+
+function InitTrig_Sound()
+    gg_trg_Sound = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Sound, gg_rct_RescuePoint)
+    TriggerAddCondition(gg_trg_Sound, Condition(Trig_Sound_Conditions))
+    TriggerAddAction(gg_trg_Sound, Trig_Sound_Actions)
+end
+
+function Trig_PeonDead_Conditions()
+    if (not (GetUnitTypeId(GetTriggerUnit()) == FourCC("opeo"))) then
+        return false
+    end
+    return true
+end
+
+function Trig_PeonDead_Actions()
+    TriggerSleepAction(2)
+    CustomDefeatBJ(Player(0), "TRIGSTR_209")
+end
+
+function InitTrig_PeonDead()
+    gg_trg_PeonDead = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(gg_trg_PeonDead, EVENT_PLAYER_UNIT_DEATH)
+    TriggerAddCondition(gg_trg_PeonDead, Condition(Trig_PeonDead_Conditions))
+    TriggerAddAction(gg_trg_PeonDead, Trig_PeonDead_Actions)
+end
+
+function Trig_Aly6_Actions()
+    SetPlayerAllianceStateBJ(Player(0), Player(5), bj_ALLIANCE_ALLIED)
+    SetPlayerAllianceStateBJ(Player(5), Player(0), bj_ALLIANCE_ALLIED)
+end
+
+function InitTrig_Aly6()
+    gg_trg_Aly6 = CreateTrigger()
+    TriggerAddAction(gg_trg_Aly6, Trig_Aly6_Actions)
+end
+
+function Trig_DisableAttack_Func004C()
+    if (not (GetIssuedOrderIdBJ() == String2OrderIdBJ("attack"))) then
+        return false
+    end
+    if (not (GetOwningPlayer(GetTriggerUnit()) == GetOwningPlayer(GetOrderTargetUnit()))) then
+        return false
+    end
+    return true
+end
+
+function Trig_DisableAttack_Conditions()
+    if (not Trig_DisableAttack_Func004C()) then
+        return false
+    end
+    return true
+end
+
+function Trig_DisableAttack_Actions()
+    PauseUnitBJ(true, GetTriggerUnit())
+    IssueImmediateOrderBJ(GetTriggerUnit(), "stop")
+    PauseUnitBJ(false, GetTriggerUnit())
+end
+
+function InitTrig_DisableAttack()
+    gg_trg_DisableAttack = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(gg_trg_DisableAttack, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+    TriggerAddCondition(gg_trg_DisableAttack, Condition(Trig_DisableAttack_Conditions))
+    TriggerAddAction(gg_trg_DisableAttack, Trig_DisableAttack_Actions)
+end
+
+function Trig_Black_Actions()
+    CreateFogModifierRectBJ(true, Player(0), FOG_OF_WAR_MASKED, GetPlayableMapRect())
+    UseTimeOfDayBJ(false)
+end
+
+function InitTrig_Black()
+    gg_trg_Black = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_Black, 0.01)
+    TriggerAddAction(gg_trg_Black, Trig_Black_Actions)
+end
+
 function InitCustomTriggers()
+    InitTrig_Start()
+    InitTrig_NewCamp()
+    InitTrig_Brod()
+    InitTrig_ReadTable()
+    InitTrig_FirstAttack()
+    InitTrig_InitBridge()
+    InitTrig_RestoreBridge()
+    InitTrig_KillMurloc()
     InitTrig_Init()
+    InitTrig_DemonessEnter()
+    InitTrig_Fire()
+    InitTrig_Fire_Copy()
+    InitTrig_Fire_Copy_Copy()
+    InitTrig_Empty()
+    InitTrig_FindHeal()
+    InitTrig_FindOrge()
+    InitTrig_OgreRun()
+    InitTrig_StartAllWave()
+    InitTrig_ReadyTower()
+    InitTrig_RepairTower()
+    InitTrig_ShowHP()
+    InitTrig_OnPlaceOrge()
+    InitTrig_TolkWOrge()
+    InitTrig_PingTowerPlace()
+    InitTrig_TolkWOrgeAfterRepair()
+    InitTrig_Victory()
+    InitTrig_Sound()
+    InitTrig_PeonDead()
+    InitTrig_Aly6()
+    InitTrig_DisableAttack()
+    InitTrig_Black()
+end
+
+function RunInitializationTriggers()
+    ConditionalTriggerExecute(gg_trg_InitBridge)
+    ConditionalTriggerExecute(gg_trg_Init)
+    ConditionalTriggerExecute(gg_trg_Aly6)
 end
 
 function InitCustomPlayerSlots()
     SetPlayerStartLocation(Player(0), 0)
+    ForcePlayerStartLocation(Player(0), 0)
     SetPlayerColor(Player(0), ConvertPlayerColor(0))
-    SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
-    SetPlayerRaceSelectable(Player(0), true)
+    SetPlayerRacePreference(Player(0), RACE_PREF_ORC)
+    SetPlayerRaceSelectable(Player(0), false)
     SetPlayerController(Player(0), MAP_CONTROL_USER)
 end
 
@@ -3328,15 +4856,21 @@ function InitCustomTeams()
 end
 
 function main()
-    SetCameraBounds(-32256.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -1536.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 28416.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 1024.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -32256.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 1024.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 28416.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -1536.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+    SetCameraBounds(-5632.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -5632.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 5760.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 5888.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -5632.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 5888.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 5760.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -5632.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
     SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+    SetTerrainFogEx(0, 0.0, 10000.0, 0.500, 0.000, 0.000, 0.000)
     NewSoundEnvironment("Default")
-    SetAmbientDaySound("LordaeronSummerDay")
-    SetAmbientNightSound("LordaeronSummerNight")
+    SetAmbientDaySound("SunkenRuinsDay")
+    SetAmbientNightSound("SunkenRuinsNight")
     SetMapMusic("Music", true, 0)
+    InitSounds()
+    CreateRegions()
+    CreateAllDestructables()
+    CreateAllUnits()
     InitBlizzard()
     InitGlobals()
     InitCustomTriggers()
+    RunInitializationTriggers()
 end
 
 function config()
@@ -3345,9 +4879,8 @@ function config()
     SetPlayers(1)
     SetTeams(1)
     SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, -30400.0, 0.0)
+    DefineStartLocation(0, -4096.0, 5120.0)
     InitCustomPlayerSlots()
-    SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
-    InitGenericPlayerSlots()
+    InitCustomTeams()
 end
 

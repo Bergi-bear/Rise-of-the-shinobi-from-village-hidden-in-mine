@@ -274,6 +274,7 @@ function Init2Map()
     MAP = 2
     CreateInterFaceMap2()
     InitDeathEvent()
+    --CreateJojoReference()
     --
     --Move2Mouse(heroSheep)
     --MouseX, MouseY = xs, ys

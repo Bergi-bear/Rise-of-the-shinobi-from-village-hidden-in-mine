@@ -3,7 +3,7 @@
 --- Created by Bergi.
 --- DateTime: 04.08.2021 16:36
 ---
-ActiveDialog=false
+ActiveDialog = false
 do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
@@ -16,22 +16,29 @@ do
         end)
     end
 end
-function CreateAndMoveSpeechImage(state, duration, position, texture, text, delay, name)
+
+yDialog = 0.15
+function CreateAndMoveSpeechImage(state, duration, position, texture, text, delay, name, sound)
     --print("изображение пеона")
     if not name then
         name = "<Неизвестно>"
     end
+    sound = udg_sound
     TimerStart(CreateTimer(), delay, false, function()
         --BlzFrameSetText(TexBoxText, text)
-        SetTexSlow(text,TexBoxText,TIMER_PERIOD/2)
+
+        --print(sound, "звук из глобалки")
+        normal_sound(sound, GetUnitXY(GetRandomPeon()))
+        SetTexSlow(text, TexBoxText, TIMER_PERIOD / 2)
         BlzFrameSetAlpha(TexBox, 254)
         local xPoz = 0
-        local yPoz = 0.5
+        local yPoz = yDialog
         local x = 0
         local xs = 0
         local pos = FRAMEPOINT_LEFT
         if state == "start" then
             xPoz = 0.1
+            ShowAllAbilitiesFrame(false)
         end
         if position == "right" then
             xPoz = 0.7 + TIMER_PERIOD64
@@ -123,6 +130,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
                 end]]
                 if state == "end" then
                     BlzFrameSetAlpha(TexBox, alpha)
+                    ShowAllAbilitiesFrame(true)
                 end
                 if position == "left" then
                     x = x - TIMER_PERIOD64
@@ -133,6 +141,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
                         DestroyTimer(GetExpiredTimer())
                         if state == "end" then
                             BlzFrameSetVisible(TexBox, false)
+
                             --BlzFrameSetAlpha(TexBox, 0)
                         end
                     end
@@ -156,12 +165,11 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
 end
 
 function CreteDialogBox()
-
     --print("создан бокс ",toolTipTex)
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
     local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
-    BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_CENTER, 0.0, 0.45)
+    BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_CENTER, 0.0, yDialog - 0.05)
     BlzFrameSetSize(tooltip, 1, 0.1)
     BlzFrameSetSize(backdrop, 1, 0.1)
     BlzFrameSetSize(text, 0.8 * 0.4, 0.1 * .7)
