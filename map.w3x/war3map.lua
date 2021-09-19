@@ -55,16 +55,16 @@ gg_trg_InitBridge = nil
 gg_trg_ClearLift = nil
 gg_trg_RestoreBridge = nil
 gg_trg_KillMurloc = nil
-gg_trg_ReadTable = nil
-gg_trg_FindOrge = nil
-gg_trg_OgreRun = nil
+gg_trg_ReadTable0607 = nil
+gg_trg_FindOrge08 = nil
+gg_trg_OgreRun09 = nil
 gg_trg_StartAllWave = nil
 gg_trg_OnPlaceOrge = nil
-gg_trg_TolkWOrge = nil
+gg_trg_TolkWOrge10 = nil
 gg_trg_PingTowerPlace = nil
-gg_trg_Fire = nil
-gg_trg_Fire_Copy = nil
-gg_trg_Fire_Copy_Copy = nil
+gg_trg_Fire1209 = nil
+gg_trg_Fire_Copy1310 = nil
+gg_trg_Fire_Copy_Copy1411 = nil
 gg_trg_ReadyTower = nil
 gg_trg_RepairTower = nil
 gg_trg_ShowHP = nil
@@ -3796,7 +3796,7 @@ function Trig_Start_Actions()
     ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Start_Func004A)
         CreateSpeechEffect()
     udg_sound = "Sound\\Speech\\Chapter1\\Peonl_01"
-        CreateAndMoveSpeechImage("start", 6, "left", "PeonEmotion\\normal_left", "Хмррр...ну и долго мы ещё тут будем сидеть, пора исследовать этот остров", 0,"Пеонетти")
+        CreateAndMoveSpeechImage("start", 6, "left", "PeonEmotion\\normal_left", "Хмррр...ну и долго мы ещё будем тут сидеть, пора исследовать этот остров?", 0,"Пеонетти")
     udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_01"
         CreateAndMoveSpeechImage("end", 6, "right", "PeonEmotion\\thing_right", "Да, пришло время размять булки, пойдёмте, ребята, осмотримся", 6,"Пеонетти")
     TriggerSleepAction(6.00)
@@ -3977,7 +3977,7 @@ function Trig_KillMurloc_Actions()
         udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_04"
                 CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Да действительно, это воняло не от тебя", 0,"Пеонетти")
         udg_sound = "Sound\\Speech\\Chapter1\\Peonl_04"
-                CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\thing_right", "Агрессивне лягушки, я видел таких во франции", 5,"Пеонльнарёфф")
+                CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\thing_right", "Агрессивные лягушки, я видел таких во франции", 5,"Пеонльнарёфф")
         udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_05"
                 CreateAndMoveSpeechImage("end", 7, "left", "PeonEmotion\\angry", "Какая Франция, это другая вселенная, я думаю они из Калимдора", 10,"Пеонетти")
         TriggerSleepAction(5.00)
@@ -4001,19 +4001,23 @@ function InitTrig_KillMurloc()
     TriggerAddAction(gg_trg_KillMurloc, Trig_KillMurloc_Actions)
 end
 
-function Trig_ReadTable_Conditions()
+function Trig_ReadTable0607_Conditions()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
     return true
 end
 
-function Trig_ReadTable_Actions()
+function Trig_ReadTable0607_Actions()
     DisableTrigger(GetTriggeringTrigger())
+    udg_sound = "\"\""
         CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\table", "В нашей жизни бывают ситуации, когда возможности выбрать правильный путь у нас нет.", 0,"Табличка")
-        CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\thing_right", "Это означает, что у нас лишь 1 путь - вниз по этой тропе", 5,"Пеонетти")
-        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Если что, теперь я буду запоминать дорогу, чтобы мы не заблудились", 10,"Пеонпио")
-        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Прям, как после того случая", 15,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_06"
+        CreateAndMoveSpeechImage("start", 7, "right", "PeonEmotion\\thing_right", "Это означает, что у нас лишь 1 путь - вниз по этой тропе", 5,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonpio_01"
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Если что, теперь я буду запоминать дорогу, чтобы мы не заблудились", 12,"Пеонпио")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_07"
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Прям, как после того случая", 17,"Пеонетти")
     TriggerSleepAction(5.00)
         CreateSpeechEffect(GetTriggerUnit())
     TriggerSleepAction(5.00)
@@ -4024,65 +4028,69 @@ function Trig_ReadTable_Actions()
         CreateSpeechEffect()
 end
 
-function InitTrig_ReadTable()
-    gg_trg_ReadTable = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_ReadTable, gg_rct________________009)
-    TriggerAddCondition(gg_trg_ReadTable, Condition(Trig_ReadTable_Conditions))
-    TriggerAddAction(gg_trg_ReadTable, Trig_ReadTable_Actions)
+function InitTrig_ReadTable0607()
+    gg_trg_ReadTable0607 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ReadTable0607, gg_rct________________009)
+    TriggerAddCondition(gg_trg_ReadTable0607, Condition(Trig_ReadTable0607_Conditions))
+    TriggerAddAction(gg_trg_ReadTable0607, Trig_ReadTable0607_Actions)
 end
 
-function Trig_FindOrge_Conditions()
+function Trig_FindOrge08_Conditions()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
     return true
 end
 
-function Trig_FindOrge_Actions()
+function Trig_FindOrge08_Actions()
     DisableTrigger(GetTriggeringTrigger())
         CreateSpeechEffect(GetTriggerUnit())
         UnitAddBigAura(gg_unit_nogm_0000)
-        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Смотрите, ребята, там какой-то громила, наверное, это он всех сожрал", 0,"Пеонетти")
-        CreateAndMoveSpeechImage("end", 2, "right", "PeonEmotion\\ready", "Я его не боюсь!", 5,"Пеонльнарёфф")
-    TriggerSleepAction(8.00)
-    EnableTrigger(gg_trg_OgreRun)
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_08"
+        CreateAndMoveSpeechImage("start", 7, "left", "PeonEmotion\\normal_left", "Смотрите, ребята, там какой-то громила, наверное, это он всех сожрал", 0,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonl_06"
+        CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\ready", "Хех, я его не боюсь!", 7,"Пеонльнарёфф")
+    TriggerSleepAction(10.00)
+    EnableTrigger(gg_trg_OgreRun09)
 end
 
-function InitTrig_FindOrge()
-    gg_trg_FindOrge = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_FindOrge, gg_rct________________010)
-    TriggerAddCondition(gg_trg_FindOrge, Condition(Trig_FindOrge_Conditions))
-    TriggerAddAction(gg_trg_FindOrge, Trig_FindOrge_Actions)
+function InitTrig_FindOrge08()
+    gg_trg_FindOrge08 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_FindOrge08, gg_rct________________010)
+    TriggerAddCondition(gg_trg_FindOrge08, Condition(Trig_FindOrge08_Conditions))
+    TriggerAddAction(gg_trg_FindOrge08, Trig_FindOrge08_Actions)
 end
 
-function Trig_OgreRun_Conditions()
+function Trig_OgreRun09_Conditions()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
     return true
 end
 
-function Trig_OgreRun_Func003A()
+function Trig_OgreRun09_Func003A()
     SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
     PauseUnitBJ(true, GetEnumUnit())
 end
 
-function Trig_OgreRun_Func011A()
+function Trig_OgreRun09_Func013A()
     SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
     PauseUnitBJ(false, GetEnumUnit())
 end
 
-function Trig_OgreRun_Actions()
+function Trig_OgreRun09_Actions()
     DisableTrigger(GetTriggeringTrigger())
     TriggerExecute(gg_trg_ReadyTower)
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_OgreRun_Func003A)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_OgreRun09_Func003A)
         CreateSpeechEffect(GetTriggerUnit())
-    udg_TMPColorText = "Эй здоровяк, где все, признавайся!?"
-        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\angry",udg_TMPColorText, 0,"Пеонетти")
-        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\ready", "Ребята, он уходит, бежим за ним!!!!", 5,"Пеонльнарёфф")
-    TriggerSleepAction(5.00)
+    udg_TMPColorText = "Эй здоровяк, я с тобой разговариваю, где все, признавайся!?"
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_09"
+        CreateAndMoveSpeechImage("start", 7, "left", "PeonEmotion\\angry",udg_TMPColorText, 0,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonl_07"
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\ready", "Ребята, он уходит, бежим за ним!!!!", 7,"Пеонльнарёфф")
+    TriggerSleepAction(7.00)
     IssuePointOrderLocBJ(gg_unit_nogm_0000, "attack", GetRectCenter(gg_rct_OgreDefPlace))
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_OgreRun_Func011A)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_OgreRun09_Func013A)
     EnableTrigger(gg_trg_StartAllWave)
         CreateSpeechEffect()
         AddQuest(true,GetTriggerUnit(),GetRectCenterX(gg_rct_OgreDefPlace),GetRectCenterY(gg_rct_OgreDefPlace))
@@ -4090,12 +4098,12 @@ function Trig_OgreRun_Actions()
     TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_318", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_319", bj_TIMETYPE_ADD, 5.00, true)
 end
 
-function InitTrig_OgreRun()
-    gg_trg_OgreRun = CreateTrigger()
-    DisableTrigger(gg_trg_OgreRun)
-    TriggerRegisterEnterRectSimple(gg_trg_OgreRun, gg_rct________________011)
-    TriggerAddCondition(gg_trg_OgreRun, Condition(Trig_OgreRun_Conditions))
-    TriggerAddAction(gg_trg_OgreRun, Trig_OgreRun_Actions)
+function InitTrig_OgreRun09()
+    gg_trg_OgreRun09 = CreateTrigger()
+    DisableTrigger(gg_trg_OgreRun09)
+    TriggerRegisterEnterRectSimple(gg_trg_OgreRun09, gg_rct________________011)
+    TriggerAddCondition(gg_trg_OgreRun09, Condition(Trig_OgreRun09_Conditions))
+    TriggerAddAction(gg_trg_OgreRun09, Trig_OgreRun09_Actions)
 end
 
 function Trig_StartAllWave_Actions()
@@ -4133,7 +4141,7 @@ function InitTrig_OnPlaceOrge()
     TriggerAddAction(gg_trg_OnPlaceOrge, Trig_OnPlaceOrge_Actions)
 end
 
-function Trig_TolkWOrge_Func025C()
+function Trig_TolkWOrge10_Func030C()
     if (not (udg_OgreOnPlace == true)) then
         return false
     end
@@ -4143,25 +4151,30 @@ function Trig_TolkWOrge_Func025C()
     return true
 end
 
-function Trig_TolkWOrge_Conditions()
-    if (not Trig_TolkWOrge_Func025C()) then
+function Trig_TolkWOrge10_Conditions()
+    if (not Trig_TolkWOrge10_Func030C()) then
         return false
     end
     return true
 end
 
-function Trig_TolkWOrge_Func019A()
+function Trig_TolkWOrge10_Func024A()
     UnitAddAbilityBJ(FourCC("Ahrp"), GetEnumUnit())
 end
 
-function Trig_TolkWOrge_Actions()
+function Trig_TolkWOrge10_Actions()
     DisableTrigger(GetTriggeringTrigger())
         CreateSpeechEffect(GetTriggerUnit())
-        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Ну и что тут происходит? Ты наш враг? я почему-то не могу тебя атаковать?", 0,"Пеонетти")
-        CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\OgreNormal", "Моя плохо поимать ваш язык, люди ушли, люди платить мне шашлыком, я убивать мурлок!", 5,"Огр")
-        CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\OgreWay", "Башни сломались, бедный огр тяжело, у вас есть кирка, ремонтируй башня!", 10,"Огр")
-        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\angry", "Так ребята, тряхнём стариной, сделаем, то что у нас получается лучше всего: СТРОИТЬ БАШНИ!", 15,"Пеонетти")
-        CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\foo", "Что угодно, только не это…", 20,"Пеонльнарёфф")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_10"
+        CreateAndMoveSpeechImage("start", 7, "left", "PeonEmotion\\thing_right", "Ну и что тут происходит? Ты наш враг? я почему-то не могу тебя атаковать?", 0,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Ogre_10"
+        CreateAndMoveSpeechImage("start", 10, "right", "PeonEmotion\\OgreNormal", "Моя плохо поимать ваш язык, люди ушли, люди платить мне шашлыком, я убивать мурлок!", 7,"Огр")
+    udg_sound = "Sound\\Speech\\Chapter1\\Ogre_11"
+        CreateAndMoveSpeechImage("start", 10, "right", "PeonEmotion\\OgreWay", "Башни сломались, бедный огр тяжело, у вас есть кирка, ремонтируй башня!", 17,"Огр")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_11"
+        CreateAndMoveSpeechImage("start", 8, "left", "PeonEmotion\\angry", "Так ребята, тряхнём стариной, сделаем, то что у нас получается лучше всего: СТРОИТЬ БАШНИ!", 27,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonl_08"
+        CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\foo", "Что угодно, только не это…", 35,"Пеонльнарёфф")
     TriggerSleepAction(5.00)
         CreateSpeechEffect(gg_unit_nogm_0000)
     TriggerSleepAction(5.00)
@@ -4170,10 +4183,10 @@ function Trig_TolkWOrge_Actions()
     EnableTrigger(gg_trg_PingTowerPlace)
         BlzFrameSetVisible(map, true)
         CreateSpeechEffect()
-    TriggerSleepAction(7.00)
+    TriggerSleepAction(20.00)
     QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UNITACQUIRED, "TRIGSTR_238")
         CreateUniversalFrame(0.1, 0.015, 0.03, "Бесплатно чинит любые строения и механизмы RMB", "Ремонт", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNRepair.blp", nil, nil, "repair")
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_TolkWOrge_Func019A)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_TolkWOrge10_Func024A)
         AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_hctw_0019))
         AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_hgtw_0018))
         AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_hatw_0020))
@@ -4181,11 +4194,11 @@ function Trig_TolkWOrge_Actions()
     SetPlayerAllianceStateBJ(Player(5), Player(0), bj_ALLIANCE_ALLIED_VISION)
 end
 
-function InitTrig_TolkWOrge()
-    gg_trg_TolkWOrge = CreateTrigger()
-    TriggerRegisterUnitInRangeSimple(gg_trg_TolkWOrge, 256, gg_unit_nogm_0000)
-    TriggerAddCondition(gg_trg_TolkWOrge, Condition(Trig_TolkWOrge_Conditions))
-    TriggerAddAction(gg_trg_TolkWOrge, Trig_TolkWOrge_Actions)
+function InitTrig_TolkWOrge10()
+    gg_trg_TolkWOrge10 = CreateTrigger()
+    TriggerRegisterUnitInRangeSimple(gg_trg_TolkWOrge10, 256, gg_unit_nogm_0000)
+    TriggerAddCondition(gg_trg_TolkWOrge10, Condition(Trig_TolkWOrge10_Conditions))
+    TriggerAddAction(gg_trg_TolkWOrge10, Trig_TolkWOrge10_Actions)
 end
 
 function Trig_PingTowerPlace_Func001C()
@@ -4231,7 +4244,7 @@ function InitTrig_PingTowerPlace()
     TriggerAddAction(gg_trg_PingTowerPlace, Trig_PingTowerPlace_Actions)
 end
 
-function Trig_Fire_Func006C()
+function Trig_Fire1209_Func008C()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
@@ -4241,28 +4254,30 @@ function Trig_Fire_Func006C()
     return true
 end
 
-function Trig_Fire_Conditions()
-    if (not Trig_Fire_Func006C()) then
+function Trig_Fire1209_Conditions()
+    if (not Trig_Fire1209_Func008C()) then
         return false
     end
     return true
 end
 
-function Trig_Fire_Actions()
+function Trig_Fire1209_Actions()
     DisableTrigger(GetTriggeringTrigger())
         CreateSpeechEffect(GetTriggerUnit())
-        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Эта башня горит, несите воду!", 0,"Пеонльнарёфф")
-        CreateAndMoveSpeechImage("end", 5, "left", "PeonEmotion\\angry", "Улыбаемся и машем кирками", 5,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonl_09"
+        CreateAndMoveSpeechImage("start", 3, "left", "PeonEmotion\\normal_left", "Эта башня горит, несите воду!", 0,"Пеонльнарёфф")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_12"
+        CreateAndMoveSpeechImage("end", 3, "left", "PeonEmotion\\angry", "Улыбаемся и машем кирками", 3,"Пеонетти")
 end
 
-function InitTrig_Fire()
-    gg_trg_Fire = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_Fire, gg_rct_FireTower)
-    TriggerAddCondition(gg_trg_Fire, Condition(Trig_Fire_Conditions))
-    TriggerAddAction(gg_trg_Fire, Trig_Fire_Actions)
+function InitTrig_Fire1209()
+    gg_trg_Fire1209 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Fire1209, gg_rct_FireTower)
+    TriggerAddCondition(gg_trg_Fire1209, Condition(Trig_Fire1209_Conditions))
+    TriggerAddAction(gg_trg_Fire1209, Trig_Fire1209_Actions)
 end
 
-function Trig_Fire_Copy_Func006C()
+function Trig_Fire_Copy1310_Func008C()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
@@ -4272,28 +4287,30 @@ function Trig_Fire_Copy_Func006C()
     return true
 end
 
-function Trig_Fire_Copy_Conditions()
-    if (not Trig_Fire_Copy_Func006C()) then
+function Trig_Fire_Copy1310_Conditions()
+    if (not Trig_Fire_Copy1310_Func008C()) then
         return false
     end
     return true
 end
 
-function Trig_Fire_Copy_Actions()
+function Trig_Fire_Copy1310_Actions()
     DisableTrigger(GetTriggeringTrigger())
         CreateSpeechEffect(GetTriggerUnit())
-        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Башня почти обуглена, как я смогу починить её одной лишь киркой?", 0,"Пеонльнарёфф")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonl_10"
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Башня почти обуглена, как я её чинить киркой-то буду?", 0,"Пеонльнарёфф")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_13"
         CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Улыбаемся и машем", 5,"Пеонетти")
 end
 
-function InitTrig_Fire_Copy()
-    gg_trg_Fire_Copy = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_Fire_Copy, gg_rct_FireTower2)
-    TriggerAddCondition(gg_trg_Fire_Copy, Condition(Trig_Fire_Copy_Conditions))
-    TriggerAddAction(gg_trg_Fire_Copy, Trig_Fire_Copy_Actions)
+function InitTrig_Fire_Copy1310()
+    gg_trg_Fire_Copy1310 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Fire_Copy1310, gg_rct_FireTower2)
+    TriggerAddCondition(gg_trg_Fire_Copy1310, Condition(Trig_Fire_Copy1310_Conditions))
+    TriggerAddAction(gg_trg_Fire_Copy1310, Trig_Fire_Copy1310_Actions)
 end
 
-function Trig_Fire_Copy_Copy_Func006C()
+function Trig_Fire_Copy_Copy1411_Func008C()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
@@ -4303,25 +4320,27 @@ function Trig_Fire_Copy_Copy_Func006C()
     return true
 end
 
-function Trig_Fire_Copy_Copy_Conditions()
-    if (not Trig_Fire_Copy_Copy_Func006C()) then
+function Trig_Fire_Copy_Copy1411_Conditions()
+    if (not Trig_Fire_Copy_Copy1411_Func008C()) then
         return false
     end
     return true
 end
 
-function Trig_Fire_Copy_Copy_Actions()
+function Trig_Fire_Copy_Copy1411_Actions()
     DisableTrigger(GetTriggeringTrigger())
         CreateSpeechEffect(GetTriggerUnit())
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_14"
         CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Этот камень горит, махайте кирками быстрее", 0,"Пеонетти")
-        CreateAndMoveSpeechImage("end", 3, "foo", "PeonEmotion\\angry", "ААА, ненавижу работать!", 5,"Пеонльнарёфф")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonl_11"
+        CreateAndMoveSpeechImage("end", 3,"right", "PeonEmotion\\foo", "ААА, ненавижу работать!", 5,"Пеонльнарёфф")
 end
 
-function InitTrig_Fire_Copy_Copy()
-    gg_trg_Fire_Copy_Copy = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_Fire_Copy_Copy, gg_rct_FireTower3)
-    TriggerAddCondition(gg_trg_Fire_Copy_Copy, Condition(Trig_Fire_Copy_Copy_Conditions))
-    TriggerAddAction(gg_trg_Fire_Copy_Copy, Trig_Fire_Copy_Copy_Actions)
+function InitTrig_Fire_Copy_Copy1411()
+    gg_trg_Fire_Copy_Copy1411 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Fire_Copy_Copy1411, gg_rct_FireTower3)
+    TriggerAddCondition(gg_trg_Fire_Copy_Copy1411, Condition(Trig_Fire_Copy_Copy1411_Conditions))
+    TriggerAddAction(gg_trg_Fire_Copy_Copy1411, Trig_Fire_Copy_Copy1411_Actions)
 end
 
 function Trig_ReadyTower_Actions()
@@ -4400,8 +4419,10 @@ function Trig_RepairTower_Actions()
         QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ("|cff008000Задание обновилось:|r Отремонтированы башни " .. (I2S(udg_TowerRepairCount) .. "/3")))
     end
     if (Trig_RepairTower_Func006C()) then
-                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Интересно, а кто управляет этими башнями?", 0,"Пеонетти")
-                CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Возможно это всё магия союзного стенда", 5,"Пеонльнарёфф")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonl_13"
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Интересно, а кто управляет этими башнями?", 0,"Пеонльнарёфф")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_16"
+                CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Возможно это всё магия союзного стенда", 5,"Пеонетти")
                 CreateSpeechEffect()
         TriggerSleepAction(5.00)
                 CreateSpeechEffect()
@@ -4409,8 +4430,10 @@ function Trig_RepairTower_Actions()
     end
     if (Trig_RepairTower_Func007C()) then
                 CreateSpeechEffect()
-                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Вот эта башня странная, она не умеет стрелять вплотную", 0,"Пеонетти")
-                CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Тот, кто её проектировал, об этом явно не думал", 5,"Пеонльнарёфф")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_17"
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Возможно, так и появились эти руины справа", 0,"Пеонетти")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonl_14"
+                CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Главное, чтобы она начала стрелять не-по-нам", 5,"Пеонльнарёфф")
         TriggerSleepAction(5.00)
                 CreateSpeechEffect()
         TriggerSleepAction(10.00)
@@ -4419,7 +4442,9 @@ function Trig_RepairTower_Actions()
     end
     if (Trig_RepairTower_Func008C()) then
                 CreateSpeechEffect()
-                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Ну и кто заряжает в неё эти стрелы?", 0,"Пеонльнарёфф")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonl_12"
+                CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Хмм, ну и кто заряжает в неё эти стрелы?", 0,"Пеонльнарёфф")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_15"
                 CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Скорее всего кто, очень маленький... прям как твой на холоде", 5,"Пеонетти")
         TriggerSleepAction(5.00)
                 CreateSpeechEffect()
@@ -4427,7 +4452,9 @@ function Trig_RepairTower_Actions()
     end
     if (Trig_RepairTower_Func009C()) then
                 CreateSpeechEffect()
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_18"
                 CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Кто-нибудь знает, зачем мы это починили?", 0,"Пеонетти")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonpio_02"
                 CreateAndMoveSpeechImage("end", 2, "right", "PeonEmotion\\angry", "Бесполезная башня", 5,"Пеонпио")
         TriggerSleepAction(5.00)
                 CreateSpeechEffect()
@@ -4457,7 +4484,7 @@ function InitTrig_ShowHP()
     TriggerAddAction(gg_trg_ShowHP, Trig_ShowHP_Actions)
 end
 
-function Trig_TolkWOrgeAfterRepair_Func012C()
+function Trig_TolkWOrgeAfterRepair_Func014C()
     if (not (udg_TowerIsRepair == true)) then
         return false
     end
@@ -4468,7 +4495,7 @@ function Trig_TolkWOrgeAfterRepair_Func012C()
 end
 
 function Trig_TolkWOrgeAfterRepair_Conditions()
-    if (not Trig_TolkWOrgeAfterRepair_Func012C()) then
+    if (not Trig_TolkWOrgeAfterRepair_Func014C()) then
         return false
     end
     return true
@@ -4477,7 +4504,9 @@ end
 function Trig_TolkWOrgeAfterRepair_Actions()
     DisableTrigger(GetTriggeringTrigger())
         CreateSpeechEffect(GetTriggerUnit())
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_19"
         CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Дело сделано, теперь башни на страже города, а куда бегут эти твари?", 0,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Ogre_19"
         CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\OgreTalk", "Моя не знать, зелёные надо идти на вершину горы, чтобы узнать", 5,"Пеонльнарёфф")
     TriggerSleepAction(5.00)
         CreateSpeechEffect(gg_unit_nogm_0000)
@@ -4564,27 +4593,27 @@ function Trig_DemonessEnter_Func002Func009A()
     PauseUnitBJ(false, GetEnumUnit())
 end
 
-function Trig_DemonessEnter_Func002Func027A()
+function Trig_DemonessEnter_Func002Func033A()
     SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
     PauseUnitBJ(true, GetEnumUnit())
     SetUnitFacingToFaceUnitTimed(GetEnumUnit(), gg_unit_ndqs_0026, 0.00)
 end
 
-function Trig_DemonessEnter_Func002Func031A()
+function Trig_DemonessEnter_Func002Func037A()
     SelectUnitAddForPlayer(GetEnumUnit(), Player(0))
     PauseUnitBJ(false, GetEnumUnit())
     IssuePointOrderLocBJ(GetEnumUnit(), "move", GetRectCenter(gg_rct_RescuePoint))
 end
 
-function Trig_DemonessEnter_Func002Func033Func001C()
+function Trig_DemonessEnter_Func002Func039Func001C()
     if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B001"))) then
         return false
     end
     return true
 end
 
-function Trig_DemonessEnter_Func002Func033A()
-    if (Trig_DemonessEnter_Func002Func033Func001C()) then
+function Trig_DemonessEnter_Func002Func039A()
+    if (Trig_DemonessEnter_Func002Func039Func001C()) then
         CreateDestructableLoc(FourCC("LTrc"), GetDestructableLoc(GetEnumDestructable()), GetRandomDirectionDeg(), 1, GetRandomInt(1, 5))
     else
     end
@@ -4608,20 +4637,26 @@ function Trig_DemonessEnter_Actions()
                 TP2Point(2309,2404,0)
                 SelectedAllPeon()
                 AddQuest(true,GetTriggerUnit(),GetUnitXY(gg_unit_odes_0027))
+        udg_sound = "Sound\\Speech\\Chapter1\\Demonesa_02"
                 CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\DemonLeft", "Где моя еда!!!???", 0,"Демонесса")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonpio_03"
                 CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\foo", "Какая еда, мы не доставка пиццы", 5,"Пеонпио")
+        udg_sound = "Sound\\Speech\\Chapter1\\Demonesa_05"
                 CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\DemonAngry", "Тогда сегодня на ужин у меня будет, черепаший суп!", 10,"Демонесса")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonl_15"
                 CreateAndMoveSpeechImage("start", 5, "right", "PeonEmotion\\foo", "Что то-то я не вижу тут черепах", 15,"Пеонльнарёфф")
+        udg_sound = "Sound\\Speech\\Chapter1\\Demonesa_heh"
                 CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\DemonBobs", "(Звуки демонической магии)", 20,"Демонесса")
+        udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_20"
                 CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "О нет, она превратила Пеонльнарёфа в черепаху, бежим отсюда!", 25,"Пеонетти")
                 CreateSpeechEffect(GetTriggerUnit())
-        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_DemonessEnter_Func002Func027A)
+        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_DemonessEnter_Func002Func033A)
         TriggerSleepAction(25.00)
         IssueTargetOrderBJ(gg_unit_ndqs_0026, "hex", GetTriggerUnit())
                 CreateSpeechEffect()
-        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_DemonessEnter_Func002Func031A)
+        ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_DemonessEnter_Func002Func037A)
                 StartDemonessa(gg_unit_ndqs_0026)
-        EnumDestructablesInRectAll(gg_rct_StonesBlock, Trig_DemonessEnter_Func002Func033A)
+        EnumDestructablesInRectAll(gg_rct_StonesBlock, Trig_DemonessEnter_Func002Func039A)
     else
         DisableTrigger(GetTriggeringTrigger())
         udg_GR = GetRandomInt(1, 4)
@@ -4671,8 +4706,8 @@ function Trig_Empty_Actions()
     DisableTrigger(GetTriggeringTrigger())
     PauseUnitBJ(true, GetTriggerUnit())
         CreateSpeechEffect(GetTriggerUnit())
-        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Посмотрите какая интересная труба, однако в ней пусто", 0,"Пеонетти")
-        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\ready", "Ты вечно думаешь о каких-то отверстиях, иди в другой посмотри!", 5,"Пеонльнарёфф")
+        CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Посмотрите какая интересная труба, однако в ней пусто", 0,"Пеонпио")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\ready", "Ты вечно думаешь о каких-то отверстиях, иди в другой посмотри!", 5,"Пеонетти")
     TriggerSleepAction(5.00)
     PauseUnitBJ(false, GetTriggerUnit())
         CreateSpeechEffect()
@@ -4698,7 +4733,7 @@ function Trig_FindHeal_Actions()
         CreateSpeechEffect(GetTriggerUnit())
     udg_TMPColorText = "Что там, пызырёк с неизвестной зелёной жидкостью, что может пойти не так если мы это попробуем?"
         CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", udg_TMPColorText, 0,"Пеонетти")
-        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Ребята, а это классна штука, похожа на колу", 5,"Пеонпио")
+        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Ребята, а это классная штука, похожа на колу", 5,"Пеонпио")
     TriggerSleepAction(5.00)
         CreateSpeechEffect()
     PauseUnitBJ(false, GetTriggerUnit())
@@ -4879,16 +4914,16 @@ function InitCustomTriggers()
     InitTrig_InitBridge()
     InitTrig_RestoreBridge()
     InitTrig_KillMurloc()
-    InitTrig_ReadTable()
-    InitTrig_FindOrge()
-    InitTrig_OgreRun()
+    InitTrig_ReadTable0607()
+    InitTrig_FindOrge08()
+    InitTrig_OgreRun09()
     InitTrig_StartAllWave()
     InitTrig_OnPlaceOrge()
-    InitTrig_TolkWOrge()
+    InitTrig_TolkWOrge10()
     InitTrig_PingTowerPlace()
-    InitTrig_Fire()
-    InitTrig_Fire_Copy()
-    InitTrig_Fire_Copy_Copy()
+    InitTrig_Fire1209()
+    InitTrig_Fire_Copy1310()
+    InitTrig_Fire_Copy_Copy1411()
     InitTrig_ReadyTower()
     InitTrig_RepairTower()
     InitTrig_ShowHP()
