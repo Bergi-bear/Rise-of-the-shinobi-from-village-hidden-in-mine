@@ -71,9 +71,9 @@ gg_trg_ShowHP = nil
 gg_trg_TolkWOrgeAfterRepair = nil
 gg_trg_Init = nil
 gg_trg_DemonessEnter = nil
-gg_trg_Empty = nil
-gg_trg_FindHeal = nil
-gg_trg_Victory = nil
+gg_trg_Empty21 = nil
+gg_trg_FindHeal22 = nil
+gg_trg_Victory25 = nil
 gg_trg_Sound = nil
 gg_trg_ZCamera = nil
 gg_trg_PeonDead = nil
@@ -4662,22 +4662,26 @@ function Trig_DemonessEnter_Actions()
         udg_GR = GetRandomInt(1, 4)
         if (Trig_DemonessEnter_Func002Func003C()) then
                         CreateSpeechEffect(gg_unit_ndqs_0026,"smileys_quest")
-            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_290", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_291", bj_TIMETYPE_ADD, 2.00, false)
+            udg_sound = "Sound\\Speech\\Chapter1\\Demonesa_01"
+                        CreateAndMoveSpeechImage("start", 3, "left", "PeonEmotion\\DemonLeft", "Прочь!!!", 0,"Демонесса")
         else
         end
         if (Trig_DemonessEnter_Func002Func004C()) then
                         CreateSpeechEffect(gg_unit_ndqs_0026,"smileys_quest")
-            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_292", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_293", bj_TIMETYPE_ADD, 2.00, false)
+            udg_sound = "Sound\\Speech\\Chapter1\\Demonesa_03"
+                        CreateAndMoveSpeechImage("start", 3, "left", "PeonEmotion\\DemonLeft", "А вы ещё кто? Проваливайте!", 0,"Демонесса")
         else
         end
         if (Trig_DemonessEnter_Func002Func005C()) then
                         CreateSpeechEffect(gg_unit_ndqs_0026,"smileys_quest")
-            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_294", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_295", bj_TIMETYPE_ADD, 2.00, false)
+            udg_sound = "Sound\\Speech\\Chapter1\\Demonesa_04"
+                        CreateAndMoveSpeechImage("start", 3, "left", "PeonEmotion\\DemonLeft", "У меня скоро обед!", 0,"Демонесса")
         else
         end
         if (Trig_DemonessEnter_Func002Func006C()) then
                         CreateSpeechEffect(gg_unit_ndqs_0026,"smileys_quest")
-            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "TRIGSTR_296", GetRectCenter(GetPlayableMapRect()), nil, "TRIGSTR_297", bj_TIMETYPE_ADD, 2.00, false)
+            udg_sound = "Sound\\Speech\\Chapter1\\Demonesa_06"
+                        CreateAndMoveSpeechImage("start", 3, "left", "PeonEmotion\\DemonLeft", "В очередь!", 0,"Демонесса")
         else
         end
                 TP2Point(530,-1320)
@@ -4695,44 +4699,48 @@ function InitTrig_DemonessEnter()
     TriggerAddAction(gg_trg_DemonessEnter, Trig_DemonessEnter_Actions)
 end
 
-function Trig_Empty_Conditions()
+function Trig_Empty21_Conditions()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
     return true
 end
 
-function Trig_Empty_Actions()
+function Trig_Empty21_Actions()
     DisableTrigger(GetTriggeringTrigger())
     PauseUnitBJ(true, GetTriggerUnit())
         CreateSpeechEffect(GetTriggerUnit())
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonpio_04"
         CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Посмотрите какая интересная труба, однако в ней пусто", 0,"Пеонпио")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_21"
         CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\ready", "Ты вечно думаешь о каких-то отверстиях, иди в другой посмотри!", 5,"Пеонетти")
     TriggerSleepAction(5.00)
     PauseUnitBJ(false, GetTriggerUnit())
         CreateSpeechEffect()
 end
 
-function InitTrig_Empty()
-    gg_trg_Empty = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_Empty, gg_rct_HealEpmty)
-    TriggerAddCondition(gg_trg_Empty, Condition(Trig_Empty_Conditions))
-    TriggerAddAction(gg_trg_Empty, Trig_Empty_Actions)
+function InitTrig_Empty21()
+    gg_trg_Empty21 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Empty21, gg_rct_HealEpmty)
+    TriggerAddCondition(gg_trg_Empty21, Condition(Trig_Empty21_Conditions))
+    TriggerAddAction(gg_trg_Empty21, Trig_Empty21_Actions)
 end
 
-function Trig_FindHeal_Conditions()
+function Trig_FindHeal22_Conditions()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
     return true
 end
 
-function Trig_FindHeal_Actions()
+function Trig_FindHeal22_Actions()
     DisableTrigger(GetTriggeringTrigger())
     PauseUnitBJ(true, GetTriggerUnit())
         CreateSpeechEffect(GetTriggerUnit())
     udg_TMPColorText = "Что там, пызырёк с неизвестной зелёной жидкостью, что может пойти не так если мы это попробуем?"
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_22"
         CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", udg_TMPColorText, 0,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonpio_05"
         CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\foo", "Ребята, а это классная штука, похожа на колу", 5,"Пеонпио")
     TriggerSleepAction(5.00)
         CreateSpeechEffect()
@@ -4742,14 +4750,14 @@ function Trig_FindHeal_Actions()
         CreateUniversalFrame(0.1, 0.015, 0.03, "Исцеляет самого раненного пеона каждые 30 секунд", "Зелье лечения", HERO[0], "ReplaceableTextures\\CommandButtons\\BTNPotionGreen.blp", nil, nil, "heal")
 end
 
-function InitTrig_FindHeal()
-    gg_trg_FindHeal = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_FindHeal, gg_rct_HealFinder)
-    TriggerAddCondition(gg_trg_FindHeal, Condition(Trig_FindHeal_Conditions))
-    TriggerAddAction(gg_trg_FindHeal, Trig_FindHeal_Actions)
+function InitTrig_FindHeal22()
+    gg_trg_FindHeal22 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_FindHeal22, gg_rct_HealFinder)
+    TriggerAddCondition(gg_trg_FindHeal22, Condition(Trig_FindHeal22_Conditions))
+    TriggerAddAction(gg_trg_FindHeal22, Trig_FindHeal22_Actions)
 end
 
-function Trig_Victory_Func020C()
+function Trig_Victory25_Func022C()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
@@ -4759,33 +4767,35 @@ function Trig_Victory_Func020C()
     return true
 end
 
-function Trig_Victory_Conditions()
-    if (not Trig_Victory_Func020C()) then
+function Trig_Victory25_Conditions()
+    if (not Trig_Victory25_Func022C()) then
         return false
     end
     return true
 end
 
-function Trig_Victory_Func012A()
+function Trig_Victory25_Func014A()
     PlaySoundAtPointBJ(gg_snd_Loading, 100, GetUnitLoc(GetEnumUnit()), 0)
     ShowUnitHide(GetEnumUnit())
     udg_SavedPeons = (udg_SavedPeons + 1)
     QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ("|cff008000Задание обновилось:|r Спасено пеонов " .. (I2S(udg_SavedPeons) .. "/5")))
 end
 
-function Trig_Victory_Actions()
+function Trig_Victory25_Actions()
     DisableTrigger(GetTriggeringTrigger())
     SetUnitOwner(gg_unit_odes_0027, Player(5), true)
     SetPlayerAllianceStateBJ(Player(0), Player(5), bj_ALLIANCE_ALLIED_VISION)
     SetPlayerAllianceStateBJ(Player(5), Player(0), bj_ALLIANCE_ALLIED_VISION)
         CreateSpeechEffect(GetTriggerUnit())
         UnitAddBigAura(gg_unit_odes_0027)
+    udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_25"
         CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Ура спасение, она что совсем сдурела?", 0,"Пеонетти")
+    udg_sound = "Sound\\Speech\\Chapter1\\Demonesa_07"
         CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\DemonAngry", "Я только начала пеонята", 5,"Демонесса")
     TriggerSleepAction(5.00)
         UnitAddBigAura(gg_unit_odes_0027)
         StartForSheep(gg_unit_ndqs_0026,gg_unit_odes_0027)
-    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Victory_Func012A)
+    ForGroupBJ(GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(0)), Trig_Victory25_Func014A)
     IssuePointOrderLocBJ(gg_unit_odes_0027, "move", GetRectCenter(gg_rct_Region_030))
     SetCameraTargetControllerNoZForPlayer(Player(0), gg_unit_odes_0027, 0, 0, false)
     SetCameraFieldForPlayer(Player(0), CAMERA_FIELD_TARGET_DISTANCE, 4000.00, 10.00)
@@ -4795,11 +4805,11 @@ function Trig_Victory_Actions()
     SaveAndChangeLevelBJ("SaveFile.w3z", "Maps\\Map1.w3x", false)
 end
 
-function InitTrig_Victory()
-    gg_trg_Victory = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_Victory, gg_rct_RescuePoint)
-    TriggerAddCondition(gg_trg_Victory, Condition(Trig_Victory_Conditions))
-    TriggerAddAction(gg_trg_Victory, Trig_Victory_Actions)
+function InitTrig_Victory25()
+    gg_trg_Victory25 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Victory25, gg_rct_RescuePoint)
+    TriggerAddCondition(gg_trg_Victory25, Condition(Trig_Victory25_Conditions))
+    TriggerAddAction(gg_trg_Victory25, Trig_Victory25_Actions)
 end
 
 function Trig_Sound_Func005C()
@@ -4930,9 +4940,9 @@ function InitCustomTriggers()
     InitTrig_TolkWOrgeAfterRepair()
     InitTrig_Init()
     InitTrig_DemonessEnter()
-    InitTrig_Empty()
-    InitTrig_FindHeal()
-    InitTrig_Victory()
+    InitTrig_Empty21()
+    InitTrig_FindHeal22()
+    InitTrig_Victory25()
     InitTrig_Sound()
     InitTrig_PeonDead()
     InitTrig_Aly6()
