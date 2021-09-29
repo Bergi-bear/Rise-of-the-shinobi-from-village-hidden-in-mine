@@ -39,6 +39,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
         if state == "start" then
             xPoz = 0.1
             ShowAllAbilitiesFrame(false)
+            SetMusicVolumeBJ(40)
         end
         if position == "right" then
             xPoz = 0.7 + TIMER_PERIOD64
@@ -131,6 +132,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
                 if state == "end" then
                     BlzFrameSetAlpha(TexBox, alpha)
                     ShowAllAbilitiesFrame(true)
+                    SetMusicVolumeBJ(100)
                 end
                 if position == "left" then
                     x = x - TIMER_PERIOD64
