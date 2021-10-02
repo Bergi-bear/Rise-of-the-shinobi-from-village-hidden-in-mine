@@ -40,14 +40,23 @@ function MarkAndFall(x, y, effModel, hero)
                     PeonAnderStone = PeonAnderStone + 1
                     RemoveUnit(damaged)
                     if PeonAnderStone == 0 then
-                        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "Пеонетти", GetRectCenter(GetPlayableMapRect()), nil, "О нет, нашего собрата придавило, думаю он выкарабкается", bj_TIMETYPE_ADD, 4.00, true)
-                        CreateSpeechEffect(GetRandomPeon())
+                        local snd=normal_sound("Sound\\Speech\\Chapter1\\Peonetty_26",GetUnitXY(GetRandomPeon()))
+                        --CreateSpeechEffect(GetRandomPeon())
+                        SoundWait(2000)
+                        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "Пеонетти", GetRectCenter(GetPlayableMapRect()), nil, "Думаю он выкарабкается", bj_TIMETYPE_ADD, 4.00, true)
                     elseif PeonAnderStone == 1 then
-                        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "Пеонетти", GetRectCenter(GetPlayableMapRect()), nil, "Мы несём потери", bj_TIMETYPE_ADD, 4.00, true)
-                        CreateSpeechEffect(GetRandomPeon())
+                        if not PeonettyMute then
+                            local snd=normal_sound("Sound\\Speech\\Chapter1\\Peonetty_23",GetUnitXY(GetRandomPeon()))
+                            --CreateSpeechEffect(GetRandomPeon())
+                            SoundWait(2000)
+                            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "Пеонетти", GetRectCenter(GetPlayableMapRect()), nil, "Мы несём потери", bj_TIMETYPE_ADD, 4.00, true)
+                        end
                     elseif PeonAnderStone == 2 then
-                        TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "Пеонетти", GetRectCenter(GetPlayableMapRect()), nil, "Я растерял всех своих друзей", bj_TIMETYPE_ADD, 4.00, true)
-                        CreateSpeechEffect(GetRandomPeon())
+                        if not PeonettyMute then
+                            local snd=normal_sound("Sound\\Speech\\Chapter1\\Peonetty_24",GetUnitXY(GetRandomPeon()))
+                            CreateSpeechEffect(GetRandomPeon())
+                            TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), FourCC("opeo"), "Пеонетти", GetRectCenter(GetPlayableMapRect()), nil, "Я растерял всех своих друзей", bj_TIMETYPE_ADD, 4.00, true)
+                        end
                     end
 
                 end
@@ -85,4 +94,12 @@ function CreateCircleImage(x, y)
     SetImageRenderAlways(img, true)
     ShowImage(img, true)
     return img
+end
+
+PeonettyMute=false
+function SoundWait(delay)
+    PeonettyMute=true
+    TimerStart(CreateTimer(), delay/1000, false, function()
+        PeonettyMute=true
+    end)
 end

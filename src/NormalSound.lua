@@ -16,4 +16,5 @@ function normal_sound (s,x,y,volume)
     SetSoundPosition(snd, x, y, 50)
     StartSound(snd)
     KillSoundWhenDone(snd)
+    return snd
 end

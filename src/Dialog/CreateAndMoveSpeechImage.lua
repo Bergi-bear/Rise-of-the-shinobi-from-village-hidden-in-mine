@@ -28,7 +28,11 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
         --BlzFrameSetText(TexBoxText, text)
 
         --print(sound, "звук из глобалки")
-        normal_sound(sound, GetUnitXY(GetRandomPeon()))
+        if name~="Демонесса" then
+            normal_sound(sound, GetUnitXY(GetRandomPeon()))
+        else
+            PlaySound(sound)
+        end
         SetTexSlow(text, TexBoxText, TIMER_PERIOD / 2)
         BlzFrameSetAlpha(TexBox, 254)
         local xPoz = 0
