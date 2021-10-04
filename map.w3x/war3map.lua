@@ -4215,9 +4215,9 @@ function Trig_TolkWOrge10_Actions()
         CreateSpeechEffect(GetTriggerUnit())
     udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_10"
         CreateAndMoveSpeechImage("start", 7, "left", "PeonEmotion\\thing_right", "Ну и что тут происходит? Ты наш враг? я почему-то не могу тебя атаковать?", 0,"Пеонетти")
-    udg_sound = "Sound\\Speech\\Chapter1\\Ogre_10"
+    udg_sound = "Sound\\Speech\\Chapter1\\Ogre_01"
         CreateAndMoveSpeechImage("start", 10, "right", "PeonEmotion\\OgreNormal", "Моя плохо поимать ваш язык, люди ушли, люди платить мне шашлыком, я убивать мурлок!", 7,"Огр")
-    udg_sound = "Sound\\Speech\\Chapter1\\Ogre_11"
+    udg_sound = "Sound\\Speech\\Chapter1\\Ogre_02"
         CreateAndMoveSpeechImage("start", 10, "right", "PeonEmotion\\OgreWay", "Башни сломались, бедный огр тяжело, у вас есть кирка, ремонтируй башня!", 17,"Огр")
     udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_11"
         CreateAndMoveSpeechImage("start", 8, "left", "PeonEmotion\\angry", "Так ребята, тряхнём стариной, сделаем, то что у нас получается лучше всего: СТРОИТЬ БАШНИ!", 27,"Пеонетти")
@@ -4554,7 +4554,7 @@ function Trig_TolkWOrgeAfterRepair_Actions()
         CreateSpeechEffect(GetTriggerUnit())
     udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_19"
         CreateAndMoveSpeechImage("start", 6, "left", "PeonEmotion\\normal_left", "Дело сделано, теперь башни на страже города, а куда бегут эти твари?", 0,"Пеонетти")
-    udg_sound = "Sound\\Speech\\Chapter1\\Ogre_19"
+    udg_sound = "Sound\\Speech\\Chapter1\\Ogre_03"
         CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\OgreTalk", "Моя не знать, зелёные надо идти на вершину горы, чтобы узнать", 6,"Пеонльнарёфф")
     TriggerSleepAction(6.00)
         CreateSpeechEffect(gg_unit_nogm_0000)
@@ -4813,7 +4813,7 @@ function Trig_Victory25_Func022C()
     if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
         return false
     end
-    if (not (udg_VictorySheep == false)) then
+    if (not (udg_VictorySheep == true)) then
         return false
     end
     return true
