@@ -4481,7 +4481,7 @@ function Trig_RepairTower_Actions()
         udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_17"
                 CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\thing_right", "Возможно, так и появились эти руины справа", 0,"Пеонетти")
         udg_sound = "Sound\\Speech\\Chapter1\\Peonl_14"
-                CreateAndMoveSpeechImage("end", 3, "right", "PeonEmotion\\angry", "Главное, чтобы она начала стрелять не-по-нам", 5,"Пеонльнарёфф")
+                CreateAndMoveSpeechImage("end", 4, "right", "PeonEmotion\\angry", "Главное, чтобы она начала стрелять не-по-нам", 5,"Пеонльнарёфф")
         TriggerSleepAction(5.00)
                 CreateSpeechEffect()
         TriggerSleepAction(10.00)
@@ -4555,7 +4555,7 @@ function Trig_TolkWOrgeAfterRepair_Actions()
     udg_sound = "Sound\\Speech\\Chapter1\\Peonetty_19"
         CreateAndMoveSpeechImage("start", 6, "left", "PeonEmotion\\normal_left", "Дело сделано, теперь башни на страже города, а куда бегут эти твари?", 0,"Пеонетти")
     udg_sound = "Sound\\Speech\\Chapter1\\Ogre_03"
-        CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\OgreTalk", "Моя не знать, зелёные надо идти на вершину горы, чтобы узнать", 6,"Пеонльнарёфф")
+        CreateAndMoveSpeechImage("end", 6, "right", "PeonEmotion\\OgreTalk", "Моя не знать, зелёные надо идти на вершину горы, чтобы узнать", 6,"Пеонльнарёфф")
     TriggerSleepAction(6.00)
         CreateSpeechEffect(gg_unit_nogm_0000)
         AddQuest(true,GetRandomPeon(),GetUnitXY(gg_unit_ndqs_0026))
